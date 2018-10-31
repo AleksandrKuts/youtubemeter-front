@@ -4,11 +4,16 @@
 
 		<div class="ui-g-11">
 			<div>
-				<h1>{{title}}</h1>
+				<h1>{{ 'HOME.TITLE' | translate }}</h1>
 			</div>
 		</div>
 
-		<div class="ui-g-1">
+		<div class="ui-g-1 rules">
+			 <label>
+        		<select #langSelect (change)="translate.use(langSelect.value)">
+          		<option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+        		</select>
+      		</label>
 			<a href="https://docs.google.com/document/d/1riapDk1TKfmTxEm-WS3Zla25dFqpSiEAO-5ExN406QM/edit?usp=sharing" target="_blank">
 			 <img id="idhelp" src="../../assets/images/help.png" alt="Про програму"	title="Про програму" />
 			</a>

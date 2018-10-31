@@ -7,7 +7,7 @@ import { DatePipe} from '@angular/common';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
@@ -39,6 +39,13 @@ import { VideoMetricsComponent } from './view/video/videometrics.component';
 import { VideoPlayListComponent } from './view/playlist/playlist.component';
 import { AboutComponent } from './about/about.component';
 
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -71,7 +78,14 @@ import { AboutComponent } from './about/about.component';
     OverlayPanelModule,
     ScrollPanelModule,
     DropdownModule,
-    routing
+    routing,
+    TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })
   ],
   providers: [HttpErrorHandler,
               MessageService,
