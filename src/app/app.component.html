@@ -3,21 +3,29 @@
 	<div class="ui-g headtitle">
 
 		<div class="ui-g-11">
-			<div>
-				<h1>{{ 'HOME.TITLE' | translate }}</h1>
+			<div class="p-grid p-align-start .p-col-align-start">
+  				<div class="p-col-fixed" style="width:30px" title="{{ 'HEADER.HOME' | translate }}">
+					<a href="/"><img src="../../assets/images/home.png"/></a>
+				</div>
+	  			<div class="p-col">
+					<h1>{{ 'HEADER.TITLE' | translate }}</h1>			
+				</div>
 			</div>
 		</div>
 
 		<div class="ui-g-1 rules">
-			 <label>
-        		<select #langSelect (change)="translate.use(langSelect.value)">
-          		<option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-        		</select>
+			<label  title="{{ 'HEADER.LANG' | translate }}">
+
+			<select [(ngModel)]="langSelect" (change)="setLang()" id="changelang">
+				<option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+			</select>
+
       		</label>
 			<a href="https://docs.google.com/document/d/1riapDk1TKfmTxEm-WS3Zla25dFqpSiEAO-5ExN406QM/edit?usp=sharing" target="_blank">
-			 <img id="idhelp" src="../../assets/images/help.png" alt="Про програму"	title="Про програму" />
+			 <img id="idhelp" src="../../assets/images/help.png" title="{{ 'HEADER.ABOUT' | translate }}" />
 			</a>
 		</div>
+		
 	</div>
 
 

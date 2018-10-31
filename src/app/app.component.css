@@ -1,17 +1,25 @@
-.headtitle h1 {
-	margin: 5px;
+.headtitle {
+   padding-bottom: 20px;
 }
 
-.rules {
-	text-align: right;
-}
-
-.rules label {
+.headtitle * {
     vertical-align: middle;
+    text-align: center;
 }
+
+.headtitle h1 {
+	margin: 0;
+	padding: 0;
+}
+
+.headtitle img {
+	width: 23px;
+	height: auto;
+}
+
 .rules img {
+	text-align: right;
 	margin: 0 10px 0 10px;
 	width: 20px;
 	height: auto;
-    vertical-align: middle;
 }

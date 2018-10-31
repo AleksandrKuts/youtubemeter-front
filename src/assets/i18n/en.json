@@ -1,6 +1,31 @@
 {
-  "HOME": {
-    "TITLE": "Hello Angular with ngx-translate!",
-    "SELECT": "Change language"
-  }
+	"COMMON": {
+		"DATE": "Date",
+		"FROM": "from",
+		"TO": "to",
+		"LOAD": "Load",
+		"REQUEST": "Query"
+	},
+	"HEADER": {
+		"HOME": "Home",
+		"TITLE": "Youtube channel statistics statistics",
+		"LANG": "Change the language",
+		"ABOUT": "About"
+	},
+	"PLAYLIST": {
+		"CHANNEL": "Channel",
+		"CHANNEL_REF": "Direct link to channel",
+		"CHANNEL_REF_YOUTUBE": "Go to the channel on Youtube",
+		"VIDEO_ID": "Video id",
+		"VIEW_STATISTICS": "See video statistics"
+	},
+	"METRICS": {
+		"PABLISHED": "Pablished",
+		"COLLECTION_PERIOD": "Metric collection period",
+		"SERVICE_IS_NOT_AVAILABLE_YET": "Service is not available yet",
+		"DETAILING": "Detailed metrics",
+		"ALL": "Total metrics",
+		"CHOOSE_ON_THE_CHART": "Choose on the appropriate chart",
+		"CHOOSE_DESCR": "To select or reset, select an indicator in the corresponding chart. If the dates are not specified, the graph is constructed throughout the period"
+	}
 }

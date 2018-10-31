@@ -1,36 +1,49 @@
 <div class="ui-g">
    	<div class="ui-g-12 headplaylist" >
 		<a *ngIf="selectedPlayList" href="/playlist?id={{selectedPlayList.id}}" target="_blank">
-	   		<label>Канал:</label> 
+	   		<label title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}">
+	   			{{ 'PLAYLIST.CHANNEL' | translate }}:
+	   		</label> 
 		</a>
-		<p-dropdown [options]="playlistsItem" [(ngModel)]="selectedPlayList" [style]="{'width':'600px', 'margin-left': '10px'}" (onChange)="getVideos()"></p-dropdown>
+		
+		<p-dropdown [options]="playlistsItem" [(ngModel)]="selectedPlayList" 
+			[style]="{'width':'600px', 'margin-left': '10px'}" (onChange)="getVideos()">
+		</p-dropdown>
+		
 		<a *ngIf="selectedPlayList" href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
-			<img *ngIf="selectedPlayList" src="../../assets/images/youtubelogo.png" alt="Канал: {{selectedPlayList.idch}}" title="Перейти на канал в Youtube"/>
+			<img src="../../assets/images/youtubelogo.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" />
 		</a>
 	</div>
 
    	<div class="ui-g-12">
    		<div class="p-grid p-align-start .p-col-align-start">    
+
    	  		<ng-template ngFor let-ytubevideo [ngForOf]="youtubeVideosShort">
    	  			<div class="p-col videocell">
    	  				<div class="ui-g">
+
 				   		<div class="ui-g-12 videopicture">
 	   	  					<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}" target="_blank">
-	   	  						<img src="http://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg" alt="Відео id: {{ytubevideo.id}}"/>
+	   	  						<img src="http://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg" 
+	   	  								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
 	   	  					</a>
 						</div>
+
 				   		<div class="ui-g-12 videotitle">
 	   		  				{{ytubevideo.title}}
 						</div>
+
 				   		<div class="ui-g-12 videopablished">
-	   		  				Дата: {{ytubevideo.publishedat | date: 'dd-MM-yyyy HH:mm:ss'}} 
+	   		  				{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date: 'dd-MM-yyyy HH:mm:ss'}} 
 	   	  					<a href="/video?idvideo={{ytubevideo.id}}" target="_blank">
-								<img src="../../assets/images/gr.png" title="Подивитися статистику по відео"/>
+								<img src="../../assets/images/gr.png" title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}"/>
 	   	  					</a>
 						</div>
 					</div>   	  		
+
 				</div>   	  		
 			</ng-template>			   	
+
 		</div>		
 	</div>
 	
