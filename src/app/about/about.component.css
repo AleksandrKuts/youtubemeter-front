@@ -1,0 +1,10 @@
+.about {
+	width: 800px;
+	text-align: justify;
+	background-color: #f9f9ff;
+	padding: 0.5em;
+}
+
+.about p:first-letter {
+	margin-left: 20px;
+}

@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+ngCustomFilePath=${project_loc\:node_modules/.bin}
+ngUseGlobalInstallation=false

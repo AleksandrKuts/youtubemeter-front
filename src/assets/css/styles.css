@@ -1,0 +1,80 @@
+/* Master Styles */
+body {
+	margin: 2em;
+}
+
+body, input[text], button {
+	color: #888;
+	font-family: Cambria, Georgia;
+}
+
+h1 {
+	font-size: 1.2em;
+	color: #999;
+	margin-bottom: 0;
+}
+
+h2 {
+	font-size: 2em;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+button {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+button:hover {
+  background-color: #cfd8dc;
+}
+
+/* . . . */
+/* everywhere else */
+
+* {
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: medium;
+}
+
+.positivecost {
+	background-color: #ff6347 !important;
+}
+
+nav a {
+	margin: 2px;
+	padding: 5px 10px;
+	text-decoration: none;
+	margin-top: 10px;
+	display: inline-block;
+	background-color: #eee;
+	border-radius: 4px;
+}
+
+nav a:visited, a:link {
+	color: #607D8B;
+}
+
+nav a:hover {
+	color: #039be5;
+	background-color: #CFD8DC;
+}
+
+nav a.active {
+	color: #039be5;
+}
+
+nav a.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}
+
+.content {
+	margin-top: 2em;
+}

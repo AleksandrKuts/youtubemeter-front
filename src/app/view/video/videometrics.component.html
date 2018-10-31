@@ -1,0 +1,63 @@
+<div class="ui-g">
+   	<div class="ui-g-12">
+		<h1 *ngIf="youtubeVideo">{{youtubeVideo.title}}</h1> 
+	</div>
+    	
+   	<div class="ui-g-12">    	
+		<div class="p-grid">
+    		<div class="p-col-fixed" style="width:310px">
+				<a href="https://www.youtube.com/watch?v={{videoId}}" target="_blank"><img *ngIf="videoId" src="http://img.youtube.com/vi/{{videoId}}/0.jpg" alt="Відео id: {{videoId}}"/></a>
+			</div>
+
+    		<div class="p-col">
+				<div class="ui-g" *ngIf="youtubeVideo">
+		    		<div class="ui-g-2">Канал:</div>
+		    		<div class="ui-g-10">
+						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank">{{youtubeVideo.chtitle}}</a>
+		    		
+		    		</div>
+		    	
+		    		<div class="ui-g-2">Опубліковано:</div>
+		    		<div class="ui-g-10">{{youtubeVideo.publishedat | date: 'dd-MM-yyyy HH:mm:ss'}}</div>
+
+			    	<div class="ui-g-2">Період збору метрик:</div>
+			    	<div class="ui-g-10">
+			    		з <strong>{{youtubeVideo.mintime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
+		    			по <strong>{{youtubeVideo.maxtime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
+		    		</div>
+
+		    		<div class="ui-g-2">Всього метрик:</div>
+		    		<div class="ui-g-10">
+		    			{{youtubeVideo.count}}
+		    			<button pButton type="button" label="Звантажити" styleClass="buttonreset" class="ui-button-raised ui-button-secondary" title="Поки що недоступно" (click)="messageService.addError('Послуга поки що недоступна')"></button>
+		    	</div>		    	
+			</div> 			
+		</div>		
+	</div>
+
+   	<div class="ui-g-12">
+
+		<p-chart type="line" [data]="chartData" [options]="chartOptions"
+		width="1000px" height="400px" (onDataSelect)="selectData($event)"></p-chart>
+
+
+		<h3>Деталізація метрик:</h3>
+
+			<div class="detail">
+			<label>Відео id:</label>
+			<input type="text" size="20" pInputText [(ngModel)]="editVideoId"/>
+			<label>  з</label>
+			<input type="text" size="20" pInputText [disabled]="true" value="{{newDateFrom | date: 'dd-MM-yyyy HH:mm:ss'}}" title=" Обери на відповідному графіку "/>*
+			<label>  по  </label>
+			<input type="text" size="20" pInputText [disabled]="true" value="{{newDateTo | date: 'dd-MM-yyyy HH:mm:ss'}}" title=" Обери на відповідному графіку "/>*
+			<button pButton type="button" label=">" styleClass="buttonreset" class="ui-button-raised ui-button-secondary" (click)="resetRequest()"></button>
+			<p-button  styleClass="buttonrequest" icon="pi pi-check" label="Запит" (onClick)="getMetrics()"></p-button>
+    		<p>* Щоб обрати або скинути оберіть показник на відповідному графіку, якщо дати не вказані графік будується по всьому періоду</p>
+		</div>
+	
+    </div>
+    
+</div>
+
+
+

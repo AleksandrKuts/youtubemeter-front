@@ -1,0 +1,106 @@
+<div>
+	<h3>
+		Cпискі відтворення:
+		<button *ngIf="playlists" (click)="newPlayList()">Додати
+			новий список</button>
+	</h3>
+
+	<p-confirmDialog header="Confirmation"
+		icon="pi pi-exclamation-triangle" width="425" acceptLabel="Так"
+		rejectLabel="Ні"></p-confirmDialog>
+
+	<p-dialog header="Редагування списоку відтворення" [(visible)]="display"
+		[modal]="true" [minY]="70" [baseZIndex]="10000" width="900">
+
+	<form [formGroup]="userform">
+		<div class="ui-grid ui-grid-responsive ui-grid-pad"
+			style="margin: 5px 0px">
+			<div class="ui-grid-row" *ngIf="modeEdit && selectedPlayList">
+				<div class="ui-grid-col-3">ID списку відтворення</div>
+				<div class="ui-grid-col-9">
+						{{selectedPlayList.id}}
+				</div>
+			</div>
+			<div class="ui-grid-row" *ngIf="!modeEdit">
+				<div class="ui-grid-col-3">ID списку відтворення*</div>
+				<div class="ui-grid-col-9">
+					<input pInputText type="text" formControlName="id"
+						placeholder="Required" [size]="24" [disabled]="true"/>
+					<p-message severity="error" text="Повинно буди рівно 24 символи"
+						*ngIf="!userform.controls['id'].valid&&userform.controls['id'].dirty"></p-message>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">Назва каналу *</div>
+				<div class="ui-grid-col-9">
+					<input pInputText type="text" formControlName="title"
+						placeholder="Required" [size]="30" />
+					<p-message severity="error" text="Введить назву каналу"
+						*ngIf="!userform.controls['title'].valid&&userform.controls['title'].dirty"></p-message>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">ID каналу *</div>
+				<div class="ui-grid-col-9">
+					<input pInputText type="text" formControlName="idch"
+						placeholder="Required" [size]="24" />
+					<p-message severity="error" text="Повинно буди рівно 24 символи"
+						*ngIf="!userform.controls['idch'].valid&&userform.controls['idch'].dirty"></p-message>
+				</div>
+			</div>
+
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-3">Включений *</div>
+				<div class="ui-grid-col-9">
+					<p-checkbox formControlName="enable" binary="true"></p-checkbox>
+					<p-message severity="error" text="Firstname is required"
+						*ngIf="!userform.controls['enable'].valid&&userform.controls['enable'].dirty"></p-message>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<p-footer>
+	<div class="ui-g">
+		<div class="ui-md-2">
+			<button type="button" pButton (click)="confirm()" label="Видалити"
+				class="ui-button-danger" *ngIf="selectedPlayList"></button>
+		</div>
+		<div class="ui-md-10">
+			<button type="button" pButton
+				(click)="addOrUpdateplaylist(userform.value)" label="Зберегти"
+				[disabled]="!userform.valid"></button>
+			<button type="button" pButton icon="pi pi-close"
+				(click)="display=false" label="Відміна" class="ui-button-secondary"></button>
+		</div>
+	</div>
+	</p-footer> 
+	</p-dialog>
+
+	<div *ngIf="playlists">
+
+		<table>
+			<tr title=" Натисніть для сортування ">
+				<th>ID списку відтворення</th>
+				<th>Назва каналу</th>
+				<th>ID Каналу</th>
+				<th>Актив.</th>
+			</tr>
+
+			<tr *ngFor="let playlist of playlists; let col = index"
+				(click)="editPlayList(playlist)">
+
+				<td style="text-align: left;">{{playlist.id}}</td>
+				<td style="text-align: left;">{{playlist.title}}</td>
+				<td style="text-align: left;">{{playlist.idch}}</td>
+				<td><p-checkbox [(ngModel)]="playlist.enable" binary="true"
+						disabled="true"></p-checkbox></td>
+			</tr>
+
+		</table>
+	</div>
+
+</div>
+
+
+

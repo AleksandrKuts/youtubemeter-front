@@ -1,0 +1,22 @@
+.buttonrequest {
+	margin-left: 2em;
+	color: black;
+}
+
+.buttonreset {
+	margin-left: 2em;
+	color: black;
+}
+
+.elhide {
+	visibility: collapse;
+}
+
+label {
+	font-weight: bold;
+}
+
+.playlists td {
+	text-align: left;
+}
+

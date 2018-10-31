@@ -1,0 +1,28 @@
+table {
+	list-style-type: none;
+	padding: 0;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 0.5em;
+	border: 1px solid black;
+	font-size: small !important;
+}
+
+th {
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	background-color: #4a86e8;
+}
+
+td {
+	color: black;
+	text-align: right;
+}
+
+.tbbottom th {
+	text-align: right;
+}
+

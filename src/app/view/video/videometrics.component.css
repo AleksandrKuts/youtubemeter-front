@@ -1,0 +1,16 @@
+.detail label, input, button {
+	margin-left: 1em;
+}
+
+.detail p-button {
+	margin-left: 3em;
+}
+
+
+img {
+	width: 300px;
+}
+
+.multi_lines_text { 
+	white-space: pre-line; 
+}
