@@ -1,25 +1,25 @@
-.headtitle {
-   padding-bottom: 20px;
-}
-
-.headtitle * {
-    vertical-align: middle;
-    text-align: center;
+.head {
+   padding-bottom: 20px;   
 }
 
 .headtitle h1 {
 	margin: 0;
 	padding: 0;
+	font-size: xx-large;
+	text-align: center;
+	
 }
 
-.headtitle img {
+.headtitle a {
+    text-decoration: none;
+}
+
+.headsupport * {
+	vertical-align: bottom;
+}
+
+.titleimg {
 	width: 23px;
 	height: auto;
-}
-
-.rules img {
-	text-align: right;
-	margin: 0 10px 0 10px;
-	width: 20px;
-	height: auto;
+	margin-left: 10px;
 }

@@ -1,29 +1,22 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div id="wrapper">
-	<div class="ui-g headtitle">
+	<div class="p-grid p-align-end head">
 
-		<div class="ui-g-11">
-			<div class="p-grid p-align-start .p-col-align-start">
-  				<div class="p-col-fixed" style="width:30px" title="{{ 'HEADER.HOME' | translate }}">
-					<a href="/"><img src="../../assets/images/home.png"/></a>
-				</div>
-	  			<div class="p-col">
-					<h1>{{ 'HEADER.TITLE' | translate }}</h1>			
-				</div>
-			</div>
+		<div class="p-col-11 headtitle">
+			<a href="/"><h1>YoutubeMETER</h1></a>						
 		</div>
 
-		<div class="ui-g-1 rules">
+		<div class="p-col headsupport">
 			<label  title="{{ 'HEADER.LANG' | translate }}">
-
-			<select [(ngModel)]="langSelect" (change)="setLang()" id="changelang">
-				<option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-			</select>
-
-      		</label>
-			<a href="https://docs.google.com/document/d/1riapDk1TKfmTxEm-WS3Zla25dFqpSiEAO-5ExN406QM/edit?usp=sharing" target="_blank">
-			 <img id="idhelp" src="../../assets/images/help.png" title="{{ 'HEADER.ABOUT' | translate }}" />
-			</a>
+				<select [(ngModel)]="langSelect" (change)="setLang()" id="changelang">
+					<option *ngFor="let lang of translate.getLangs()" [value]="lang" 
+						[selected]="lang === translate.currentLang">{{ lang }}</option>
+				</select>
+			</label>
+			<a href="https://docs.google.com/document/d/1riapDk1TKfmTxEm-WS3Zla25dFqpSiEAO-5ExN406QM/edit?usp=sharing" 
+				target="_blank">
+	 			<img id="idhelp" src="../../assets/images/help.png" title="{{ 'HEADER.ABOUT' | translate }}" class="titleimg"/>
+			</a>			
 		</div>
 		
 	</div>
