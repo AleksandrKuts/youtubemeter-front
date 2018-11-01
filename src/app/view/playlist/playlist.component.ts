@@ -76,7 +76,6 @@ export class VideoPlayListComponent implements OnInit {
     }
 
     getVideos() {
-        console.log('11111111111');
         this.youtubeVideosShort = null;
 
         if ( this.selectedPlayList ) {

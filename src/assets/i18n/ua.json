@@ -5,8 +5,10 @@
 		"TO": "по",
 		"LOAD": "Звантажити",
 		"REQUEST": "Запит",
-		"PLAYLIST": "Плейлист",
-		"CHANNEL": "Канал",
+		"PLAYLIST_U": "Плейлист",
+		"PLAYLIST_L": "плейлист",
+		"CHANNEL_U": "Канал",
+		"CHANNEL_L": "канал",
 		"CHANGE": "Змінити"
 	},
 	"HEADER": {

@@ -20,9 +20,9 @@
 		</button>
 
 		<span *ngIf="selectedPlayList">{{selectedPlayList.title}} ( 
-			{{ 'COMMON.CHANNEL' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" 
+			{{ 'COMMON.CHANNEL_L' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" 
 					target="_blank">{{selectedPlayList.idch}}</a>, 
-			{{ 'COMMON.PLAYLIST' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}/videos" 
+			{{ 'COMMON.PLAYLIST_L' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}/videos" 
 					target="_blank">{{selectedPlayList.id}}</a>) 
 		</span>
 	</div>

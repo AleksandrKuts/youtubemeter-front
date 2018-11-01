@@ -5,8 +5,10 @@
 		"TO": "to",
 		"LOAD": "Load",
 		"REQUEST": "Query",
-		"PLAYLIST": "Pleylist",
-		"CHANNEL": "Сhannel",
+		"PLAYLIST_U": "Pleylist",
+		"PLAYLIST_L": "pleylist",
+		"CHANNEL_U": "Cannel",
+		"CHANNEL_L": "cannel",
 		"CHANGE": "Change"
 	},
 	"HEADER": {
