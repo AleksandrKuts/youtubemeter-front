@@ -31,6 +31,8 @@ import {ChartModule } from 'primeng/chart';
 import {OverlayPanelModule } from 'primeng/overlaypanel';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {DropdownModule} from 'primeng/dropdown';
+import {SidebarModule} from 'primeng/sidebar';
+import {ListboxModule} from 'primeng/listbox';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -78,6 +80,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     OverlayPanelModule,
     ScrollPanelModule,
     DropdownModule,
+    SidebarModule,
+    ListboxModule,
     routing,
     TranslateModule.forRoot({
         loader: {

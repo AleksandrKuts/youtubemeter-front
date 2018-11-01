@@ -4,18 +4,22 @@
 		"FROM": "from",
 		"TO": "to",
 		"LOAD": "Load",
-		"REQUEST": "Query"
+		"REQUEST": "Query",
+		"PLAYLIST": "Pleylist",
+		"CHANNEL": "Сhannel",
+		"CHANGE": "Change"
 	},
 	"HEADER": {
 		"HOME": "Home",
-		"TITLE": "Youtube channel statistics statistics",
+		"TITLE": "YoutubeMETER",
+		"DESCRIPTION": "video tracking service",
 		"LANG": "Change the language",
 		"ABOUT": "About"
 	},
 	"PLAYLIST": {
-		"CHANNEL": "Channel",
-		"CHANNEL_REF": "Direct link to channel",
+		"CHANNEL_REF": "Direct link to this page",
 		"CHANNEL_REF_YOUTUBE": "Go to the channel on Youtube",
+		"SELECT": "Select a channel",		
 		"VIDEO_ID": "Video id",
 		"VIEW_STATISTICS": "See video statistics"
 	},

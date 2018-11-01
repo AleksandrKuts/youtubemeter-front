@@ -21,10 +21,12 @@ export class VideoPlayListComponent implements OnInit {
     sortOrder = false; // true = asc, false = desc
 
     selectedPlayList: PlayList;
-    playlistsItem: SelectItem[];
+    playlistItems: SelectItem[];
     youtubeVideosShort: YoutubeVideoShort[];
 
     initPlayListID: string = undefined;
+
+    visibleSidebar1: boolean;
 
     constructor( private route: ActivatedRoute, private backEndService: BackEndService,
             private messageService: MessageService  ) {
@@ -43,7 +45,7 @@ export class VideoPlayListComponent implements OnInit {
     }
 
     getPlayLists() {
-        this.playlistsItem = null;
+        this.playlistItems = null;
         this.selectedPlayList = undefined;
 
         this.backEndService.getPlayLists( true ).subscribe(
@@ -63,9 +65,9 @@ export class VideoPlayListComponent implements OnInit {
                         this.messageService.addError( 'Невідомий плейлист з id: ' + this.initPlayListID);
                     }
 
-                    this.playlistsItem = playlistsItem;
+                    this.playlistItems = playlistsItem;
 
-                    if (this.selectedPlayList === undefined && this.playlistsItem.length > 0 ) {
+                    if (this.selectedPlayList === undefined && this.playlistItems.length > 0 ) {
                         this.selectedPlayList = playlists[0];
                     }
                     this.getVideos();
@@ -74,6 +76,7 @@ export class VideoPlayListComponent implements OnInit {
     }
 
     getVideos() {
+        console.log('11111111111');
         this.youtubeVideosShort = null;
 
         if ( this.selectedPlayList ) {
@@ -84,6 +87,8 @@ export class VideoPlayListComponent implements OnInit {
                     }
                 } );
         }
+
+        this.visibleSidebar1 = false;
     }
 
 }

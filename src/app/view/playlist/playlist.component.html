@@ -1,52 +1,71 @@
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"
+	blockScroll="true" [style]="{'width':'340px', 'margin-bottom': '20px'}">
+
+	<h1>{{ 'PLAYLIST.SELECT' | translate }}</h1>
+
+	<p-listbox [options]="playlistItems" [(ngModel)]="selectedPlayList"
+		filter="filter" [style]="{'width':'300px', 'border': 'none'}"
+		(onChange)="getVideos()"> 
+		<ng-template let-playlistItem pTemplate="item">
+			<div class="ui-helper-clearfix">    {{playlistItem.label}}</div>
+		</ng-template> 
+	</p-listbox>
+	 
+</p-sidebar>
+
 <div class="ui-g">
-   	<div class="ui-g-12 headplaylist" >
-		<a *ngIf="selectedPlayList" href="/playlist?id={{selectedPlayList.id}}" target="_blank">
-	   		<label title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}">
-	   			{{ 'PLAYLIST.CHANNEL' | translate }}:
-	   		</label> 
-		</a>
-		
-		<p-dropdown [options]="playlistsItem" [(ngModel)]="selectedPlayList" 
-			[style]="{'width':'600px', 'margin-left': '10px'}" (onChange)="getVideos()">
-		</p-dropdown>
-		
-		<a *ngIf="selectedPlayList" href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
-			<img src="../../assets/images/youtubelogo.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" />
-		</a>
+	<div class="ui-g-11 headplaylist">
+		<button pButton type="button" (click)="visibleSidebar1 = true"
+			icon="pi pi-arrow-left" label="{{ 'COMMON.CHANGE' | translate }}">
+		</button>
+
+		<span *ngIf="selectedPlayList">{{selectedPlayList.title}} ( 
+			{{ 'COMMON.CHANNEL' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" 
+					target="_blank">{{selectedPlayList.idch}}</a>, 
+			{{ 'COMMON.PLAYLIST' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}/videos" 
+					target="_blank">{{selectedPlayList.id}}</a>) 
+		</span>
 	</div>
-
-   	<div class="ui-g-12">
-   		<div class="p-grid p-align-start .p-col-align-start">    
-
-   	  		<ng-template ngFor let-ytubevideo [ngForOf]="youtubeVideosShort">
-   	  			<div class="p-col videocell">
-   	  				<div class="ui-g">
-
-				   		<div class="ui-g-12 videopicture">
-	   	  					<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}" target="_blank">
-	   	  						<img src="http://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg" 
-	   	  								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
-	   	  					</a>
-						</div>
-
-				   		<div class="ui-g-12 videotitle">
-	   		  				{{ytubevideo.title}}
-						</div>
-
-				   		<div class="ui-g-12 videopablished">
-	   		  				{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date: 'dd-MM-yyyy HH:mm:ss'}} 
-	   	  					<a href="/video?idvideo={{ytubevideo.id}}" target="_blank">
-								<img src="../../assets/images/gr.png" title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}"/>
-	   	  					</a>
-						</div>
-					</div>   	  		
-
-				</div>   	  		
-			</ng-template>			   	
-
-		</div>		
+		
+	<div class="ui-g-1 headplaylist">
+		<a *ngIf="selectedPlayList" href="/playlist?id={{selectedPlayList.id}}" target="_blank">
+			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}" />
+		</a>
 	</div>
 	
+
+	<div class="ui-g-12">
+		<div class="p-grid p-align-start .p-col-align-start">
+
+			<ng-template ngFor let-ytubevideo [ngForOf]="youtubeVideosShort">
+			<div class="p-col videocell">
+				<div class="ui-g">
+
+					<div class="ui-g-12 videopicture">
+						<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
+							target="_blank"> <img
+							src="http://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
+							alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}" />
+						</a>
+					</div>
+
+					<div class="ui-g-12 videotitle">{{ytubevideo.title}}</div>
+
+					<div class="ui-g-12 videopablished">
+						{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date:
+						'dd-MM-yyyy HH:mm:ss'}} <a href="/video?idvideo={{ytubevideo.id}}"
+							target="_blank"> <img src="../../assets/images/gr.png"
+							title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}" />
+						</a>
+					</div>
+				</div>
+
+			</div>
+			</ng-template>
+
+		</div>
+	</div>
+
 </div>
 
 

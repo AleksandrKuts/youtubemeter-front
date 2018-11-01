@@ -1,27 +1,22 @@
 .headplaylist {
 	padding: 0;
 	padding-bottom: 10px;
+	vertical-align: middle;
 }
 
 .headplaylist img {
-	padding: 0;
+	width: 20px;
+	height: auto;
 }
 
-.headplaylist img {
-	width: 41px;
-	height: 29px;
+.headplaylist span {
 	margin-left: 1em;
-    vertical-align: middle;
-}
-
-.headplaylist label {
-	color: black;
 	font-weight: bold;
 }
 
 .videocell {
 	max-width: 210px;
-	padding: 15px,5px,5px,5px;
+	padding: 15px, 5px, 5px, 5px;
 }
 
 .videopicture {
@@ -48,7 +43,5 @@
 	margin-left: 10px;
 	width: 19px;
 	height: auto;
-    vertical-align: baseline;
+	vertical-align: baseline;
 }
-
-

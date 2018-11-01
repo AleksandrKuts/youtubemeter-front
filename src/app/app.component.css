@@ -1,13 +1,15 @@
 .head {
-   padding-bottom: 20px;   
+   padding-bottom: 25px;   
+}
+
+.headtitle {
+	text-align: center;	
 }
 
 .headtitle h1 {
 	margin: 0;
 	padding: 0;
 	font-size: xx-large;
-	text-align: center;
-	
 }
 
 .headtitle a {
@@ -15,7 +17,7 @@
 }
 
 .headsupport * {
-	vertical-align: bottom;
+	vertical-align: top;
 }
 
 .titleimg {

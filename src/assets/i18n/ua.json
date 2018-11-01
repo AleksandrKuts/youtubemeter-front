@@ -4,18 +4,22 @@
 		"FROM": "з",
 		"TO": "по",
 		"LOAD": "Звантажити",
-		"REQUEST": "Запит"
+		"REQUEST": "Запит",
+		"PLAYLIST": "Плейлист",
+		"CHANNEL": "Канал",
+		"CHANGE": "Змінити"
 	},
 	"HEADER": {
 		"HOME": "Головна сторінка",
-		"TITLE": "Статистика роботи каналів Youtube",
+		"TITLE": "YoutubeMETER",
+		"DESCRIPTION": "сервіс відстеження накруток відео",
 		"LANG": "Змінити мову",
 		"ABOUT": "Про програму"
 	},
 	"PLAYLIST": {
-		"CHANNEL": "Канал",
-		"CHANNEL_REF": "Пряме посилання на обраний канал",
+		"CHANNEL_REF": "Пряме посилання на цю сторінку",
 		"CHANNEL_REF_YOUTUBE": "Перейти на канал в Youtube",
+		"SELECT": "Обери канал",		
 		"VIDEO_ID": "Відео id",
 		"VIEW_STATISTICS": "Подивитися статистику по відео"
 	},
