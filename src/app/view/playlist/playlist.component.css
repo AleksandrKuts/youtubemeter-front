@@ -4,14 +4,19 @@
 	vertical-align: middle;
 }
 
-.headplaylist img {
-	width: 20px;
-	height: auto;
-}
-
 .headplaylist span {
 	margin-left: 1em;
 	font-weight: bold;
+}
+
+.headlink {
+	text-align: center;
+}
+
+.headlink img {
+	width: 20px;
+	height: auto;
+	vertical-align: baseline;
 }
 
 .videocell {
