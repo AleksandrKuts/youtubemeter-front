@@ -6,6 +6,14 @@
 	text-align: center;	
 }
 
+.headtitle .decor {
+	color: #888;
+	font-style: italic;
+	background: #eee;
+	font-size: 0.9em;
+	vertical-align: top;
+}
+
 .headtitle h1 {
 	display: inline;
 	margin: 0;
@@ -15,6 +23,10 @@
 
 .headtitle a {
 	text-decoration: none;
+}
+
+.headsupport {
+	text-align: right;	
 }
 
 .headsupport * {

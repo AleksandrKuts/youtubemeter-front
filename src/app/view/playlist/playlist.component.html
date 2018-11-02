@@ -14,23 +14,20 @@
 </p-sidebar>
 
 <div class="ui-g">
-	<div class="ui-g-11 headplaylist">
+	<div class="ui-g-12 headplaylist">
 		<button pButton type="button" (click)="visibleSidebar1 = true"
 			icon="pi pi-arrow-left" label="{{ 'COMMON.CHANGE' | translate }}">
 		</button>
 
-		<h1 *ngIf="selectedPlayList">
+		<h1 *ngIf="selectedPlayList" title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}">
 			<span>{{ 'COMMON.CHANNEL_U' | translate }}: </span>
-			<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
+			<a href="/playlist?id={{selectedPlayList.id}}" target="_blank">
 				<label>{{selectedPlayList.title}}</label>
 			</a>
 		</h1>
 		
-	</div>
-		
-	<div class="ui-g-1 headlink">
-		<a *ngIf="selectedPlayList" href="/playlist?id={{selectedPlayList.id}}" target="_blank">
-			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}" />
+		<a *ngIf="selectedPlayList" href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
+			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" />
 		</a>
 	</div>
 	

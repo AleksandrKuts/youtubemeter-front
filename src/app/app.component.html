@@ -3,13 +3,15 @@
 	
 	<div id="header">
 	
-		<div class="p-grid p-align-center head">
-			<div class="p-col-11 headtitle">
-					<a href="/"><h1>Youtube</h1><h1 style="color: #888; font-style: italic;">METER</h1></a><br/>
+		<div class="p-grid p-justify-between head">
+			<div class="p-col-2">
+			</div>
+			<div class="p-col-6 headtitle">
+					<a href="/"><h1>Youtube</h1><h1 class="decor"> METER </h1></a><br/>
 					<label>{{ 'HEADER.DESCRIPTION' | translate }}</label>
 			</div>
 
-			<div class="p-col headsupport">
+			<div class="p-col-2 headsupport">
 				<label  title="{{ 'HEADER.LANG' | translate }}">
 					<select [(ngModel)]="langSelect" (change)="setLang()" id="changelang">
 						<option *ngFor="let lang of translate.getLangs()" [value]="lang" 

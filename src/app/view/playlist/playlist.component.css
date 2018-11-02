@@ -30,14 +30,15 @@
 	font-size: large;
 }
 
-.headlink {
-	text-align: center;
+.headplaylist img {
+	margin-left: 1em;
+	width: 24px;
+	height: auto;
+	vertical-align: text-bottom;
 }
 
-.headlink img {
-	width: 20px;
-	height: auto;
-	vertical-align: baseline;
+.headlink {
+	text-align: center;
 }
 
 .videocell {
