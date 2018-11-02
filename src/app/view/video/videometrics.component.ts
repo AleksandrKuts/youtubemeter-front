@@ -131,7 +131,18 @@ export class VideoMetricsComponent implements OnInit {
                             },
                             tooltips: {
                                 mode: 'nearest',
-                                backgroundColor: '#696969'
+                                backgroundColor: '#696969',
+                                callbacks: {
+                                    title: function(tooltipItem, data) {
+                                        let label = '';
+
+                                        if ( tooltipItem && tooltipItem[0]) {
+                                            label = new Date(tooltipItem[0].xLabel).toLocaleString();
+                                        }
+
+                                        return label;
+                                    }
+                                }
                             },
                             legend: {
                                 position: 'bottom'
