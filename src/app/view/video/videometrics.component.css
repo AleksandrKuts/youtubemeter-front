@@ -14,3 +14,11 @@ img {
 .multi_lines_text { 
 	white-space: pre-line; 
 }
+
+
+.imglink {
+	margin-left: 1em;
+	width: 24px;
+	height: auto;
+	vertical-align: text-bottom;	
+}

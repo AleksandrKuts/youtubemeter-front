@@ -17,7 +17,12 @@
 				<div class="ui-g" *ngIf="youtubeVideo">
 		    		<div class="ui-g-2">{{ 'COMMON.CHANNEL_U' | translate }}:</div>
 		    		<div class="ui-g-10">
-						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank">{{youtubeVideo.chtitle}}</a>		    		
+						<a href="/playlist?id={{youtubeVideo.idpl}}">
+							{{youtubeVideo.chtitle}}
+						</a>		    		
+						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank">
+							<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
+						</a>		    		
 		    		</div>
 		    	
 		    		<div class="ui-g-2">{{ 'METRICS.PABLISHED' | translate }}:</div>
