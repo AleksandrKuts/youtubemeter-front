@@ -4,9 +4,30 @@
 	vertical-align: middle;
 }
 
+.headplaylist h1 {
+	display: inline;
+}
+
+.headplaylist h1 a {
+	text-decoration: none;
+}
+
+.headplaylist h1 a:hover {
+	text-decoration: underline;
+}
+
+.headplaylist h1 a label {
+	color: #999;
+	font-style: bold;
+	font-size: large;
+	cursor: pointer;
+}
+
 .headplaylist span {
 	margin-left: 1em;
-	font-weight: bold;
+	color: black;
+	font-style: bold;
+	font-size: large;
 }
 
 .headlink {

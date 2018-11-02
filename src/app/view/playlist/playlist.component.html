@@ -19,12 +19,13 @@
 			icon="pi pi-arrow-left" label="{{ 'COMMON.CHANGE' | translate }}">
 		</button>
 
-		<span *ngIf="selectedPlayList">{{selectedPlayList.title}} ( 
-			{{ 'COMMON.CHANNEL_L' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" 
-					target="_blank">{{selectedPlayList.idch}}</a>, 
-			{{ 'COMMON.PLAYLIST_L' | translate }}: <a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}/videos" 
-					target="_blank">{{selectedPlayList.id}}</a>) 
-		</span>
+		<h1 *ngIf="selectedPlayList">
+			<span>{{ 'COMMON.CHANNEL_U' | translate }}: </span>
+			<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
+				<label>{{selectedPlayList.title}}</label>
+			</a>
+		</h1>
+		
 	</div>
 		
 	<div class="ui-g-1 headlink">

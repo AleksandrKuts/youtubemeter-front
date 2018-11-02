@@ -14,11 +14,12 @@
 	"HEADER": {
 		"HOME": "Главная страница",
 		"TITLE": "YoutubeMETER",
-		"DESCRIPTION": "сервис отслеживания накруток видео",
+		"DESCRIPTION": "служба отслеживания метрик видео",
 		"LANG": "Сменить язык",
 		"ABOUT": "О программе"
 	},
 	"PLAYLIST": {
+		"CHANNELS": "Каналы",
 		"CHANNEL_REF": "Direct link to this page",
 		"CHANNEL_REF_YOUTUBE": "Перейти на канал в Youtube",
 		"SELECT": "Выбери канал",		

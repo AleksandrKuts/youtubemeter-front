@@ -14,11 +14,12 @@
 	"HEADER": {
 		"HOME": "Home",
 		"TITLE": "YoutubeMETER",
-		"DESCRIPTION": "video tracking service",
+		"DESCRIPTION": "video metrics tracking service",
 		"LANG": "Change the language",
 		"ABOUT": "About"
 	},
 	"PLAYLIST": {
+		"CHANNELS": "Channels",
 		"CHANNEL_REF": "Direct link to this page",
 		"CHANNEL_REF_YOUTUBE": "Go to the channel on Youtube",
 		"SELECT": "Select a channel",		
