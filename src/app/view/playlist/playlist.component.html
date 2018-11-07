@@ -1,10 +1,10 @@
-<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000"
+<p-sidebar *ngIf="selectedPlayList" [(visible)]="visibleSidebar1" [baseZIndex]="10000"
 	blockScroll="true" [style]="{'width':'340px', 'margin-bottom': '20px'}">
 
 	<h1>{{ 'PLAYLIST.SELECT' | translate }}</h1>
 
 	<p-listbox [options]="playlistItems" [(ngModel)]="selectedPlayList"
-		filter="filter" [style]="{'width':'300px', 'border': 'none'}"
+		filter="filter" [style]="{'width':'300px', 'border':'none'}"
 		(onChange)="getVideos()"> 
 		<ng-template let-playlistItem pTemplate="item">
 			<div class="ui-helper-clearfix">    {{playlistItem.label}}</div>
@@ -13,20 +13,20 @@
 	 
 </p-sidebar>
 
-<div class="ui-g">
+<div *ngIf="selectedPlayList" class="ui-g">
 	<div class="ui-g-12 headplaylist">
 		<button pButton type="button" (click)="visibleSidebar1 = true"
 			icon="pi pi-arrow-left" label="{{ 'COMMON.CHANGE' | translate }}">
 		</button>
 
-		<h1 *ngIf="selectedPlayList" title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}">
+		<h1 title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}">
 			<span>{{ 'COMMON.CHANNEL_U' | translate }}: </span>
 			<a href="/playlist?id={{selectedPlayList.id}}" target="_blank">
 				<label>{{selectedPlayList.title}}</label>
 			</a>
 		</h1>
 		
-		<a *ngIf="selectedPlayList" href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
+		<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
 			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" />
 		</a>
 	</div>
@@ -61,6 +61,19 @@
 			</div>
 			</ng-template>
 
+		</div>
+	</div>
+	
+	<div class="ui-g-12">
+		<div class="p-grid">
+    		<div class="p-col-fixed" style="width:5px">*</div>
+    		<div class="p-col">{{ 'PLAYLIST.DESCR_COUNT_VIDEO_BEFORE' | translate }} {{maxCountVideoInPlayLists}} 
+					{{ 'PLAYLIST.DESCR_COUNT_VIDEO_AFTER' | translate }}<br/>
+					
+					{{ 'PLAYLIST.ID' | translate }}: {{selectedPlayList.id}}, 
+					{{ 'PLAYLIST.IDCHANNEL' | translate }}: {{selectedPlayList.idch}}, 
+					{{ 'PLAYLIST.START' | translate }}: {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}}					
+			</div>
 		</div>
 	</div>
 

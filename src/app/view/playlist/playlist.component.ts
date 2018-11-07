@@ -25,6 +25,7 @@ export class VideoPlayListComponent implements OnInit {
     youtubeVideosShort: YoutubeVideoShort[];
 
     initPlayListID: string = undefined;
+    maxCountVideoInPlayLists: number;
 
     visibleSidebar1: boolean;
 
@@ -49,11 +50,12 @@ export class VideoPlayListComponent implements OnInit {
         this.selectedPlayList = undefined;
 
         this.backEndService.getPlayLists( true ).subscribe(
-            playlists => {
-                if ( playlists ) {
+            responsePlaylists => {
+                if ( responsePlaylists ) {
+                    this.maxCountVideoInPlayLists = responsePlaylists.maxvideocount;
                     const playlistsItem: SelectItem[] = [];
 
-                    for ( const playlist of playlists ) {
+                    for ( const playlist of responsePlaylists.playlists ) {
                         playlistsItem.push( { label: playlist.title, value: playlist } );
 
                         if ( playlist.id === this.initPlayListID ) {
@@ -68,7 +70,7 @@ export class VideoPlayListComponent implements OnInit {
                     this.playlistItems = playlistsItem;
 
                     if (this.selectedPlayList === undefined && this.playlistItems.length > 0 ) {
-                        this.selectedPlayList = playlists[0];
+                        this.selectedPlayList = responsePlaylists.playlists[0];
                     }
                     this.getVideos();
                 }

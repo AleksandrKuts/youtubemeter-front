@@ -4,9 +4,9 @@ import { BackEndService } from '../backend/backend.service';
 import { PlayList } from '../backend/backend';
 import { ConfirmationService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
-import { TableModule} from 'primeng/table';
-import { FieldsetModule} from 'primeng/fieldset';
-import { Validators, FormControl, FormGroup, FormBuilder} from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { FieldsetModule } from 'primeng/fieldset';
+import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component( {
     selector: 'admin',
@@ -38,16 +38,18 @@ export class AdminComponent implements OnInit {
 
     ngOnInit() {
         this.getPlayLists();
-        this.setEditForm('', '', true, '');
+        this.setEditForm( '', '', true, '' );
     }
 
-    setEditForm(id: string, title: string, enable: boolean, idch: string) {
-        this.userform = this.fb.group({
-            'id': new FormControl(id, Validators.compose([Validators.required, Validators.minLength(24), Validators.maxLength(24)])),
-            'title': new FormControl(title, Validators.required),
-            'enable': new FormControl(enable),
-            'idch': new FormControl(idch, Validators.compose([Validators.required, Validators.minLength(24), Validators.maxLength(24)]))
-        });
+    setEditForm( id: string, title: string, enable: boolean, idch: string ) {
+        this.userform = this.fb.group( {
+            'id': new FormControl( id, Validators.compose( [Validators.required, Validators.minLength( 24 ),
+                                                                Validators.maxLength( 24 )] ) ),
+            'title': new FormControl( title, Validators.required ),
+            'enable': new FormControl( enable ),
+            'idch': new FormControl( idch, Validators.compose( [Validators.required, Validators.minLength( 24 ),
+                                                                Validators.maxLength( 24 )] ) )
+        } );
     }
 
     getPlayLists() {
@@ -55,8 +57,8 @@ export class AdminComponent implements OnInit {
         this.playlists = null;
 
         this.backEndService.getPlayLists( false ).subscribe(
-            playlists => {
-                this.playlists = playlists;
+            responsePlaylists => {
+                this.playlists = responsePlaylists.playlists;
             },
             error => this.errorMessage = <any>error,
             () => this.sort() );
@@ -102,18 +104,32 @@ export class AdminComponent implements OnInit {
                     this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c2.id, c1.id ) );
                 }
                 break;
+            case 'title':
+                if ( this.sortOrder ) {
+                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c1.title, c2.title ) );
+                } else {
+                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c2.title, c1.title ) );
+                }
+                break;
+            case 'idch':
+                if ( this.sortOrder ) {
+                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c1.idch, c2.idch ) );
+                } else {
+                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c2.idch, c1.idch ) );
+                }
+                break;
         }
     }
 
-    addOrUpdateplaylist(playlist: PlayList) {
+    addOrUpdateplaylist( playlist: PlayList ) {
         if ( this.selectedPlayList ) {
-            this.updatePlayList(this.selectedPlayList.id, playlist);
+            this.updatePlayList( this.selectedPlayList.id, playlist );
         } else {
-            this.addPlayList(playlist);
+            this.addPlayList( playlist );
         }
     }
 
-    addPlayList(playlist: PlayList) {
+    addPlayList( playlist: PlayList ) {
         this.backEndService.addPlayList( playlist ).subscribe(
             ret => {
                 if ( !ret ) {
@@ -126,8 +142,8 @@ export class AdminComponent implements OnInit {
         this.display = false;
     }
 
-    updatePlayList(id: string, playlist: PlayList) {
-        this.backEndService.updatePlayList(id, playlist ).subscribe(
+    updatePlayList( id: string, playlist: PlayList ) {
+        this.backEndService.updatePlayList( id, playlist ).subscribe(
             ret => {
                 if ( !ret ) {
                     this.selectedPlayList.id = playlist.id;
@@ -145,14 +161,14 @@ export class AdminComponent implements OnInit {
 
     newPlayList() {
         this.selectedPlayList = null;
-        this.setEditForm('', '', true, '');
+        this.setEditForm( '', '', true, '' );
         this.modeEdit = false;
         this.display = true;
     }
 
     editPlayList( ch: PlayList ) {
         this.selectedPlayList = ch;
-        this.setEditForm(ch.id, ch.title, ch.enable, ch.idch);
+        this.setEditForm( ch.id, ch.title, ch.enable, ch.idch );
         this.modeEdit = true;
         this.display = true;
     }

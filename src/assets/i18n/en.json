@@ -19,12 +19,17 @@
 		"ABOUT": "About"
 	},
 	"PLAYLIST": {
+		"ID": "Playlist id",
+		"IDCHANNEL": "channel id",
 		"CHANNELS": "Channels",
 		"CHANNEL_REF": "Direct link to this page",
 		"CHANNEL_REF_YOUTUBE": "Go to the channel on Youtube",
 		"SELECT": "Select a channel",		
 		"VIDEO_ID": "Video id",
-		"VIEW_STATISTICS": "See video statistics"
+		"VIEW_STATISTICS": "See video statistics",
+		"DESCR_COUNT_VIDEO_BEFORE": "Here are the last",				
+		"DESCR_COUNT_VIDEO_AFTER": "videos displayed. To view the metrics for older videos, go to the statistics page of any other video and enter the desired id",				
+		"START": "start collecting metrics"
 	},
 	"METRICS": {
 		"PABLISHED": "Pablished",

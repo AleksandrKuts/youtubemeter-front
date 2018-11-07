@@ -72,3 +72,8 @@
 	height: auto;
 	vertical-align: baseline;
 }
+
+:host >>> .ui-listbox-header {
+	padding: 0 !important;
+}
+

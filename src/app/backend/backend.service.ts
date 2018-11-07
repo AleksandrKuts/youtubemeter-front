@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { PlayList, YoutubeVideo, YoutubeVideoShort, Metric } from './backend';
+import { PlayLists, PlayList, YoutubeVideo, YoutubeVideoShort, Metric } from './backend';
 
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 import { MessageService } from '../message.service';
@@ -35,7 +35,7 @@ export class BackEndService {
         this.getUrlVideosByPlaylistId = environment.URL_BACKEND + '/view/videos';
     }
 
-    getPlayLists(onlyEnable: boolean): Observable<PlayList[]> {
+    getPlayLists(onlyEnable: boolean): Observable<PlayLists> {
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
 
@@ -45,7 +45,7 @@ export class BackEndService {
         }
         const options = { params: params };
 
-        return this.http.get<PlayList[]>( url, options )
+        return this.http.get<PlayLists>( url, options )
             .pipe(
             catchError( this.handleError( 'getPlayLists', null ) )
             );

@@ -1,8 +1,15 @@
+export interface PlayLists {
+    maxvideocount: number;
+    playlists: PlayList[];
+}
+
+
 export interface PlayList {
     id: string;
     title: string;
     enable: boolean;
     idch: string;
+    timeadd: Date;
 }
 
 export interface YoutubeVideo {
