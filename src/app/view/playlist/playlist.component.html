@@ -4,7 +4,7 @@
 	<h1>{{ 'PLAYLIST.SELECT' | translate }}</h1>
 
 	<p-listbox [options]="playlistItems" [(ngModel)]="selectedPlayList"
-		filter="filter" [style]="{'width':'300px', 'border':'none'}"
+		filter="filter" [style]="{'width':'300px', 'border':'none'}"		
 		(onChange)="getVideos()"> 
 		<ng-template let-playlistItem pTemplate="item">
 			<div class="ui-helper-clearfix">    {{playlistItem.label}}</div>
