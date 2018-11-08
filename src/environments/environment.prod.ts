@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  URL_BACKEND: 'http://localhost:3000'
+  URL_BACKEND: 'http://vanl0061853.online-vm.com:3000'
 };

@@ -68,7 +68,7 @@
 					title="{{ 'METRICS.CHOOSE_ON_THE_CHART' | translate }}"/>*
 			
 			<button pButton type="button" label=">" styleClass="buttonreset" class="ui-button-raised ui-button-secondary" 
-					(click)="resetRequest()"></button>
+					(click)="resetRequest()" title="{{ 'METRICS.GO_RIGHT' | translate }}"></button>
 			<p-button  styleClass="buttonrequest" icon="pi pi-check" label="{{ 'COMMON.REQUEST' | translate }}" (onClick)="getMetrics()"></p-button>
     		
     		<p>* {{ 'METRICS.CHOOSE_DESCR' | translate }}</p>

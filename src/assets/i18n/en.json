@@ -27,11 +27,12 @@
 		"SELECT": "Select a channel",		
 		"VIDEO_ID": "Video id",
 		"VIEW_STATISTICS": "See video statistics",
-		"DESCR_COUNT_VIDEO_BEFORE": "Here are the last",				
-		"DESCR_COUNT_VIDEO_AFTER": "videos displayed. To view the metrics for older videos, go to the statistics page of any other video and enter the desired id",				
+		"DESCR_COUNT_VIDEO_BEFORE": "There are no more than",				
+		"DESCR_COUNT_VIDEO_AFTER": "last videos. To view the metrics for older videos, go to the statistics page of any other video and enter the desired id",				
 		"START": "start collecting metrics"
 	},
 	"METRICS": {
+		"GO_RIGHT": "Move selected dates to the right",
 		"PABLISHED": "Pablished",
 		"COLLECTION_PERIOD": "Metric collection period",
 		"SERVICE_IS_NOT_AVAILABLE_YET": "Service is not available yet",
