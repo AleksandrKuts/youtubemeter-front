@@ -52,6 +52,8 @@
 		<p-chart type="line" [data]="chartData" [options]="chartOptions"
 			width="1000px" height="400px" (onDataSelect)="selectData($event)"></p-chart>
 
+		<p-chart type="line" [data]="chartDiffData" [options]="chartDiffOptions"
+			width="1000px" height="400px" (onDataSelect)="selectData($event)"></p-chart>
 
 		<h3>{{ 'METRICS.DETAILING' | translate }}:</h3>
 

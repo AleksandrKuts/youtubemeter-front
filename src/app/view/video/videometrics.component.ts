@@ -14,6 +14,7 @@ export class VideoMetricsComponent implements OnInit {
     mode = 'Observable';
 
     metrics: Metric[];
+    metricsDiff: Metric[];
 
     dateFrom: Date;
     dateTo: Date;
@@ -27,6 +28,9 @@ export class VideoMetricsComponent implements OnInit {
 
     chartData: any;
     chartOptions: any;
+
+    chartDiffData: any;
+    chartDiffOptions: any;
 
     butRequestText: string;
 
@@ -86,14 +90,46 @@ export class VideoMetricsComponent implements OnInit {
                 const dislikes: any[] = [];
                 const views: any[] = [];
 
+                const commentsDiff: any[] = [];
+                const likesDiff: any[] = [];
+                const dislikesDiff: any[] = [];
+                const viewsDiff: any[] = [];
+
                 if ( metrics ) {
+                    let commentsPrev: number;
+                    let likesPrev: number;
+                    let dislikesPrev: number;
+                    let viewsPrev: number;
+
+                    let isFirst = true;
                     for ( const metric of metrics ) {
                         comments.push( { x: metric.mtime, y: metric.comment } );
                         likes.push( { x: metric.mtime, y: metric.like } );
                         dislikes.push( { x: metric.mtime, y: metric.dislike } );
                         views.push( { x: metric.mtime, y: metric.view } );
+
+                        if ( isFirst ) {
+                            commentsDiff.push( { x: metric.mtime, y: 0 });
+                            likesDiff.push( { x: metric.mtime, y: 0 });
+                            dislikesDiff.push( { x: metric.mtime, y: 0 });
+                            viewsDiff.push( { x: metric.mtime, y: 0 });
+
+                            isFirst = false;
+                        } else {
+                            commentsDiff.push( { x: metric.mtime, y: metric.comment - commentsPrev } );
+                            likesDiff.push( { x: metric.mtime, y: metric.like - likesPrev } );
+                            dislikesDiff.push( { x: metric.mtime, y: metric.dislike  - dislikesPrev } );
+                            viewsDiff.push( { x: metric.mtime, y: metric.view - viewsPrev } );
+                        }
+
+                        commentsPrev = metric.comment;
+                        likesPrev = metric.like;
+                        dislikesPrev = metric.dislike;
+                        viewsPrev = metric.view;
                     }
 
+
+                    console.log(viewsDiff);
 
                     const minTime = new Date(metrics[0].mtime);
                     const maxTime = new Date(metrics[metrics.length - 1].mtime);
@@ -219,6 +255,103 @@ export class VideoMetricsComponent implements OnInit {
                             }
                         ]
                     };
+
+                    this.chartDiffOptions = {
+                            title: {
+                                display: true,
+                                text: 'Изменения метрик'
+                            },
+                            tooltips: {
+                                mode: 'nearest',
+                                backgroundColor: '#696969',
+                                callbacks: {
+                                    title: function(tooltipItem, data) {
+                                        let label = '';
+
+                                        if ( tooltipItem && tooltipItem[0]) {
+                                            label = new Date(tooltipItem[0].xLabel).toLocaleString();
+                                        }
+
+                                        return label;
+                                    }
+                                }
+                            },
+                            legend: {
+                                position: 'bottom'
+                            },
+                            elements: {
+                                line: {
+                                    tension: 0,
+                                    backgroundColor: 'transparent',
+                                    borderWidth: 2
+                                },
+                                point:
+                                {
+                                    radius: 2,
+                                    hitRadius: 2,
+                                    hoverRadius: 2
+                                }
+                            },
+                            scales: {
+                                xAxes: [{
+                                    type: 'time',
+                                    distribution: 'linear',
+                                    time: {
+                                        unit: xUnit,
+                                        stepSize: xStepSize,
+                                        displayFormats: {
+                                            second: 'HH:mm:ss',
+                                            minute: 'HH:mm',
+                                            hour: 'DD_HH:mm',
+                                            day: 'DD.MM',
+                                            week: 'DD.MM.YYYY',
+                                            month: 'MM.YYYY',
+                                            quarter: 'MM.YYYY',
+                                            year: 'YYYY'
+                                        }
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: false
+                                    }
+                                }]
+                            },
+                            animation: {
+                                duration: 0, // general animation time
+                            },
+                            hover: {
+                                animationDuration: 0, // duration of animations when hovering an item
+                            },
+                            responsiveAnimationDuration: 0, // animation duration after a resize
+                        };
+
+                    this.chartDiffData = {
+                        datasets: [
+                            {
+                                label: 'Лайків',
+                                borderColor: 'green',
+                                data: likesDiff
+                            },
+                            {
+                                label: 'Дизлайків',
+                                backgroundColor: 'transparent',
+                                borderColor: 'red',
+                                data: dislikesDiff
+                            },
+                            {
+                                label: 'Коментарів',
+                                borderColor: 'black',
+                                data: commentsDiff
+                            },
+                            {
+                                label: 'Переглядів',
+                                borderColor: 'blue',
+                                data: viewsDiff
+                            }
+                        ]
+                    };
+
                     this.metrics = metrics;
                     this.dateFrom = this.metrics[0].mtime;
                     this.dateTo = this.metrics[this.metrics.length - 1].mtime;
