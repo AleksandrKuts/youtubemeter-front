@@ -32,6 +32,14 @@
 		"START": "start collecting metrics"
 	},
 	"METRICS": {
+		"METRICS": ", metrics: ",
+		"FROM": "Metrics from ",
+		"TO": " to ",
+		"CHANGE": "Сhange metrics",
+		"LIKES": "Likes",
+		"DISLIKES": "Dislikes",
+		"COMMENTS": "Comments",
+		"VIEWS": "Views",
 		"GO_RIGHT": "Move selected dates to the right",
 		"PABLISHED": "Pablished",
 		"COLLECTION_PERIOD": "Metric collection period",

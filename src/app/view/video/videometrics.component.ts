@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/route
 import { BackEndService } from '../../backend/backend.service';
 import { PlayList, YoutubeVideo, Metric } from '../../backend/backend';
 import { MessageService } from '../../message.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component( {
     selector: 'videometrics',
@@ -34,7 +35,36 @@ export class VideoMetricsComponent implements OnInit {
 
     butRequestText: string;
 
-    constructor( private route: ActivatedRoute, private backEndService: BackEndService,
+    LANG_METRICS_METRICS: string;
+    LANG_METRICS_FROM: string;
+    LANG_METRICS_TO: string;
+    LANG_METRICS_CHANGE: string;
+    LANG_METRICS_LIKES: string;
+    LANG_METRICS_DISLIKES: string;
+    LANG_METRICS_COMMENTS: string;
+    LANG_METRICS_VIEWS: string;
+
+    hidenLike = false;
+    hidenDisLike = false;
+    hidenComment = false;
+    hidenView = false;
+    hidenDiffLike = false;
+    hidenDiffDisLike = false;
+    hidenDiffComment = false;
+    hidenDiffView = false;
+
+    setValueLang() {
+        this.translate.get('METRICS.METRICS').subscribe( s => this.LANG_METRICS_METRICS = s );
+        this.translate.get('METRICS.FROM').subscribe( s => this.LANG_METRICS_FROM = s );
+        this.translate.get('METRICS.TO').subscribe( s => this.LANG_METRICS_TO = s );
+        this.translate.get('METRICS.CHANGE').subscribe( s => this.LANG_METRICS_CHANGE = s );
+        this.translate.get('METRICS.LIKES').subscribe( s => this.LANG_METRICS_LIKES = s );
+        this.translate.get('METRICS.DISLIKES').subscribe( s => this.LANG_METRICS_DISLIKES = s );
+        this.translate.get('METRICS.COMMENTS').subscribe( s => this.LANG_METRICS_COMMENTS = s );
+        this.translate.get('METRICS.VIEWS').subscribe( s => this.LANG_METRICS_VIEWS = s );
+    }
+
+    constructor( public translate: TranslateService, private route: ActivatedRoute, private backEndService: BackEndService,
             private messageService: MessageService ) {
 
     }
@@ -61,6 +91,8 @@ export class VideoMetricsComponent implements OnInit {
             }
         } );
 
+        this.setValueLang();
+
         this.getMetrics();
     }
 
@@ -71,6 +103,29 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     getMetrics() {
+        console.log('-----------------------------');
+        console.log(this.hidenLike, this.hidenDisLike, this.hidenDisLike, this.hidenView);
+        console.log(this.hidenDiffLike, this.hidenDiffDisLike, this.hidenDiffDisLike, this.hidenDiffView);
+        if ( this.chartData && this.chartData.datasets ) {
+            console.log('1');
+            console.log(this.chartData);
+            this.hidenLike = this.chartData.datasets[0].showLine;
+            this.hidenDisLike = this.chartData.datasets[1].showLine;
+            this.hidenComment = this.chartData.datasets[2].showLine;
+            this.hidenView = this.chartData.datasets[3].showLine;
+        }
+
+        if ( this.chartDiffData && this.chartDiffData.datasets ) {
+            console.log('2');
+            console.log(this.chartDiffData.datasets);
+            this.hidenDiffLike = this.chartDiffData.datasets[0].showLine;
+            this.hidenDiffDisLike = this.chartDiffData.datasets[1].showLine;
+            this.hidenDiffComment = this.chartDiffData.datasets[2].showLine;
+            this.hidenDiffView = this.chartDiffData.datasets[3].showLine;
+        }
+        console.log(this.hidenLike, this.hidenDisLike, this.hidenDisLike, this.hidenView);
+        console.log(this.hidenDiffLike, this.hidenDiffDisLike, this.hidenDiffDisLike, this.hidenDiffView);
+
         if (  this.newDateFrom === undefined && this.newDateTo === undefined ) {
             this.dateFrom = undefined;
             this.dateTo = undefined;
@@ -129,8 +184,6 @@ export class VideoMetricsComponent implements OnInit {
                     }
 
 
-                    console.log(viewsDiff);
-
                     const minTime = new Date(metrics[0].mtime);
                     const maxTime = new Date(metrics[metrics.length - 1].mtime);
                     const diffTime = maxTime.valueOf() - minTime.valueOf();
@@ -161,8 +214,12 @@ export class VideoMetricsComponent implements OnInit {
                     this.chartOptions = {
                             title: {
                                 display: true,
-                                text: 'Метрики з  ' + minTime.toLocaleString() + '   по  ' + maxTime.toLocaleString() +
-                                ', метрик: ' + metrics.length,
+                                text:   this.LANG_METRICS_FROM +
+                                        minTime.toLocaleString() +
+                                        this.LANG_METRICS_TO +
+                                        maxTime.toLocaleString() +
+                                        this.LANG_METRICS_METRICS +
+                                        metrics.length,
                                 fontSize: 12
                             },
                             tooltips: {
@@ -233,25 +290,29 @@ export class VideoMetricsComponent implements OnInit {
                     this.chartData = {
                         datasets: [
                             {
-                                label: 'Лайків',
+                                label: this.LANG_METRICS_LIKES,
                                 borderColor: 'green',
-                                data: likes
+                                data: likes,
+                                hidden: this.hidenLike
                             },
                             {
-                                label: 'Дизлайків',
+                                label: this.LANG_METRICS_DISLIKES,
                                 backgroundColor: 'transparent',
                                 borderColor: 'red',
-                                data: dislikes
+                                data: dislikes,
+                                hidden: this.hidenDisLike
                             },
                             {
-                                label: 'Коментарів',
+                                label: this.LANG_METRICS_COMMENTS,
                                 borderColor: 'black',
-                                data: comments
+                                data: comments,
+                                hidden: this.hidenComment
                             },
                             {
-                                label: 'Переглядів',
+                                label: this.LANG_METRICS_VIEWS,
                                 borderColor: 'blue',
-                                data: views
+                                data: views,
+                                hidden: this.hidenView
                             }
                         ]
                     };
@@ -259,7 +320,7 @@ export class VideoMetricsComponent implements OnInit {
                     this.chartDiffOptions = {
                             title: {
                                 display: true,
-                                text: 'Изменения метрик'
+                                text: this.LANG_METRICS_CHANGE
                             },
                             tooltips: {
                                 mode: 'nearest',
@@ -277,7 +338,18 @@ export class VideoMetricsComponent implements OnInit {
                                 }
                             },
                             legend: {
-                                position: 'bottom'
+                                position: 'bottom',
+                                onClick: function(e, legendItem) {
+                                    const index = legendItem.datasetIndex;
+                                    const ci = this.chart;
+                                    const meta = ci.getDatasetMeta(index);
+
+                                    console.log(this.mode);
+
+                                    meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+
+                                    ci.update();
+                                }
                             },
                             elements: {
                                 line: {
@@ -329,25 +401,29 @@ export class VideoMetricsComponent implements OnInit {
                     this.chartDiffData = {
                         datasets: [
                             {
-                                label: 'Лайків',
+                                label: this.LANG_METRICS_LIKES,
                                 borderColor: 'green',
-                                data: likesDiff
+                                data: likesDiff,
+                                hidden: this.hidenDiffLike
                             },
                             {
-                                label: 'Дизлайків',
+                                label: this.LANG_METRICS_DISLIKES,
                                 backgroundColor: 'transparent',
                                 borderColor: 'red',
-                                data: dislikesDiff
+                                data: dislikesDiff,
+                                hidden: this.hidenDiffDisLike
                             },
                             {
-                                label: 'Коментарів',
+                                label: this.LANG_METRICS_COMMENTS,
                                 borderColor: 'black',
-                                data: commentsDiff
+                                data: commentsDiff,
+                                hidden: this.hidenDiffComment
                             },
                             {
-                                label: 'Переглядів',
+                                label: this.LANG_METRICS_VIEWS,
                                 borderColor: 'blue',
-                                data: viewsDiff
+                                data: viewsDiff,
+                                hidden: this.hidenDiffComment
                             }
                         ]
                     };
@@ -379,7 +455,9 @@ export class VideoMetricsComponent implements OnInit {
         );
     }
 
-    selectData( event ) {
+    selectData( event, br ) {
+        console.log(event.element._chart.legend.legendItems[0].hidden);
+
         const selectedDate = new Date(this.metrics[+event.element._index].mtime);
 
         if ( this.newDateFrom === undefined && this.newDateTo === undefined ) {
