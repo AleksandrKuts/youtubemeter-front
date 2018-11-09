@@ -521,7 +521,7 @@ export class VideoMetricsComponent implements OnInit {
         );
     }
 
-    selectData( event, br ) {
+    selectData( event ) {
         const selectedDate = new Date(this.metrics[+event.element._index].mtime);
 
         if ( this.newDateFrom === undefined && this.newDateTo === undefined ) {
