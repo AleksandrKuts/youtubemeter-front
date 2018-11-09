@@ -216,6 +216,7 @@ export class VideoMetricsComponent implements OnInit {
                     let likesPrev: number;
                     let dislikesPrev: number;
                     let viewsPrev: number;
+                    let mtimePrev: Date;
 
                     let isFirst = true;
                     for ( const metric of metrics ) {
@@ -225,25 +226,27 @@ export class VideoMetricsComponent implements OnInit {
                         views.push( { x: metric.mtime, y: metric.view } );
 
                         if ( isFirst ) {
-                            commentsDiff.push( { x: metric.mtime, y: 0 });
-                            likesDiff.push( { x: metric.mtime, y: 0 });
-                            dislikesDiff.push( { x: metric.mtime, y: 0 });
-                            viewsDiff.push( { x: metric.mtime, y: 0 });
-
                             isFirst = false;
                         } else {
-                            commentsDiff.push( { x: metric.mtime, y: metric.comment - commentsPrev } );
-                            likesDiff.push( { x: metric.mtime, y: metric.like - likesPrev } );
-                            dislikesDiff.push( { x: metric.mtime, y: metric.dislike  - dislikesPrev } );
-                            viewsDiff.push( { x: metric.mtime, y: metric.view - viewsPrev } );
+                            commentsDiff.push( { x: mtimePrev, y: metric.comment - commentsPrev } );
+                            likesDiff.push( { x: mtimePrev, y: metric.like - likesPrev } );
+                            dislikesDiff.push( { x: mtimePrev, y: metric.dislike  - dislikesPrev } );
+                            viewsDiff.push( { x: mtimePrev, y: metric.view - viewsPrev } );
                         }
 
                         commentsPrev = metric.comment;
                         likesPrev = metric.like;
                         dislikesPrev = metric.dislike;
                         viewsPrev = metric.view;
+                        mtimePrev = metric.mtime;
                     }
+                    if (mtimePrev) {
+                        commentsDiff.push( { x: mtimePrev, y: 0 });
+                        likesDiff.push( { x: mtimePrev, y: 0 });
+                        dislikesDiff.push( { x: mtimePrev, y: 0 });
+                        viewsDiff.push( { x: mtimePrev, y: 0 });
 
+                    }
 
                     const minTime = new Date(metrics[0].mtime);
                     const maxTime = new Date(metrics[metrics.length - 1].mtime);
@@ -412,14 +415,14 @@ export class VideoMetricsComponent implements OnInit {
                             elements: {
                                 line: {
                                     tension: 0,
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2
+//                                    backgroundColor: 'transparent',
+                                    borderWidth: 1
                                 },
                                 point:
                                 {
-                                    radius: 2,
-                                    hitRadius: 2,
-                                    hoverRadius: 2
+                                    radius: 1,
+                                    hitRadius: 1,
+                                    hoverRadius: 1
                                 }
                             },
                             scales: {
@@ -462,26 +465,29 @@ export class VideoMetricsComponent implements OnInit {
                                 label: this.LANG_METRICS_LIKES,
                                 borderColor: 'green',
                                 data: likesDiff,
-                                hidden: this.hidenDiffLike
+                                hidden: this.hidenDiffLike,
+                                steppedLine: true
                             },
                             {
                                 label: this.LANG_METRICS_DISLIKES,
-                                backgroundColor: 'transparent',
                                 borderColor: 'red',
                                 data: dislikesDiff,
-                                hidden: this.hidenDiffDisLike
+                                hidden: this.hidenDiffDisLike,
+                                steppedLine: true
                             },
                             {
                                 label: this.LANG_METRICS_COMMENTS,
                                 borderColor: 'black',
                                 data: commentsDiff,
-                                hidden: this.hidenDiffComment
+                                hidden: this.hidenDiffComment,
+                                steppedLine: true
                             },
                             {
                                 label: this.LANG_METRICS_VIEWS,
                                 borderColor: 'blue',
                                 data: viewsDiff,
-                                hidden: this.hidenDiffView
+                                hidden: this.hidenDiffView,
+                                steppedLine: true
                             }
                         ]
                     };
