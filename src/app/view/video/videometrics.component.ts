@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { BackEndService } from '../../backend/backend.service';
 import { PlayList, YoutubeVideo, Metric } from '../../backend/backend';
 import { MessageService } from '../../message.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UIChart } from 'primeng/primeng';
 
 @Component( {
     selector: 'videometrics',
@@ -13,6 +14,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class VideoMetricsComponent implements OnInit {
     mode = 'Observable';
+
+    @ViewChild('metricschart') metricsChart: UIChart;
+    @ViewChild('metricsdiffchart') metricsDiffChart: UIChart;
 
     metrics: Metric[];
     metricsDiff: Metric[];
@@ -24,6 +28,9 @@ export class VideoMetricsComponent implements OnInit {
     newDateTo: Date;
     videoId: string;
     editVideoId: string;
+
+    curUrl: string;
+    fullUrlVideo: string;
 
     youtubeVideo: YoutubeVideo;
 
@@ -44,14 +51,14 @@ export class VideoMetricsComponent implements OnInit {
     LANG_METRICS_COMMENTS: string;
     LANG_METRICS_VIEWS: string;
 
-    hidenLike = false;
-    hidenDisLike = false;
-    hidenComment = false;
-    hidenView = false;
-    hidenDiffLike = false;
-    hidenDiffDisLike = false;
-    hidenDiffComment = false;
-    hidenDiffView = false;
+    hidenLike: boolean;
+    hidenDisLike: boolean;
+    hidenComment: boolean;
+    hidenView: boolean;
+    hidenDiffLike: boolean;
+    hidenDiffDisLike: boolean;
+    hidenDiffComment: boolean;
+    hidenDiffView: boolean;
 
     setValueLang() {
         this.translate.get('METRICS.METRICS').subscribe( s => this.LANG_METRICS_METRICS = s );
@@ -67,27 +74,90 @@ export class VideoMetricsComponent implements OnInit {
     constructor( public translate: TranslateService, private route: ActivatedRoute, private backEndService: BackEndService,
             private messageService: MessageService ) {
 
+        this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+    }
+
+    isValidDate(date) {
+        return !! (Object.prototype.toString.call(date) === '[object Date]' && +date);
     }
 
     ngOnInit() {
         this.dateFrom = undefined;
         this.dateTo = undefined;
         this.videoId = '';
+        this.hidenLike = false;
+        this.hidenDisLike = false;
+        this.hidenComment = false;
+        this.hidenView = false;
+        this.hidenDiffLike = false;
+        this.hidenDiffDisLike = false;
+        this.hidenDiffComment = false;
+        this.hidenDiffView = false;
 
         this.route.queryParams.subscribe(( p ) => {
             const dateFrom = p['from'];
             if ( dateFrom ) {
-                this.dateFrom = dateFrom;
+                const dt = new Date(+dateFrom);
+
+                if ( this.isValidDate(dt)) {
+                    this.dateFrom = dt;
+                    this.newDateFrom = dt;
+                }
             }
 
             const dateTo = p['to'];
-            if ( dateFrom ) {
-                this.dateTo = dateTo;
+            if ( dateTo ) {
+                const dt = new Date(+dateTo);
+
+                if ( this.isValidDate(dt)) {
+                    this.dateTo = dt;
+                    this.newDateTo = dt;
+                }
             }
 
             const videoId = p['idvideo'];
             if ( videoId ) {
                 this.editVideoId = videoId;
+            }
+
+            const hidenLike = p['like'];
+            if ( hidenLike ) {
+                this.hidenLike = true;
+            }
+
+            const hidenDisLike = p['dislike'];
+            if ( hidenDisLike ) {
+                this.hidenDisLike = true;
+            }
+
+            const hidenComment = p['comment'];
+            if ( hidenComment ) {
+                this.hidenComment = true;
+            }
+
+            const hidenView = p['view'];
+            if ( hidenView ) {
+                this.hidenView = true;
+            }
+
+            const hidenDiffLike = p['difflike'];
+            if ( hidenDiffLike ) {
+                this.hidenDiffLike = true;
+            }
+
+            const hidenDiffDisLike = p['diffdislike'];
+            if ( hidenDiffDisLike ) {
+                this.hidenDiffDisLike = true;
+            }
+
+            const hidenDiffComment = p['diffcomment'];
+            if ( hidenDiffComment ) {
+                this.hidenDiffComment = true;
+            }
+
+            const hidenDiffView = p['diffview'];
+            if ( hidenDiffView ) {
+                this.hidenDiffView = true;
             }
         } );
 
@@ -103,28 +173,19 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     getMetrics() {
-        console.log('-----------------------------');
-        console.log(this.hidenLike, this.hidenDisLike, this.hidenDisLike, this.hidenView);
-        console.log(this.hidenDiffLike, this.hidenDiffDisLike, this.hidenDiffDisLike, this.hidenDiffView);
-        if ( this.chartData && this.chartData.datasets ) {
-            console.log('1');
-            console.log(this.chartData);
-            this.hidenLike = this.chartData.datasets[0].showLine;
-            this.hidenDisLike = this.chartData.datasets[1].showLine;
-            this.hidenComment = this.chartData.datasets[2].showLine;
-            this.hidenView = this.chartData.datasets[3].showLine;
+        if ( this.metricsChart && this.metricsChart.chart ) {
+            this.hidenLike = this.metricsChart.chart.legend.legendItems[0].hidden;
+            this.hidenDisLike = this.metricsChart.chart.legend.legendItems[1].hidden;
+            this.hidenComment = this.metricsChart.chart.legend.legendItems[2].hidden;
+            this.hidenView = this.metricsChart.chart.legend.legendItems[3].hidden;
         }
 
-        if ( this.chartDiffData && this.chartDiffData.datasets ) {
-            console.log('2');
-            console.log(this.chartDiffData.datasets);
-            this.hidenDiffLike = this.chartDiffData.datasets[0].showLine;
-            this.hidenDiffDisLike = this.chartDiffData.datasets[1].showLine;
-            this.hidenDiffComment = this.chartDiffData.datasets[2].showLine;
-            this.hidenDiffView = this.chartDiffData.datasets[3].showLine;
+        if ( this.metricsDiffChart && this.metricsDiffChart.chart ) {
+            this.hidenDiffLike = this.metricsDiffChart.chart.legend.legendItems[0].hidden;
+            this.hidenDiffDisLike = this.metricsDiffChart.chart.legend.legendItems[1].hidden;
+            this.hidenDiffComment = this.metricsDiffChart.chart.legend.legendItems[2].hidden;
+            this.hidenDiffView = this.metricsDiffChart.chart.legend.legendItems[3].hidden;
         }
-        console.log(this.hidenLike, this.hidenDisLike, this.hidenDisLike, this.hidenView);
-        console.log(this.hidenDiffLike, this.hidenDiffDisLike, this.hidenDiffDisLike, this.hidenDiffView);
 
         if (  this.newDateFrom === undefined && this.newDateTo === undefined ) {
             this.dateFrom = undefined;
@@ -338,18 +399,15 @@ export class VideoMetricsComponent implements OnInit {
                                 }
                             },
                             legend: {
-                                position: 'bottom',
-                                onClick: function(e, legendItem) {
-                                    const index = legendItem.datasetIndex;
-                                    const ci = this.chart;
-                                    const meta = ci.getDatasetMeta(index);
-
-                                    console.log(this.mode);
-
-                                    meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
-
-                                    ci.update();
-                                }
+                                position: 'bottom'
+//                                onClick: function(e, legendItem) {
+//                                    const index = legendItem.datasetIndex;
+//                                    const ci = this.chart;
+//                                    const meta = ci.getDatasetMeta(index);
+//
+//                                    meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+//                                    ci.update();
+//                                }
                             },
                             elements: {
                                 line: {
@@ -423,7 +481,7 @@ export class VideoMetricsComponent implements OnInit {
                                 label: this.LANG_METRICS_VIEWS,
                                 borderColor: 'blue',
                                 data: viewsDiff,
-                                hidden: this.hidenDiffComment
+                                hidden: this.hidenDiffView
                             }
                         ]
                     };
@@ -432,13 +490,15 @@ export class VideoMetricsComponent implements OnInit {
                     this.dateFrom = this.metrics[0].mtime;
                     this.dateTo = this.metrics[this.metrics.length - 1].mtime;
 
-                    this.newDateFrom = undefined;
-                    this.newDateTo = undefined;
-
                     if (this.videoId !== this.editVideoId) {
                         this.videoId = this.editVideoId;
                         this.getVideo(this.videoId);
                     }
+
+                    this.setRefUrl();
+
+                    this.newDateFrom = undefined;
+                    this.newDateTo = undefined;
                 }
 
             } );
@@ -456,8 +516,6 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     selectData( event, br ) {
-        console.log(event.element._chart.legend.legendItems[0].hidden);
-
         const selectedDate = new Date(this.metrics[+event.element._index].mtime);
 
         if ( this.newDateFrom === undefined && this.newDateTo === undefined ) {
@@ -480,6 +538,45 @@ export class VideoMetricsComponent implements OnInit {
             this.newDateFrom = d1;
             this.newDateTo = d2;
         }
+    }
+
+    setRefUrl(): string {
+        let url = 'video?idvideo=' + this.videoId;
+
+        if ( this.newDateFrom ) {
+            url = url + '&from=' + this.newDateFrom.valueOf();
+        }
+        if ( this.newDateTo ) {
+            url = url + '&to=' + this.newDateTo.valueOf();
+        }
+        if ( this.hidenLike && this.hidenLike === true ) {
+            url = url + '&like=false';
+        }
+        if ( this.hidenDisLike && this.hidenDisLike === true ) {
+            url = url + '&dislike=false';
+        }
+        if ( this.hidenComment && this.hidenComment === true ) {
+            url = url + '&comment=false';
+        }
+        if ( this.hidenView && this.hidenView === true ) {
+            url = url + '&view=false';
+        }
+        if ( this.hidenDiffLike && this.hidenDiffLike === true ) {
+            url = url + '&difflike=false';
+        }
+        if ( this.hidenDiffDisLike && this.hidenDiffDisLike === true ) {
+            url = url + '&diffdislike=false';
+        }
+        if ( this.hidenDiffComment && this.hidenDiffComment === true ) {
+            url = url + '&diffcomment=false';
+        }
+        if ( this.hidenDiffView && this.hidenDiffView === true ) {
+            url = url + '&diffview=false';
+        }
+
+        this.fullUrlVideo = this.curUrl + '/' + url;
+
+        return url;
     }
 }
 

@@ -1,6 +1,8 @@
 <div class="ui-g">
-   	<div class="ui-g-12">
-		<h1 *ngIf="youtubeVideo">{{youtubeVideo.title}}</h1> 
+   	<div class="ui-g-12 headmetrics">
+		<h1 *ngIf="youtubeVideo" title="{{ 'COMMON.DIRECTL_REF' | translate }}">
+			<a href="{{fullUrlVideo}}">{{youtubeVideo.title}}</a>
+		</h1> 
 	</div>
     	
    	<div class="ui-g-12">    	
@@ -49,10 +51,10 @@
 
    	<div class="ui-g-12">
 
-		<p-chart type="line" [data]="chartData" [options]="chartOptions"
+		<p-chart type="line" #metricschart [data]="chartData" [options]="chartOptions"
 			width="1000px" height="400px" (onDataSelect)="selectData($event)"></p-chart>
 
-		<p-chart #barChart type="line" [data]="chartDiffData" [options]="chartDiffOptions"
+		<p-chart #metricsdiffchart type="line" [data]="chartDiffData" [options]="chartDiffOptions"
 			width="1000px" height="400px" (onDataSelect)="selectData($event, $barChart)"></p-chart>
 
 		<h3>{{ 'METRICS.DETAILING' | translate }}:</h3>
@@ -72,11 +74,16 @@
 			<button pButton type="button" label=">" styleClass="buttonreset" class="ui-button-raised ui-button-secondary" 
 					(click)="resetRequest()" title="{{ 'METRICS.GO_RIGHT' | translate }}"></button>
 			<p-button  styleClass="buttonrequest" icon="pi pi-check" label="{{ 'COMMON.REQUEST' | translate }}" (onClick)="getMetrics()"></p-button>
-    		
-    		<p>* {{ 'METRICS.CHOOSE_DESCR' | translate }}</p>
 		</div>
 	
     </div>
+	
+	<div class="ui-g-12">
+		<div class="p-grid">
+    		<div class="p-col-fixed" style="width:5px">*</div>
+    		<div class="p-col">{{ 'METRICS.CHOOSE_DESCR' | translate }}</div>
+		</div>
+	</div>
 	    
 </div>
 

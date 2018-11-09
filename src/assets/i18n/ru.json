@@ -4,6 +4,7 @@
 		"FROM": "с",
 		"TO": "по",
 		"LOAD": "Загрузить",
+		"DIRECTL_REF": "Прямая ссылка на эту страницу",
 		"REQUEST": "Запрос",
 		"PLAYLIST_U": "Плейлист",
 		"PLAYLIST_L": "плейлист",
@@ -22,14 +23,13 @@
 		"ID": "Плейлист id",
 		"IDCHANNEL": "id канала",
 		"CHANNELS": "Каналы",
-		"CHANNEL_REF": "Direct link to this page",
 		"CHANNEL_REF_YOUTUBE": "Перейти на канал в Youtube",
 		"SELECT": "Выбери канал",		
 		"VIDEO_ID": "Видео id",
 		"VIEW_STATISTICS": "Посмотреть статистику по видео",
 		"DESCR_COUNT_VIDEO_BEFORE": "Здесь отображены не более",		
 		"DESCR_COUNT_VIDEO_AFTER": "последних видео. Для просмотра метрик по более старым видео перейдите на страницу просмотра статистики любого другого видео и введите нужный id",		
-		"START": "начало сбора метрик"
+		"START": "начало сбора метрик с"
 	},
 	"METRICS": {
 		"METRICS": ", метрик: ",

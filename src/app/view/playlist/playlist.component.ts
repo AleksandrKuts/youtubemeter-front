@@ -7,7 +7,6 @@ import { PlayList, YoutubeVideoShort } from '../../backend/backend';
 import { MessageService } from '../../message.service';
 import { SelectItem } from 'primeng/api';
 
-
 @Component( {
     selector: 'playlist',
     templateUrl: './playlist.component.html',

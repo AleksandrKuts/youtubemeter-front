@@ -19,7 +19,7 @@
 			icon="pi pi-arrow-left" label="{{ 'COMMON.CHANGE' | translate }}">
 		</button>
 
-		<h1 title="{{ 'PLAYLIST.CHANNEL_REF' | translate }}">
+		<h1 title="{{ 'COMMON.DIRECTL_REF' | translate }}">
 			<span>{{ 'COMMON.CHANNEL_U' | translate }}: </span>
 			<a href="/playlist?id={{selectedPlayList.id}}" target="_blank">
 				<label>{{selectedPlayList.title}}</label>
@@ -34,7 +34,7 @@
 	<div class="ui-g-12">
 		{{ 'PLAYLIST.ID' | translate }}: {{selectedPlayList.id}}, 
 		{{ 'PLAYLIST.IDCHANNEL' | translate }}: {{selectedPlayList.idch}}, 
-		{{ 'PLAYLIST.START' | translate }}: {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}}					
+		{{ 'PLAYLIST.START' | translate }} {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}}					
 	</div>
 	
 

@@ -1,3 +1,15 @@
+.headmetrics h1 a {
+	color: #999;
+	font-style: bold;
+	font-size: large;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.headmetrics h1 a:hover {
+	text-decoration: underline;
+}
+
 .detail label, input, button {
 	margin-left: 1em;
 }
@@ -5,7 +17,6 @@
 .detail p-button {
 	margin-left: 3em;
 }
-
 
 img {
 	width: 300px;
