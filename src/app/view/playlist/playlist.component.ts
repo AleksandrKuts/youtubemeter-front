@@ -7,6 +7,8 @@ import { PlayList, YoutubeVideoShort } from '../../backend/backend';
 import { MessageService } from '../../message.service';
 import { SelectItem } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 const PLAYLISTID_TAG = 'playlistid';
 
@@ -34,7 +36,8 @@ export class VideoPlayListComponent implements OnInit {
     coockePlayListId: string;
 
     constructor( private route: ActivatedRoute, private backEndService: BackEndService,
-        private cookieService: CookieService,   private messageService: MessageService  ) {
+        private cookieService: CookieService,   private messageService: MessageService,
+        private titleService: Title, public translate: TranslateService,   ) {
     }
 
     ngOnInit() {
@@ -47,7 +50,6 @@ export class VideoPlayListComponent implements OnInit {
         } );
 
         this.getPlayLists();
-
         this.coockePlayListId = this.cookieService.get(PLAYLISTID_TAG);
     }
 
@@ -89,6 +91,8 @@ export class VideoPlayListComponent implements OnInit {
                     }
 
                     if (this.selectedPlayList ) {
+                        this.setTitle( this.selectedPlayList.title );
+
                         this.cookieService.set(PLAYLISTID_TAG, this.coockePlayListId );
                         this.getVideos();
                     }
@@ -111,5 +115,10 @@ export class VideoPlayListComponent implements OnInit {
         this.visibleSidebar1 = false;
     }
 
+    setTitle(title: string) {
+        this.translate.get('PLAYLIST.TITLR').subscribe( s =>
+            this.titleService.setTitle( s + ': ' + title)
+        );
+    }
 }
 

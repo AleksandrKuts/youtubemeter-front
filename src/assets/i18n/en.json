@@ -24,6 +24,7 @@
 		"DESCRIPTION": "Youtube channel analytics service. Track YouTube statistics - video features: likes, dislikes, views, comments. Allows you to capture scrolls, scrolls, and more"
 	},
 	"PLAYLIST": {
+		"TITLE": "YoutubeMETER - analytics youtube channel",
 		"ID": "Playlist id",
 		"IDCHANNEL": "channel id",
 		"CHANNELS": "Channels",

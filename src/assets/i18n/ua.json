@@ -24,6 +24,7 @@
 		"ABOUT": "Про програму"
 	},
 	"PLAYLIST": {
+		"TITLE": "YoutubeMETER - аналітика каналу youtube",
 		"ID": "Плейлист id",
 		"IDCHANNEL": "id каналу",
 		"CHANNELS": "Канали",

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackEndService } from '../../backend/backend.service';
 import { YoutubeVideo, Metric } from '../../backend/backend';
-import { MessageService } from '../../message.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UIChart } from 'primeng/primeng';
 
@@ -71,7 +70,8 @@ export class VideoMetricsComponent implements OnInit {
         this.translate.get('METRICS.VIEWS').subscribe( s => this.LANG_METRICS_VIEWS = s );
     }
 
-    constructor( public translate: TranslateService, private route: ActivatedRoute, private backEndService: BackEndService ) {
+    constructor( public translate: TranslateService, private route: ActivatedRoute,
+         private backEndService: BackEndService ) {
     }
 
     isValidDate(date) {
