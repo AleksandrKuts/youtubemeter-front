@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { BackEndService } from '../../backend/backend.service';
 import { PlayList, YoutubeVideoShort } from '../../backend/backend';
 
 import { MessageService } from '../../message.service';
 import { SelectItem } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
+
+const PLAYLISTID_TAG = 'playlistid';
 
 @Component( {
-    selector: 'playlist',
+    selector: 'app-playlist',
     templateUrl: './playlist.component.html',
     styleUrls: ['./playlist.component.css']
 } )
@@ -28,8 +31,10 @@ export class VideoPlayListComponent implements OnInit {
 
     visibleSidebar1: boolean;
 
+    coockePlayListId: string;
+
     constructor( private route: ActivatedRoute, private backEndService: BackEndService,
-            private messageService: MessageService  ) {
+        private cookieService: CookieService,   private messageService: MessageService  ) {
     }
 
     ngOnInit() {
@@ -42,6 +47,8 @@ export class VideoPlayListComponent implements OnInit {
         } );
 
         this.getPlayLists();
+
+        this.coockePlayListId = this.cookieService.get(PLAYLISTID_TAG);
     }
 
     getPlayLists() {
@@ -62,16 +69,29 @@ export class VideoPlayListComponent implements OnInit {
                         }
                     }
 
+                    this.playlistItems = playlistsItem;
+
                     if ( this.initPlayListID !== undefined && this.selectedPlayList === undefined ) {
                         this.messageService.addError( 'Невідомий плейлист з id: ' + this.initPlayListID);
                     }
 
-                    this.playlistItems = playlistsItem;
+                    if (this.selectedPlayList === undefined ) {
+                        for ( const playlist of responsePlaylists.playlists ) {
+                            if ( playlist.id === this.coockePlayListId ) {
+                                this.selectedPlayList = playlist;
+                                break;
+                            }
+                        }
+                    }
 
                     if (this.selectedPlayList === undefined && this.playlistItems.length > 0 ) {
                         this.selectedPlayList = responsePlaylists.playlists[0];
                     }
-                    this.getVideos();
+
+                    if (this.selectedPlayList ) {
+                        this.cookieService.set(PLAYLISTID_TAG, this.coockePlayListId );
+                        this.getVideos();
+                    }
                 }
             } );
     }

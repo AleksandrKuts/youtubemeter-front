@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { BackEndService } from '../backend/backend.service';
 import { PlayList } from '../backend/backend';
 import { ConfirmationService } from 'primeng/api';
-import { DatePipe } from '@angular/common';
-import { TableModule } from 'primeng/table';
-import { FieldsetModule } from 'primeng/fieldset';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component( {
-    selector: 'admin',
+    selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.css', '../../assets/css/table.css']
 } )

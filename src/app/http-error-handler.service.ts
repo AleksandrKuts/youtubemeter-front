@@ -16,9 +16,8 @@ export class HttpErrorHandler {
 
   /** Create curried handleError function that already knows the service name */
   createHandleError = (serviceName = '') => <T>
-    (operation = 'operation', result = {} as T) => this.handleError(serviceName, operation, result);
+  (operation = 'operation', result = {} as T) => this.handleError(serviceName, operation, result)
 
-    
   /**
    * Returns a function that handles Http operation failures.
    * This error handler lets the app continue to run as if no error occurred.

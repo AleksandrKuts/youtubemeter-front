@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BackEndService } from '../../backend/backend.service';
-import { PlayList, YoutubeVideo, Metric } from '../../backend/backend';
+import { YoutubeVideo, Metric } from '../../backend/backend';
 import { MessageService } from '../../message.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UIChart } from 'primeng/primeng';
 
 @Component( {
-    selector: 'videometrics',
+    selector: 'app-videometrics',
     templateUrl: './videometrics.component.html',
     styleUrls: ['./videometrics.component.css']
 } )
@@ -71,10 +71,7 @@ export class VideoMetricsComponent implements OnInit {
         this.translate.get('METRICS.VIEWS').subscribe( s => this.LANG_METRICS_VIEWS = s );
     }
 
-    constructor( public translate: TranslateService, private route: ActivatedRoute, private backEndService: BackEndService,
-            private messageService: MessageService ) {
-
-        this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+    constructor( public translate: TranslateService, private route: ActivatedRoute, private backEndService: BackEndService ) {
     }
 
     isValidDate(date) {

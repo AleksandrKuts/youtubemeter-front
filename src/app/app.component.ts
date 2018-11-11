@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Meta } from '@angular/platform-browser';
+
+const LANGUAGE_TAG = 'langinterface';
 
 @Component( {
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 } )
-export class AppComponent {
+export class AppComponent implements OnInit {
     langSelect: any;
 
-    tagLanguage = 'langinterface';
+    constructor( public translate: TranslateService, private cookieService: CookieService,
+        private meta: Meta ) {
 
-    constructor( public translate: TranslateService, private cookieService: CookieService ) {
         translate.addLangs( ['en', 'ua', 'ru'] );
         translate.setDefaultLang( 'ua' );
+
     }
 
-    ngOnInit(): void {
-        const lang = this.cookieService.get( this.tagLanguage );
+    ngOnInit() {
+        const lang = this.cookieService.get(LANGUAGE_TAG);
 
         if ( lang && lang.match( /en|ua|ru/ ) ) {
             this.langSelect = lang;
@@ -27,11 +31,28 @@ export class AppComponent {
         }
 
         this.translate.use( this.langSelect );
+
+        this.addMETA();
     }
 
     setLang() {
-        this.cookieService.set( this.tagLanguage, this.langSelect );
+        this.cookieService.set( LANGUAGE_TAG, this.langSelect );
         this.translate.use( this.langSelect );
+        this.updateMETA();
+    }
+
+    addMETA() {
+        this.translate.get('META.TITLE').
+            subscribe( s =>  this.meta.addTag({ name: 'title', content: s }));
+        this.translate.get('META.DESCRIPTION').
+            subscribe( s =>  this.meta.addTag({ name: 'description', content: s }));
+    }
+
+    updateMETA() {
+        this.translate.get('META.TITLE').
+            subscribe( s =>  this.meta.updateTag({ name: 'title', content: s }));
+        this.translate.get('META.DESCRIPTION').
+            subscribe( s =>  this.meta.updateTag({ name: 'description', content: s }));
     }
 
 }
