@@ -15,12 +15,12 @@
 	"HEADER": {
 		"HOME": "Home",
 		"TITLE": "YoutubeMETER",
-		"DESCRIPTION": "video metrics tracking service",
+		"DESCRIPTION": "service analytics channels youtube",
 		"LANG": "Change the language",
 		"ABOUT": "About"
 	},
 	"META": {
-		"TITLE": "Youtube stats. Analytics Youtube channel. Analysis of bots activity: likes cheating, cheating dislikes",
+		"TITLE": "Youtube stats. Analytics Youtube channel: likes cheating, cheating dislikes, twisting views",
 		"DESCRIPTION": "Youtube channel analytics service. Track YouTube statistics - video features: likes, dislikes, views, comments. Allows you to capture scrolls, scrolls, and more"
 	},
 	"PLAYLIST": {
@@ -37,6 +37,7 @@
 		"START": "start collecting metrics from"
 	},
 	"METRICS": {
+		"TITLE": "YoutubeMETER - statistics for video: ",
 		"METRICS": ", metrics: ",
 		"FROM": "Metrics from ",
 		"TO": " to ",

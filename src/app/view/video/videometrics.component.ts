@@ -4,6 +4,7 @@ import { BackEndService } from '../../backend/backend.service';
 import { YoutubeVideo, Metric } from '../../backend/backend';
 import { TranslateService } from '@ngx-translate/core';
 import { UIChart } from 'primeng/primeng';
+import { Title } from '@angular/platform-browser';
 
 @Component( {
     selector: 'app-videometrics',
@@ -71,7 +72,7 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     constructor( public translate: TranslateService, private route: ActivatedRoute,
-         private backEndService: BackEndService ) {
+         private backEndService: BackEndService, private titleService: Title ) {
     }
 
     isValidDate(date) {
@@ -581,5 +582,12 @@ export class VideoMetricsComponent implements OnInit {
 
         return url;
     }
+
+    setTitle(title: string) {
+        this.translate.get('METRICS.TITLE').subscribe( s =>
+            this.titleService.setTitle( s + ': ' + title)
+        );
+    }
+
 }
 

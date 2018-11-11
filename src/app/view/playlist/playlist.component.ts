@@ -37,7 +37,7 @@ export class VideoPlayListComponent implements OnInit {
 
     constructor( private route: ActivatedRoute, private backEndService: BackEndService,
         private cookieService: CookieService,   private messageService: MessageService,
-        private titleService: Title, public translate: TranslateService,   ) {
+        private titleService: Title, public translate: TranslateService ) {
     }
 
     ngOnInit() {
@@ -116,7 +116,7 @@ export class VideoPlayListComponent implements OnInit {
     }
 
     setTitle(title: string) {
-        this.translate.get('PLAYLIST.TITLR').subscribe( s =>
+        this.translate.get('PLAYLIST.TITLE').subscribe( s =>
             this.titleService.setTitle( s + ': ' + title)
         );
     }
