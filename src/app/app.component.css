@@ -30,11 +30,11 @@
 }
 
 .headsupport * {
-	vertical-align: top;
+	vertical-align: baseline;
 }
 
 .titleimg {
-	width: 23px;
+	width: 16px;
 	height: auto;
 	margin-left: 10px;
 }
