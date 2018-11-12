@@ -37,7 +37,7 @@
 		"START": "start collecting metrics from"
 	},
 	"METRICS": {
-		"TITLE": "YoutubeMETER - statistics for video: ",
+		"TITLE": "YoutubeMETER - statistics for video",
 		"METRICS": ", metrics: ",
 		"FROM": "Metrics from ",
 		"TO": " to ",

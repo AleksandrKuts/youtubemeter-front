@@ -182,7 +182,6 @@ export class VideoMetricsComponent implements OnInit {
         } );
 
         this.setValueLang();
-
         this.getMetrics();
     }
 
@@ -518,6 +517,7 @@ export class VideoMetricsComponent implements OnInit {
             youtubeVideo => {
                 if ( youtubeVideo.title !== 'NOT_DATA' ) {
                     this.youtubeVideo = youtubeVideo;
+                    this.setTitle( youtubeVideo.title );
                 }
             }
         );
@@ -586,8 +586,6 @@ export class VideoMetricsComponent implements OnInit {
 
         this.fullUrlVideo = this.curUrl + '/' + url;
 
-        console.log(this.fullUrlVideo);
-
         return url;
     }
 
@@ -611,7 +609,7 @@ export class VideoMetricsComponent implements OnInit {
 
     setTitle( title: string ) {
         this.translate.get( 'METRICS.TITLE' ).subscribe( s =>
-            this.titleService.setTitle( s + ': ' + title )
+            this.titleService.setTitle( s + ' ' + title )
         );
     }
 

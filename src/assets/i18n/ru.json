@@ -37,7 +37,7 @@
 		"START": "начало сбора метрик с"
 	},
 	"METRICS": {
-		"TITLE": "YoutubeMETER - статистика по видео: ",
+		"TITLE": "YoutubeMETER - статистика по видео",
 		"METRICS": ", метрик: ",
 		"FROM": "Метрики c ",
 		"TO": " по ",
