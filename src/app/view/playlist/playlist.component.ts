@@ -91,9 +91,6 @@ export class VideoPlayListComponent implements OnInit {
                     }
 
                     if (this.selectedPlayList ) {
-                        this.setTitle( this.selectedPlayList.title );
-
-                        this.cookieService.set(PLAYLISTID_TAG, this.coockePlayListId );
                         this.getVideos();
                     }
                 }
@@ -104,6 +101,9 @@ export class VideoPlayListComponent implements OnInit {
         this.youtubeVideosShort = null;
 
         if ( this.selectedPlayList ) {
+            this.setTitle( this.selectedPlayList.title );
+            this.cookieService.set(PLAYLISTID_TAG, this.selectedPlayList.id );
+
             this.backEndService.getVideosByPlaylistId( this.selectedPlayList.id ).subscribe(
                 youtubeVideosShort => {
                     if ( youtubeVideosShort ) {
@@ -117,7 +117,7 @@ export class VideoPlayListComponent implements OnInit {
 
     setTitle(title: string) {
         this.translate.get('PLAYLIST.TITLE').subscribe( s =>
-            this.titleService.setTitle( s + ': ' + title)
+            this.titleService.setTitle( s + ' ' + title)
         );
     }
 }

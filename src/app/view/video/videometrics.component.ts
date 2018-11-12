@@ -15,8 +15,8 @@ import { Title } from '@angular/platform-browser';
 export class VideoMetricsComponent implements OnInit {
     mode = 'Observable';
 
-    @ViewChild('metricschart') metricsChart: UIChart;
-    @ViewChild('metricsdiffchart') metricsDiffChart: UIChart;
+    @ViewChild( 'metricschart' ) metricsChart: UIChart;
+    @ViewChild( 'metricsdiffchart' ) metricsDiffChart: UIChart;
 
     metrics: Metric[];
     metricsDiff: Metric[];
@@ -60,23 +60,45 @@ export class VideoMetricsComponent implements OnInit {
     hidenDiffComment: boolean;
     hidenDiffView: boolean;
 
+    onClickLegendChart = ( function( e, legendItem ) {
+        const index = legendItem.datasetIndex;
+        const ci = this.metricsChart.chart;
+        const meta = ci.getDatasetMeta( index );
+
+        meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+        ci.update();
+        this.setRefUrl();
+    }).bind(this);
+
+    onClickLegendDiffChart = ( function( e, legendItem ) {
+        const index = legendItem.datasetIndex;
+        const ci = this.metricsDiffChart.chart;
+        const meta = ci.getDatasetMeta( index );
+
+        meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+        ci.update();
+        this.setRefUrl();
+    }).bind(this);
+
     setValueLang() {
-        this.translate.get('METRICS.METRICS').subscribe( s => this.LANG_METRICS_METRICS = s );
-        this.translate.get('METRICS.FROM').subscribe( s => this.LANG_METRICS_FROM = s );
-        this.translate.get('METRICS.TO').subscribe( s => this.LANG_METRICS_TO = s );
-        this.translate.get('METRICS.CHANGE').subscribe( s => this.LANG_METRICS_CHANGE = s );
-        this.translate.get('METRICS.LIKES').subscribe( s => this.LANG_METRICS_LIKES = s );
-        this.translate.get('METRICS.DISLIKES').subscribe( s => this.LANG_METRICS_DISLIKES = s );
-        this.translate.get('METRICS.COMMENTS').subscribe( s => this.LANG_METRICS_COMMENTS = s );
-        this.translate.get('METRICS.VIEWS').subscribe( s => this.LANG_METRICS_VIEWS = s );
+        this.translate.get( 'METRICS.METRICS' ).subscribe( s => this.LANG_METRICS_METRICS = s );
+        this.translate.get( 'METRICS.FROM' ).subscribe( s => this.LANG_METRICS_FROM = s );
+        this.translate.get( 'METRICS.TO' ).subscribe( s => this.LANG_METRICS_TO = s );
+        this.translate.get( 'METRICS.CHANGE' ).subscribe( s => this.LANG_METRICS_CHANGE = s );
+        this.translate.get( 'METRICS.LIKES' ).subscribe( s => this.LANG_METRICS_LIKES = s );
+        this.translate.get( 'METRICS.DISLIKES' ).subscribe( s => this.LANG_METRICS_DISLIKES = s );
+        this.translate.get( 'METRICS.COMMENTS' ).subscribe( s => this.LANG_METRICS_COMMENTS = s );
+        this.translate.get( 'METRICS.VIEWS' ).subscribe( s => this.LANG_METRICS_VIEWS = s );
     }
 
     constructor( public translate: TranslateService, private route: ActivatedRoute,
-         private backEndService: BackEndService, private titleService: Title ) {
+        private backEndService: BackEndService, private titleService: Title ) {
+
+        this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
     }
 
-    isValidDate(date) {
-        return !! (Object.prototype.toString.call(date) === '[object Date]' && +date);
+    isValidDate( date ) {
+        return !!( Object.prototype.toString.call( date ) === '[object Date]' && +date );
     }
 
     ngOnInit() {
@@ -95,9 +117,9 @@ export class VideoMetricsComponent implements OnInit {
         this.route.queryParams.subscribe(( p ) => {
             const dateFrom = p['from'];
             if ( dateFrom ) {
-                const dt = new Date(+dateFrom);
+                const dt = new Date( +dateFrom );
 
-                if ( this.isValidDate(dt)) {
+                if ( this.isValidDate( dt ) ) {
                     this.dateFrom = dt;
                     this.newDateFrom = dt;
                 }
@@ -105,9 +127,9 @@ export class VideoMetricsComponent implements OnInit {
 
             const dateTo = p['to'];
             if ( dateTo ) {
-                const dt = new Date(+dateTo);
+                const dt = new Date( +dateTo );
 
-                if ( this.isValidDate(dt)) {
+                if ( this.isValidDate( dt ) ) {
                     this.dateTo = dt;
                     this.newDateTo = dt;
                 }
@@ -171,31 +193,19 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     getMetrics() {
-        if ( this.metricsChart && this.metricsChart.chart ) {
-            this.hidenLike = this.metricsChart.chart.legend.legendItems[0].hidden;
-            this.hidenDisLike = this.metricsChart.chart.legend.legendItems[1].hidden;
-            this.hidenComment = this.metricsChart.chart.legend.legendItems[2].hidden;
-            this.hidenView = this.metricsChart.chart.legend.legendItems[3].hidden;
-        }
+        this.setHideLegends();
 
-        if ( this.metricsDiffChart && this.metricsDiffChart.chart ) {
-            this.hidenDiffLike = this.metricsDiffChart.chart.legend.legendItems[0].hidden;
-            this.hidenDiffDisLike = this.metricsDiffChart.chart.legend.legendItems[1].hidden;
-            this.hidenDiffComment = this.metricsDiffChart.chart.legend.legendItems[2].hidden;
-            this.hidenDiffView = this.metricsDiffChart.chart.legend.legendItems[3].hidden;
-        }
-
-        if (  this.newDateFrom === undefined && this.newDateTo === undefined ) {
+        if ( this.newDateFrom === undefined && this.newDateTo === undefined ) {
             this.dateFrom = undefined;
             this.dateTo = undefined;
 
-            this.getMetricsByDates(this.dateFrom, this.dateTo);
+            this.getMetricsByDates( this.dateFrom, this.dateTo );
         } else {
-            this.getMetricsByDates(this.newDateFrom, this.newDateTo);
+            this.getMetricsByDates( this.newDateFrom, this.newDateTo );
         }
     }
 
-    getMetricsByDates(dateFrom: Date, dateTo: Date) {
+    getMetricsByDates( dateFrom: Date, dateTo: Date ) {
         this.backEndService.getMetricsByVideoId( this.editVideoId, dateFrom, dateTo ).subscribe(
             metrics => {
 
@@ -228,7 +238,7 @@ export class VideoMetricsComponent implements OnInit {
                         } else {
                             commentsDiff.push( { x: mtimePrev, y: metric.comment - commentsPrev } );
                             likesDiff.push( { x: mtimePrev, y: metric.like - likesPrev } );
-                            dislikesDiff.push( { x: mtimePrev, y: metric.dislike  - dislikesPrev } );
+                            dislikesDiff.push( { x: mtimePrev, y: metric.dislike - dislikesPrev } );
                             viewsDiff.push( { x: mtimePrev, y: metric.view - viewsPrev } );
                         }
 
@@ -238,16 +248,16 @@ export class VideoMetricsComponent implements OnInit {
                         viewsPrev = metric.view;
                         mtimePrev = metric.mtime;
                     }
-                    if (mtimePrev) {
-                        commentsDiff.push( { x: mtimePrev, y: 0 });
-                        likesDiff.push( { x: mtimePrev, y: 0 });
-                        dislikesDiff.push( { x: mtimePrev, y: 0 });
-                        viewsDiff.push( { x: mtimePrev, y: 0 });
+                    if ( mtimePrev ) {
+                        commentsDiff.push( { x: mtimePrev, y: 0 } );
+                        likesDiff.push( { x: mtimePrev, y: 0 } );
+                        dislikesDiff.push( { x: mtimePrev, y: 0 } );
+                        viewsDiff.push( { x: mtimePrev, y: 0 } );
 
                     }
 
-                    const minTime = new Date(metrics[0].mtime);
-                    const maxTime = new Date(metrics[metrics.length - 1].mtime);
+                    const minTime = new Date( metrics[0].mtime );
+                    const maxTime = new Date( metrics[metrics.length - 1].mtime );
                     const diffTime = maxTime.valueOf() - minTime.valueOf();
 
                     const msInMinutes = 60000;
@@ -264,90 +274,91 @@ export class VideoMetricsComponent implements OnInit {
                         xStepSize = 1;
                     } else if ( diffTime > countLinesX * msInHour ) {
                         xUnit = 'hour';
-                        xStepSize = Math.ceil((diffTime / msInHour) / countLinesX);
+                        xStepSize = Math.ceil(( diffTime / msInHour ) / countLinesX );
                     } else if ( diffTime > countLinesX * msInMinutes ) {
                         xUnit = 'minute';
-                        xStepSize = Math.ceil((diffTime / msInMinutes) / countLinesX);
+                        xStepSize = Math.ceil(( diffTime / msInMinutes ) / countLinesX );
                     } else if ( diffTime > msInMinutes ) {
                         xUnit = 'minute';
                         xStepSize = 1;
                     }
 
                     this.chartOptions = {
-                            title: {
-                                display: true,
-                                text:   this.LANG_METRICS_FROM +
-                                        minTime.toLocaleString() +
-                                        this.LANG_METRICS_TO +
-                                        maxTime.toLocaleString() +
-                                        this.LANG_METRICS_METRICS +
-                                        metrics.length,
-                                fontSize: 12
+                        title: {
+                            display: true,
+                            text: this.LANG_METRICS_FROM +
+                            minTime.toLocaleString() +
+                            this.LANG_METRICS_TO +
+                            maxTime.toLocaleString() +
+                            this.LANG_METRICS_METRICS +
+                            metrics.length,
+                            fontSize: 12
+                        },
+                        tooltips: {
+                            mode: 'nearest',
+                            backgroundColor: '#696969',
+                            callbacks: {
+                                title: function( tooltipItem, data ) {
+                                    let label = '';
+
+                                    if ( tooltipItem && tooltipItem[0] ) {
+                                        label = new Date( tooltipItem[0].xLabel ).toLocaleString();
+                                    }
+
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'bottom',
+                            onClick: this.onClickLegendChart
+                        },
+                        elements: {
+                            line: {
+                                tension: 0,
+                                backgroundColor: 'transparent',
+                                borderWidth: 2
                             },
-                            tooltips: {
-                                mode: 'nearest',
-                                backgroundColor: '#696969',
-                                callbacks: {
-                                    title: function(tooltipItem, data) {
-                                        let label = '';
-
-                                        if ( tooltipItem && tooltipItem[0]) {
-                                            label = new Date(tooltipItem[0].xLabel).toLocaleString();
-                                        }
-
-                                        return label;
+                            point:
+                            {
+                                radius: 2,
+                                hitRadius: 2,
+                                hoverRadius: 2
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                distribution: 'linear',
+                                time: {
+                                    unit: xUnit,
+                                    stepSize: xStepSize,
+                                    displayFormats: {
+                                        second: 'HH:mm:ss',
+                                        minute: 'HH:mm',
+                                        hour: 'DD_HH:mm',
+                                        day: 'DD.MM',
+                                        week: 'DD.MM.YYYY',
+                                        month: 'MM.YYYY',
+                                        quarter: 'MM.YYYY',
+                                        year: 'YYYY'
                                     }
                                 }
-                            },
-                            legend: {
-                                position: 'bottom'
-                            },
-                            elements: {
-                                line: {
-                                    tension: 0,
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2
-                                },
-                                point:
-                                {
-                                    radius: 2,
-                                    hitRadius: 2,
-                                    hoverRadius: 2
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
                                 }
-                            },
-                            scales: {
-                                xAxes: [{
-                                    type: 'time',
-                                    distribution: 'linear',
-                                    time: {
-                                        unit: xUnit,
-                                        stepSize: xStepSize,
-                                        displayFormats: {
-                                            second: 'HH:mm:ss',
-                                            minute: 'HH:mm',
-                                            hour: 'DD_HH:mm',
-                                            day: 'DD.MM',
-                                            week: 'DD.MM.YYYY',
-                                            month: 'MM.YYYY',
-                                            quarter: 'MM.YYYY',
-                                            year: 'YYYY'
-                                        }
-                                    }
-                                }],
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: false
-                                    }
-                                }]
-                            },
-                            animation: {
-                                duration: 0, // general animation time
-                            },
-                            hover: {
-                                animationDuration: 0, // duration of animations when hovering an item
-                            },
-                            responsiveAnimationDuration: 0, // animation duration after a resize
-                        };
+                            }]
+                        },
+                        animation: {
+                            duration: 0, // general animation time
+                        },
+                        hover: {
+                            animationDuration: 0, // duration of animations when hovering an item
+                        },
+                        responsiveAnimationDuration: 0, // animation duration after a resize
+                    };
 
                     this.chartData = {
                         datasets: [
@@ -380,82 +391,75 @@ export class VideoMetricsComponent implements OnInit {
                     };
 
                     this.chartDiffOptions = {
-                            title: {
-                                display: true,
-                                text: this.LANG_METRICS_CHANGE
+                        title: {
+                            display: true,
+                            text: this.LANG_METRICS_CHANGE
+                        },
+                        tooltips: {
+                            mode: 'nearest',
+                            backgroundColor: '#696969',
+                            callbacks: {
+                                title: function( tooltipItem, data ) {
+                                    let label = '';
+
+                                    if ( tooltipItem && tooltipItem[0] ) {
+                                        label = new Date( tooltipItem[0].xLabel ).toLocaleString();
+                                    }
+
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'bottom',
+                              onClick: this.onClickLegendDiffChart
+                        },
+                        elements: {
+                            line: {
+                                tension: 0,
+                                //                                    backgroundColor: 'transparent',
+                                borderWidth: 1
                             },
-                            tooltips: {
-                                mode: 'nearest',
-                                backgroundColor: '#696969',
-                                callbacks: {
-                                    title: function(tooltipItem, data) {
-                                        let label = '';
-
-                                        if ( tooltipItem && tooltipItem[0]) {
-                                            label = new Date(tooltipItem[0].xLabel).toLocaleString();
-                                        }
-
-                                        return label;
+                            point:
+                            {
+                                radius: 1,
+                                hitRadius: 1,
+                                hoverRadius: 1
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                distribution: 'linear',
+                                time: {
+                                    unit: xUnit,
+                                    stepSize: xStepSize,
+                                    displayFormats: {
+                                        second: 'HH:mm:ss',
+                                        minute: 'HH:mm',
+                                        hour: 'DD_HH:mm',
+                                        day: 'DD.MM',
+                                        week: 'DD.MM.YYYY',
+                                        month: 'MM.YYYY',
+                                        quarter: 'MM.YYYY',
+                                        year: 'YYYY'
                                     }
                                 }
-                            },
-                            legend: {
-                                position: 'bottom'
-//                                onClick: function(e, legendItem) {
-//                                    const index = legendItem.datasetIndex;
-//                                    const ci = this.chart;
-//                                    const meta = ci.getDatasetMeta(index);
-//
-//                                    meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
-//                                    ci.update();
-//                                }
-                            },
-                            elements: {
-                                line: {
-                                    tension: 0,
-//                                    backgroundColor: 'transparent',
-                                    borderWidth: 1
-                                },
-                                point:
-                                {
-                                    radius: 1,
-                                    hitRadius: 1,
-                                    hoverRadius: 1
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
                                 }
-                            },
-                            scales: {
-                                xAxes: [{
-                                    type: 'time',
-                                    distribution: 'linear',
-                                    time: {
-                                        unit: xUnit,
-                                        stepSize: xStepSize,
-                                        displayFormats: {
-                                            second: 'HH:mm:ss',
-                                            minute: 'HH:mm',
-                                            hour: 'DD_HH:mm',
-                                            day: 'DD.MM',
-                                            week: 'DD.MM.YYYY',
-                                            month: 'MM.YYYY',
-                                            quarter: 'MM.YYYY',
-                                            year: 'YYYY'
-                                        }
-                                    }
-                                }],
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: false
-                                    }
-                                }]
-                            },
-                            animation: {
-                                duration: 0, // general animation time
-                            },
-                            hover: {
-                                animationDuration: 0, // duration of animations when hovering an item
-                            },
-                            responsiveAnimationDuration: 0, // animation duration after a resize
-                        };
+                            }]
+                        },
+                        animation: {
+                            duration: 0, // general animation time
+                        },
+                        hover: {
+                            animationDuration: 0, // duration of animations when hovering an item
+                        },
+                        responsiveAnimationDuration: 0, // animation duration after a resize
+                    };
 
                     this.chartDiffData = {
                         datasets: [
@@ -494,9 +498,9 @@ export class VideoMetricsComponent implements OnInit {
                     this.dateFrom = this.metrics[0].mtime;
                     this.dateTo = this.metrics[this.metrics.length - 1].mtime;
 
-                    if (this.videoId !== this.editVideoId) {
+                    if ( this.videoId !== this.editVideoId ) {
                         this.videoId = this.editVideoId;
-                        this.getVideo(this.videoId);
+                        this.getVideo( this.videoId );
                     }
 
                     this.setRefUrl();
@@ -509,18 +513,18 @@ export class VideoMetricsComponent implements OnInit {
 
     }
 
-    getVideo(videoId: string) {
-        this.backEndService.getVideoId(this.editVideoId).subscribe(
-                youtubeVideo => {
-                    if ( youtubeVideo.title !== 'NOT_DATA' ) {
-                        this.youtubeVideo = youtubeVideo;
-                    }
+    getVideo( videoId: string ) {
+        this.backEndService.getVideoId( this.editVideoId ).subscribe(
+            youtubeVideo => {
+                if ( youtubeVideo.title !== 'NOT_DATA' ) {
+                    this.youtubeVideo = youtubeVideo;
                 }
+            }
         );
     }
 
     selectData( event ) {
-        const selectedDate = new Date(this.metrics[+event.element._index].mtime);
+        const selectedDate = new Date( this.metrics[+event.element._index].mtime );
 
         if ( this.newDateFrom === undefined && this.newDateTo === undefined ) {
             this.newDateFrom = selectedDate;
@@ -528,14 +532,14 @@ export class VideoMetricsComponent implements OnInit {
             this.newDateFrom = undefined;
             this.newDateTo = undefined;
         } else if ( this.newDateFrom !== undefined ) {
-            this.setDates(this.newDateFrom, selectedDate);
+            this.setDates( this.newDateFrom, selectedDate );
         } else {
-            this.setDates(this.newDateTo, selectedDate);
+            this.setDates( this.newDateTo, selectedDate );
         }
     }
 
-    setDates(d1: Date, d2: Date) {
-        if (d1 > d2 ) {
+    setDates( d1: Date, d2: Date ) {
+        if ( d1 > d2 ) {
             this.newDateFrom = d2;
             this.newDateTo = d1;
         } else {
@@ -545,6 +549,8 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     setRefUrl(): string {
+        this.setHideLegends();
+
         let url = 'video?idvideo=' + this.videoId;
 
         if ( this.newDateFrom ) {
@@ -580,12 +586,32 @@ export class VideoMetricsComponent implements OnInit {
 
         this.fullUrlVideo = this.curUrl + '/' + url;
 
+        console.log(this.fullUrlVideo);
+
         return url;
     }
 
-    setTitle(title: string) {
-        this.translate.get('METRICS.TITLE').subscribe( s =>
-            this.titleService.setTitle( s + ': ' + title)
+    setHideLegends() {
+        if ( this.metricsChart && this.metricsChart.chart &&
+                this.metricsChart.chart.legend.legendItems.length === 4 ) {
+            this.hidenLike = this.metricsChart.chart.legend.legendItems[0].hidden;
+            this.hidenDisLike = this.metricsChart.chart.legend.legendItems[1].hidden;
+            this.hidenComment = this.metricsChart.chart.legend.legendItems[2].hidden;
+            this.hidenView = this.metricsChart.chart.legend.legendItems[3].hidden;
+        }
+
+        if ( this.metricsDiffChart && this.metricsDiffChart.chart &&
+                this.metricsDiffChart.chart.legend.legendItems.length === 4 ) {
+            this.hidenDiffLike = this.metricsDiffChart.chart.legend.legendItems[0].hidden;
+            this.hidenDiffDisLike = this.metricsDiffChart.chart.legend.legendItems[1].hidden;
+            this.hidenDiffComment = this.metricsDiffChart.chart.legend.legendItems[2].hidden;
+            this.hidenDiffView = this.metricsDiffChart.chart.legend.legendItems[3].hidden;
+        }
+    }
+
+    setTitle( title: string ) {
+        this.translate.get( 'METRICS.TITLE' ).subscribe( s =>
+            this.titleService.setTitle( s + ': ' + title )
         );
     }
 
