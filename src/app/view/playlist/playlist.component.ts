@@ -19,11 +19,6 @@ const PLAYLISTID_TAG = 'playlistid';
 } )
 
 export class VideoPlayListComponent implements OnInit {
-    mode = 'Observable';
-
-    sortBy: string = undefined;
-    sortOrder = false; // true = asc, false = desc
-
     selectedPlayList: PlayList;
     playlistItems: SelectItem[];
     youtubeVideosShort: YoutubeVideoShort[];

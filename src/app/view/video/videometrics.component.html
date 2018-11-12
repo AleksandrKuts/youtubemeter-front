@@ -1,14 +1,14 @@
 <div class="ui-g">
-   	<div class="ui-g-12 headmetrics">
-		<h1 *ngIf="youtubeVideo" title="{{ 'COMMON.DIRECTL_REF' | translate }}">
+   	<div class="ui-g-12 headmetrics"  *ngIf="youtubeVideo">
+		<h1 title="{{ 'COMMON.DIRECTL_REF' | translate }}">
 			<a href="{{fullUrlVideo}}">{{youtubeVideo.title}}</a>
 		</h1> 
 	</div>
     	
-   	<div class="ui-g-12">    	
+   	<div class="ui-g-12" *ngIf="youtubeVideo">    	
 		<div class="p-grid">
     		
-    		<div class="p-col-fixed" style="width:310px">
+    		<div class="p-col-fixed" style="width:310px" >
 				<a href="https://www.youtube.com/watch?v={{videoId}}" target="_blank">
 					<img *ngIf="videoId" src="http://img.youtube.com/vi/{{videoId}}/0.jpg" 
 							alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{videoId}}"/>
@@ -16,7 +16,7 @@
 			</div>
 
     		<div class="p-col">
-				<div class="ui-g" *ngIf="youtubeVideo">
+				<div class="ui-g">
 		    		<div class="ui-g-2">{{ 'COMMON.CHANNEL_U' | translate }}:</div>
 		    		<div class="ui-g-10">
 						<a href="/playlist?id={{youtubeVideo.idpl}}">
@@ -45,6 +45,7 @@
 		    				(click)="messageService.addError('Послуга поки що недоступна')" [disabled]="true">
 		    			</button>
 		    			 -->
+			    	</div>		    	
 		    	</div>		    	
 			</div>
 			
@@ -54,10 +55,10 @@
    	<div class="ui-g-12">
 
 		<p-chart type="line" #metricschart [data]="chartData" [options]="chartOptions"
-			width="1000px" height="300px" (onDataSelect)="selectData($event)"></p-chart>
+			width="1000px" height="300px" (onDataSelect)="selectData($event)" *ngIf="youtubeVideo"></p-chart>
 
 		<p-chart #metricsdiffchart type="line" [data]="chartDiffData" [options]="chartDiffOptions"
-			width="1000px" height="300px" (onDataSelect)="selectData($event)"></p-chart>
+			width="1000px" height="300px" (onDataSelect)="selectData($event)" *ngIf="youtubeVideo"></p-chart>
 
 		<h3>{{ 'METRICS.DETAILING' | translate }}:</h3>
 
@@ -88,11 +89,3 @@
 	</div>
 	    
 </div>
-
-    
-    
-       
-
-
-
-

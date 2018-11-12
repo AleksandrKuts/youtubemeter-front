@@ -13,13 +13,10 @@ import { Title } from '@angular/platform-browser';
 } )
 
 export class VideoMetricsComponent implements OnInit {
-    mode = 'Observable';
-
     @ViewChild( 'metricschart' ) metricsChart: UIChart;
     @ViewChild( 'metricsdiffchart' ) metricsDiffChart: UIChart;
 
     metrics: Metric[];
-    metricsDiff: Metric[];
 
     dateFrom: Date;
     dateTo: Date;
@@ -39,8 +36,6 @@ export class VideoMetricsComponent implements OnInit {
 
     chartDiffData: any;
     chartDiffOptions: any;
-
-    butRequestText: string;
 
     LANG_METRICS_METRICS: string;
     LANG_METRICS_FROM: string;
@@ -207,7 +202,6 @@ export class VideoMetricsComponent implements OnInit {
     getMetricsByDates( dateFrom: Date, dateTo: Date ) {
         this.backEndService.getMetricsByVideoId( this.editVideoId, dateFrom, dateTo ).subscribe(
             metrics => {
-
                 const comments: any[] = [];
                 const likes: any[] = [];
                 const dislikes: any[] = [];
@@ -499,7 +493,7 @@ export class VideoMetricsComponent implements OnInit {
 
                     if ( this.videoId !== this.editVideoId ) {
                         this.videoId = this.editVideoId;
-                        this.getVideo( this.videoId );
+                        this.getVideo();
                     }
 
                     this.setRefUrl();
@@ -512,7 +506,7 @@ export class VideoMetricsComponent implements OnInit {
 
     }
 
-    getVideo( videoId: string ) {
+    getVideo() {
         this.backEndService.getVideoId( this.editVideoId ).subscribe(
             youtubeVideo => {
                 if ( youtubeVideo.title !== 'NOT_DATA' ) {

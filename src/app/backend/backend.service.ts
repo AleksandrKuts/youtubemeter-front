@@ -68,6 +68,11 @@ export class BackEndService {
     }
 
     updatePlayList( id: string, playlist: PlayList ): Observable<PlayList> {
+        if ( id === undefined ) {
+            this.messageService.addError('playlist id is emtpy');
+            return new Observable;
+        }
+
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
 
@@ -97,6 +102,11 @@ export class BackEndService {
     }
 
     getVideoId(id: string): Observable<YoutubeVideo> {
+        if ( id === undefined ) {
+            this.messageService.addError('video id is emtpy');
+            return new Observable;
+        }
+
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
 
@@ -111,6 +121,11 @@ export class BackEndService {
     }
 
     getMetricsByVideoId(id: string, dateFrom: Date, dateTo: Date): Observable<Metric[]> {
+        if ( id === undefined ) {
+            this.messageService.addError('video id is emtpy');
+            return new Observable;
+        }
+
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
         if ( dateFrom ) {
@@ -130,6 +145,11 @@ export class BackEndService {
     }
 
     getVideosByPlaylistId(id: string): Observable<YoutubeVideoShort[]> {
+        if ( id === undefined ) {
+            this.messageService.addError('playlist id is emtpy');
+            return new Observable;
+        }
+
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
 
