@@ -55,10 +55,10 @@
    	<div class="ui-g-12">
 
 		<p-chart type="line" #metricschart [data]="chartData" [options]="chartOptions"
-			width="1000px" height="300px" (onDataSelect)="selectData($event)" *ngIf="youtubeVideo"></p-chart>
+			width="900px" height="250px" (onDataSelect)="selectData($event)" *ngIf="chartData"></p-chart>
 
 		<p-chart #metricsdiffchart type="line" [data]="chartDiffData" [options]="chartDiffOptions"
-			width="1000px" height="300px" (onDataSelect)="selectData($event)" *ngIf="youtubeVideo"></p-chart>
+			width="900px" height="250px" (onDataSelect)="selectData($event)" *ngIf="chartDiffData"></p-chart>
 
 		<h3>{{ 'METRICS.DETAILING' | translate }}:</h3>
 
