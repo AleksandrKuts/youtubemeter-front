@@ -112,7 +112,7 @@ export class VideoPlayListComponent implements OnInit {
 
     setTitle(title: string) {
         this.translate.get('PLAYLIST.TITLE').subscribe( s =>
-            this.titleService.setTitle( s + ' ' + title)
+            this.titleService.setTitle( s + ': ' + title)
         );
     }
 }

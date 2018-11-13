@@ -498,8 +498,8 @@ export class VideoMetricsComponent implements OnInit {
 
                     this.setRefUrl();
 
-                    this.newDateFrom = undefined;
-                    this.newDateTo = undefined;
+//                    this.newDateFrom = undefined;
+//                    this.newDateTo = undefined;
                 }
 
             } );
@@ -603,7 +603,7 @@ export class VideoMetricsComponent implements OnInit {
 
     setTitle( title: string ) {
         this.translate.get( 'METRICS.TITLE' ).subscribe( s =>
-            this.titleService.setTitle( s + ' ' + title )
+            this.titleService.setTitle( s + ': ' + title )
         );
     }
 
