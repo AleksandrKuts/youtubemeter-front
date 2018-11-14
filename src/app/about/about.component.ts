@@ -1,10 +1,24 @@
-import { Component  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component( {
     selector: 'app-about',
-    templateUrl: './about.component.html',
-    styleUrls: ['./about.component.css']
+    template: `<div [innerHTML]="myVal"></div>`
 })
 
-export class AboutComponent {
+export class AboutComponent implements OnInit {
+    myVal: any;
+
+    constructor(private http: HttpClient, public translate: TranslateService ) {
+        const url = '/assets/html/about-' + translate.currentLang + '.html';
+
+        http.get(url, { responseType: 'text' })
+        .subscribe(
+           html => this.myVal = html) ;
+    }
+
+    ngOnInit() {
+    }
 }
+

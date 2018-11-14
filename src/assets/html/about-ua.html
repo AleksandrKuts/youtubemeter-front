@@ -1,0 +1,139 @@
+<div class="about">
+
+	<div>
+		<h1>Сервіс статистики каналів Youtube</h1>
+		
+		<div class="dislikemeter"> 
+			<h3>Написаний під впливом проекту: <a href="https://dislikemeter.com/"	target="_blank">
+					dislikemeter.com
+				</a>
+			<h3>
+		</div>			
+		
+		<p>
+			Аналітика Youtube каналу: накрутка лайків, накрутка дізлайков, скручування переглядів тощо
+		</p>
+
+		<p>
+			Служить для аналізу роботи каналів youtube, відстежує статистику по відео: лайки, дизлайки, перегляди,
+			коментарі. Це дозволяє зафіксувати аномальну зміну цих характеристик, наприклад:
+		</p>
+
+		<ul>
+			<li>Скручування переглядів відео: 
+				<a href="http://youtubemeter.com/video?idvideo=TWRgPDvKWFs" 
+					target="_blank">BOEHHO-БACKETБOЛЬHЫE COЛДATЫ</a>
+			</li>			
+		
+			<li>Деталізація скручування переглядів відео: 
+				<a href="http://youtubemeter.com/video?idvideo=TWRgPDvKWFs&from=1539354171725&to=1539358731696&like=false&dislike=false&comment=false&difflike=false&diffdislike=false&diffcomment=false" 
+					target="_blank">BOEHHO-БACKETБOЛЬHЫE COЛДATЫ</a>
+			</li>
+						
+			<li>Накручування дизлайків відео:
+				<a href="http://vanl0061853.online-vm.com/video?idvideo=jfJM9_pzviY&to=1541608395196&like=false&comment=false&difflike=false&diffcomment=false" 
+					target="_blank">
+				В Кремле паника: Анаконда на границе с РФ. У Украины теперь есть ударные БПЛА.</a>
+			</li>			
+		
+			<li>Накрутка дизлайків відео:
+				<a href="http://youtubemeter.com/video?idvideo=Sidhnsj2IpU&from=1541698400849&to=1541699180710&like=false&comment=false&difflike=false&diffcomment=false&diffview=false" 
+					target="_blank">
+					Е. Понасенков: тайна Возрождения, задания в посольстве, трагедия в Керчи, Вермахт и 1941 год</a>
+			</li>			
+		</ul>			
+		
+		<p>
+			Робота сервісу заснована на плейлистах, список яких веде адміністратор - він же автор програми.
+			Збір метрик ведеться тільки для відео з цього списку. Збираються такі метрики: 
+			<ul>
+				<li>лайки</li>
+				<li>дизлайки</li>
+				<li>перегляди</li>
+				<li>коментарі</li>
+			</ul>
+		<p>
+
+		<p>
+			Для збору метрик використовується сервіс:
+			<a href="https://developers.google.com/youtube/v3/docs/" target="_blank">
+				Youtube API
+			</a>
+		</p>
+
+		<p>
+			Період за який збираються метрики - два тижні з моменту опублікування відео,
+			довше збирати метрики не має сенсу. Метрики збираються раз на хвилину.
+		</p>
+
+		<p>
+			Сервіс періодично, раз в три хвилини, перевіряє плейлисти на появу нових відео, 
+			і автоматично додає їх в обробку.		
+		</p>
+
+		<p>
+			Збір метрик починається з моменту додавання адміністратором плейлиста, по-цьому дані метрик по
+			старим відео можуть бути відсутніми або бути неповними (тільки з дати додавання).
+		</p>
+			
+		<p>
+			Список плейлистів не в повному обсязі відбиває вподобання автора, деякі додані як хороший об'єкт
+			для дослідження. Також в списку присутні нейтральні не політичні канали в якості
+			контрольної групи.			
+		</p>
+			
+		<p>
+			Сервіс написаний з метою об'єктивного дослідження впливу ботів на ютуб, перш за все для розуміння
+			цього явища самим автором.
+		</p>
+		
+		<p>
+			Звертаю увагу що метрики які видаються через api можуть відрізнятися від тих що відображені під відео
+			на сайті <a href="https://www.youtube.com" target="_blank"> Youtube</a>. Поки я спостерігаю це для 
+			дизлайків, напевно як наслідок їх накручування.
+		</p>
+		
+		<p>			
+			Наприклад відео: Е. Понасенков:
+			<a href="https://www.youtube.com/watch?v=Sidhnsj2IpU" target="_blank"> 
+				тайна Возрождения, задания в посольстве, трагедия в Керчи, Вермахт и 1941 год.,</a>
+			на 2018.11.10 17:21 під відео 132 дизлайка, по api 516. Це співпадає з
+			<a href="http://youtubemeter.com/video?idvideo=Sidhnsj2IpU&from=1541698400849&to=1541699180710&like=false&comment=false&difflike=false&diffcomment=false&diffview=false" target="_blank"> 
+			накручуванням дизлайків за період з 19:38 по 19:45 8.11.2018г.,</a>
+			з цього моменту кількість метрик різниться.			
+		</p>
+		
+		<p class="usefulref">
+			<h3>Корисні посилання:</h3>
+			<ul>
+				<li> 
+					<a href="https://dislikemeter.com" target="_blank">Dislikemeter</a>
+				</li>			
+				<li>
+					<a href="https://developers.google.com/youtube/v3/docs/" 
+						target="_blank">Сервіс Youtube API</a>
+				</li>			
+				<li><a href="https://developers.google.com/youtube/v3/docs/videos/list" 
+						target="_blank">Перегляд поточних показників відео по api на сайті youtube
+					</a>
+				</li>			
+				<li>
+					<a href="https://docs.google.com/document/d/1riapDk1TKfmTxEm-WS3Zla25dFqpSiEAO-5ExN406QM/edit?usp=sharing" 
+						target="_blank">Актуальний докладний опис сервісу</a>
+				</li>			
+				<li>
+					<a href="https://github.com/AleksandrKuts" target="_blank">Джерела програми</a>
+				</li>			
+			</ul>
+		</p>
+		
+		<div class="author">
+			Автор: Куц Олександр Іванович, email: 
+			<a href="mailto:aleksandr.kuts.kr@gmail.com" target="_blank">
+				aleksandr.kuts.kr@gmail.com
+			</a>
+		</div>
+		
+	</div>
+	 
+</div>

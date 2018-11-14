@@ -30,7 +30,8 @@
 							"node_modules/primeng/resources/primeng.min.css",
 							"node_modules/primeflex/primeflex.css",
 							"src/assets/css/styles.css",
-							"src/assets/css/layout.css"
+							"src/assets/css/layout.css",
+							"src/assets/css/about.css"
 						],
 						"scripts": ["./node_modules/moment/min/moment.min.js",
 									"./node_modules/chart.js/dist/Chart.js"

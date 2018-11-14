@@ -1,0 +1,45 @@
+.about {
+	margin: 0 auto;
+	width: 800px;
+	color: #333;
+	text-align: justify;
+}
+
+.about h1 {
+	text-align: center;
+}
+
+.about li {
+	margin:20px;
+}
+
+.about p:first-letter {
+	margin-left: 20px;
+}
+
+.dislikemeter {
+	margin-top: 3em;
+	margin-bottom: 2em;
+}
+
+.dislikemeter h3 {
+	color: #999;
+	text-align: right;
+}
+
+.dislikemeter h3 a {
+	color: #999;
+	text-decoration: none;
+}
+
+.dislikemeter h3 a:hover {
+	text-decoration: underline;
+}
+
+.author {
+	margin-top: 3em;
+}
+
+.usefulref {
+	margin-top: 3em;
+}
