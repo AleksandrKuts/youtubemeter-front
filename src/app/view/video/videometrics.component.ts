@@ -75,6 +75,10 @@ export class VideoMetricsComponent implements OnInit {
         this.setRefUrl();
     }).bind(this);
 
+
+    /**
+     * Встановлення написів на графіках згідно з обраною мовою. Потрібне оновлення сторінки
+     */
     setValueLang() {
         this.translate.get( 'METRICS.METRICS' ).subscribe( s => this.LANG_METRICS_METRICS = s );
         this.translate.get( 'METRICS.FROM' ).subscribe( s => this.LANG_METRICS_FROM = s );
@@ -249,6 +253,9 @@ export class VideoMetricsComponent implements OnInit {
 
                     }
 
+                    /**
+                     * Встановлення потрібної часової сітки
+                     */
                     const minTime = new Date( metrics[0].mtime );
                     const maxTime = new Date( metrics[metrics.length - 1].mtime );
                     const diffTime = maxTime.valueOf() - minTime.valueOf();
@@ -345,12 +352,12 @@ export class VideoMetricsComponent implements OnInit {
                             }]
                         },
                         animation: {
-                            duration: 0, // general animation time
+                            duration: 0,
                         },
                         hover: {
-                            animationDuration: 0, // duration of animations when hovering an item
+                            animationDuration: 0,
                         },
-                        responsiveAnimationDuration: 0, // animation duration after a resize
+                        responsiveAnimationDuration: 0,
                     };
 
                     this.chartData = {
@@ -446,12 +453,12 @@ export class VideoMetricsComponent implements OnInit {
                             }]
                         },
                         animation: {
-                            duration: 0, // general animation time
+                            duration: 0,
                         },
                         hover: {
-                            animationDuration: 0, // duration of animations when hovering an item
+                            animationDuration: 0,
                         },
-                        responsiveAnimationDuration: 0, // animation duration after a resize
+                        responsiveAnimationDuration: 0,
                     };
 
                     this.chartDiffData = {
@@ -497,7 +504,6 @@ export class VideoMetricsComponent implements OnInit {
                     }
 
                     this.setRefUrl();
-
 //                    this.newDateFrom = undefined;
 //                    this.newDateTo = undefined;
                 }
