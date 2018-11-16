@@ -33,6 +33,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {DropdownModule} from 'primeng/dropdown';
 import {SidebarModule} from 'primeng/sidebar';
 import {ListboxModule} from 'primeng/listbox';
+import {PaginatorModule} from 'primeng/paginator';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -82,6 +83,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DropdownModule,
     SidebarModule,
     ListboxModule,
+    PaginatorModule,
     routing,
     TranslateModule.forRoot({
         loader: {

@@ -34,7 +34,8 @@
 	<div class="ui-g-12">
 		{{ 'PLAYLIST.ID' | translate }}: {{selectedPlayList.id}}, 
 		{{ 'PLAYLIST.IDCHANNEL' | translate }}: {{selectedPlayList.idch}}, 
-		{{ 'PLAYLIST.START' | translate }} {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}}					
+		{{ 'PLAYLIST.START' | translate }} {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}},
+		{{ 'PLAYLIST.COUNT_VIDEO' | translate }}: {{selectedPlayList.countvideo}}
 	</div>
 	
 
@@ -69,16 +70,12 @@
 
 		</div>
 	</div>
-	
-	<div class="ui-g-12">
-		<div class="p-grid">
-    		<div class="p-col-fixed" style="width:5px">*</div>
-    		<div class="p-col">{{ 'PLAYLIST.DESCR_COUNT_VIDEO_BEFORE' | translate }} {{maxCountVideoInPlayLists}} 
-					{{ 'PLAYLIST.DESCR_COUNT_VIDEO_AFTER' | translate }}					
-			</div>
-		</div>
-	</div>
 
+	<div class="ui-g-12" *ngIf="selectedPlayList && selectedPlayList.countvideo > maxCountVideoInPlayLists">
+		<p-paginator [rows]="maxCountVideoInPlayLists" totalRecords="{{selectedPlayList.countvideo}}" 
+		(onPageChange)="paginate($event)"></p-paginator>	
+	</div>
+	
 </div>
 
 

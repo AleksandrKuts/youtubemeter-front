@@ -34,6 +34,7 @@
 		"VIEW_STATISTICS": "See video statistics",
 		"DESCR_COUNT_VIDEO_BEFORE": "There are no more than",				
 		"DESCR_COUNT_VIDEO_AFTER": "last videos. To view the metrics for older videos, go to the statistics page of any other video and enter the desired id",				
+		"COUNT_VIDEO": "total video",
 		"START": "start collecting metrics from"
 	},
 	"METRICS": {

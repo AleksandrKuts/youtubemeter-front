@@ -86,20 +86,20 @@ export class VideoPlayListComponent implements OnInit {
                     }
 
                     if (this.selectedPlayList ) {
-                        this.getVideos();
+                        this.getVideos(0);
                     }
                 }
             } );
     }
 
-    getVideos() {
+    getVideos(skip: number) {
         this.youtubeVideosShort = null;
 
         if ( this.selectedPlayList ) {
             this.setTitle( this.selectedPlayList.title );
             this.cookieService.set(PLAYLISTID_TAG, this.selectedPlayList.id );
 
-            this.backEndService.getVideosByPlaylistId( this.selectedPlayList.id ).subscribe(
+            this.backEndService.getVideosByPlaylistId( this.selectedPlayList.id, skip ).subscribe(
                 youtubeVideosShort => {
                     if ( youtubeVideosShort ) {
                         this.youtubeVideosShort = youtubeVideosShort;
@@ -114,6 +114,17 @@ export class VideoPlayListComponent implements OnInit {
         this.translate.get('PLAYLIST.TITLE').subscribe( s =>
             this.titleService.setTitle( s + ': ' + title)
         );
+    }
+
+    paginate(event) {
+        console.log(event);
+        if (event) {
+            this.getVideos(event.page * this.maxCountVideoInPlayLists);
+        }
+        // event.first = Index of the first record
+        // event.rows = Number of rows to display in new page
+        // event.page = Index of the new page
+        // event.pageCount = Total number of pages
     }
 }
 

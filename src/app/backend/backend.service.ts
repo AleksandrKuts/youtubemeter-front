@@ -144,7 +144,7 @@ export class BackEndService {
             );
     }
 
-    getVideosByPlaylistId(id: string): Observable<YoutubeVideoShort[]> {
+    getVideosByPlaylistId(id: string, skip: number): Observable<YoutubeVideoShort[]> {
         if ( id === undefined ) {
             this.messageService.addError('playlist id is emtpy');
             return new Observable;
@@ -152,6 +152,9 @@ export class BackEndService {
 
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
+        if ( skip !== undefined ) {
+            params = params.set( 'skip', skip.toString() );
+        }
 
         const options = { params: params };
         const url = `${this.getUrlVideosByPlaylistId}/${id}`;

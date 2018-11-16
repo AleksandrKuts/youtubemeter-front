@@ -10,6 +10,7 @@ export interface PlayList {
     enable: boolean;
     idch: string;
     timeadd: Date;
+    countvideo: number;
 }
 
 export interface YoutubeVideo {
