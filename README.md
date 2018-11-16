@@ -2,3 +2,8 @@
 
 Youtube channel analytics service. Track YouTube statistics - video features: likes, dislikes, views, comments.
 Allows you to capture scrolls, scrolls, and more
+
+Build programm:
+```
+ng build --prod
+```
