@@ -49,6 +49,7 @@
 		"GO_RIGHT": "Переместить выбранные даты вправо",
 		"PABLISHED": "Опубликовано",
 		"COLLECTION_PERIOD": "Период сбора метрик",
+		"DATE_ALREADY_SELECTED": "такая дата уже выбрана",
 		"SERVICE_IS_NOT_AVAILABLE_YET": "Услуга пока еще недоступна",
 		"DETAILING": "Детализация метрик",
 		"ALL": "Всего метрик",

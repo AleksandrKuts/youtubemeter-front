@@ -5,6 +5,7 @@ import { YoutubeVideo, Metric } from '../../backend/backend';
 import { TranslateService } from '@ngx-translate/core';
 import { UIChart } from 'primeng/primeng';
 import { Title } from '@angular/platform-browser';
+import { MessageService } from '../../message.service';
 
 @Component( {
     selector: 'app-videometrics',
@@ -45,6 +46,7 @@ export class VideoMetricsComponent implements OnInit {
     LANG_METRICS_DISLIKES: string;
     LANG_METRICS_COMMENTS: string;
     LANG_METRICS_VIEWS: string;
+    LANG_DATE_ALREADY_SELECTED: string;
 
     hidenLike: boolean;
     hidenDisLike: boolean;
@@ -88,10 +90,12 @@ export class VideoMetricsComponent implements OnInit {
         this.translate.get( 'METRICS.DISLIKES' ).subscribe( s => this.LANG_METRICS_DISLIKES = s );
         this.translate.get( 'METRICS.COMMENTS' ).subscribe( s => this.LANG_METRICS_COMMENTS = s );
         this.translate.get( 'METRICS.VIEWS' ).subscribe( s => this.LANG_METRICS_VIEWS = s );
+        this.translate.get( 'METRICS.DATE_ALREADY_SELECTED' ).subscribe( s => this.LANG_DATE_ALREADY_SELECTED = s );
     }
 
     constructor( public translate: TranslateService, private route: ActivatedRoute,
-        private backEndService: BackEndService, private titleService: Title ) {
+        private backEndService: BackEndService, private titleService: Title,
+        private messageService: MessageService) {
 
         this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
     }
@@ -529,16 +533,25 @@ export class VideoMetricsComponent implements OnInit {
         if ( this.newDateFrom === undefined && this.newDateTo === undefined ) {
             this.newDateFrom = selectedDate;
         } else if ( this.newDateFrom !== undefined && this.newDateTo !== undefined ) {
-            this.newDateFrom = undefined;
+            this.newDateFrom = selectedDate;
             this.newDateTo = undefined;
         } else if ( this.newDateFrom !== undefined ) {
-            this.setDates( this.newDateFrom, selectedDate );
+            if (this.newDateFrom.valueOf() !== selectedDate.valueOf()) {
+                this.setDates( this.newDateFrom, selectedDate );
+            } else {
+                this.messageService.addWarn( this.LANG_DATE_ALREADY_SELECTED );
+            }
         } else {
-            this.setDates( this.newDateTo, selectedDate );
+            if (this.newDateTo.valueOf() !== selectedDate.valueOf()) {
+                this.setDates( this.newDateTo, selectedDate );
+            } else {
+                this.messageService.addWarn( this.LANG_DATE_ALREADY_SELECTED );
+            }
         }
     }
 
     setDates( d1: Date, d2: Date ) {
+        console.log(d1, d2);
         if ( d1 > d2 ) {
             this.newDateFrom = d2;
             this.newDateTo = d1;

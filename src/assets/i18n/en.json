@@ -49,6 +49,7 @@
 		"GO_RIGHT": "Move selected dates to the right",
 		"PABLISHED": "Pablished",
 		"COLLECTION_PERIOD": "Metric collection period",
+		"DATE_ALREADY_SELECTED": "such date is already selected",
 		"SERVICE_IS_NOT_AVAILABLE_YET": "Service is not available yet",
 		"DETAILING": "Detailed metrics",
 		"ALL": "Total metrics",
