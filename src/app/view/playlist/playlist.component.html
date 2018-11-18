@@ -4,13 +4,13 @@
 	<h1>{{ 'PLAYLIST.SELECT' | translate }}</h1>
 
 	<p-listbox [options]="playlistItems" [(ngModel)]="selectedPlayList"
-		filter="filter" [style]="{'width':'300px', 'border':'none'}"		
-		(onChange)="getVideos()"> 
+		filter="filter" [style]="{'width':'300px', 'border':'none'}"
+		(onChange)="getVideos()">
 		<ng-template let-playlistItem pTemplate="item">
-			<div class="ui-helper-clearfix">    {{playlistItem.label}}</div>
-		</ng-template> 
+			<div class="ui-helper-clearfix">{{playlistItem.label}}</div>
+		</ng-template>
 	</p-listbox>
-	 
+
 </p-sidebar>
 
 <div *ngIf="selectedPlayList" class="ui-g">
@@ -25,7 +25,7 @@
 				<label>{{selectedPlayList.title}}</label>
 			</a>
 		</h1>
-		
+
 		<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
 			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" />
 		</a>
@@ -37,46 +37,44 @@
 		{{ 'PLAYLIST.START' | translate }} {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}},
 		{{ 'PLAYLIST.COUNT_VIDEO' | translate }}: {{selectedPlayList.countvideo}}
 	</div>
-	
 
 	<div class="ui-g-12">
 		<div class="p-grid p-align-start .p-col-align-start">
 
 			<ng-template ngFor let-ytubevideo [ngForOf]="youtubeVideosShort">
-			<div class="p-col videocell">
-				<div class="ui-g">
+				<div class="p-col videocell">
+					<div class="ui-g">
 
-					<div class="ui-g-12 videopicture">
-						<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
-							target="_blank"> <img
-							src="http://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
-							alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}" />
-						</a>
+						<div class="ui-g-12 videopicture">
+							<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
+								target="_blank"> <img
+								src="http://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
+								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
+							</a>
+						</div>
+
+						<div class="ui-g-12 videotitle">{{ytubevideo.title}}</div>
+
+						<div class="ui-g-12 videopablished">
+							{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date:
+							'dd-MM-yyyy HH:mm:ss'}}
+							<a href="/video?idvideo={{ytubevideo.id}}"
+								target="_blank"> <img src="../../assets/images/gr.png"
+								title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}" />
+							</a>
+						</div>
 					</div>
 
-					<div class="ui-g-12 videotitle">{{ytubevideo.title}}</div>
-
-					<div class="ui-g-12 videopablished">
-						{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date:
-						'dd-MM-yyyy HH:mm:ss'}} <a href="/video?idvideo={{ytubevideo.id}}"
-							target="_blank"> <img src="../../assets/images/gr.png"
-							title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}" />
-						</a>
-					</div>
 				</div>
-
-			</div>
 			</ng-template>
 
 		</div>
 	</div>
 
 	<div class="ui-g-12" *ngIf="selectedPlayList && selectedPlayList.countvideo > maxCountVideoInPlayLists">
-		<p-paginator [rows]="maxCountVideoInPlayLists" totalRecords="{{selectedPlayList.countvideo}}" 
-		(onPageChange)="paginate($event)"></p-paginator>	
+		<p-paginator [rows]="maxCountVideoInPlayLists" totalRecords="{{selectedPlayList.countvideo}}"
+		(onPageChange)="paginate($event)"></p-paginator>
 	</div>
-	
+
 </div>
-
-
 

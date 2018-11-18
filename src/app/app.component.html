@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div id="wrapper">
 	<div id="header">
-	
+
 		<div class="p-grid p-justify-between head">
 			<div class="p-col-2">
 			</div>
@@ -13,13 +13,13 @@
 			<div class="p-col-2 headsupport">
 				<label  title="{{ 'HEADER.LANG' | translate }}">
 					<select [(ngModel)]="langSelect" (change)="setLang()" id="changelang">
-						<option *ngFor="let lang of translate.getLangs()" [value]="lang" 
+						<option *ngFor="let lang of translate.getLangs()" [value]="lang"
 							[selected]="lang === translate.currentLang">{{ lang }}</option>
 					</select>
 				</label>
 				<a href="/about">
-	 				<img id="idhelp" src="../../assets/images/info.png" title="{{ 'HEADER.ABOUT' | translate }}" 
-	 					class="titleimg" alt="yfrhenrf kfqrjd"/>
+				<img id="idhelp" src="../../assets/images/info.png" title="{{ 'HEADER.ABOUT' | translate }}"
+					class="titleimg" alt="yfrhenrf kfqrjd"/>
 				</a>			
 			</div>
 		
@@ -30,7 +30,7 @@
 		<app-messages></app-messages>
 		<router-outlet></router-outlet>
 	</div>
-	
+
 	<div id="footer">
 		<form style="margin-top: 2em; text-align: center;">
 				YoutubeMETER, version: 0.2beta
