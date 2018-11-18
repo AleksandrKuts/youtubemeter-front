@@ -23,7 +23,8 @@
 							{{youtubeVideo.chtitle}}
 						</a>		    		
 						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank">
-							<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
+							<img src="../../assets/images/link.png" 
+									title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
 						</a>		    		
 		    		</div>
 		    	
@@ -32,19 +33,15 @@
 
 			    	<div class="ui-g-2">{{ 'METRICS.COLLECTION_PERIOD' | translate }}:</div>
 			    	<div class="ui-g-10">
-			    		{{ 'COMMON.FROM' | translate }} <strong>{{youtubeVideo.mintime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
-		    			{{ 'COMMON.TO' | translate }} <strong>{{youtubeVideo.maxtime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
+						{{ 'COMMON.FROM' | translate }} 
+						<strong>{{youtubeVideo.mintime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
+						{{ 'COMMON.TO' | translate }} 
+						<strong>{{youtubeVideo.maxtime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
 		    		</div>
 
 		    		<div class="ui-g-2">{{ 'METRICS.ALL' | translate }}:</div>
 		    		<div class="ui-g-10">
 		    			{{youtubeVideo.count}}
-		    			<!-- 
-		    			<button pButton type="button" label="{{ 'COMMON.LOAD' | translate }}" styleClass="buttonreset" 
-		    				class="ui-button-raised ui-button-secondary" title="{{ 'METRICS.SERVICE_IS_NOT_AVAILABLE_YET' | translate }}" 
-		    				(click)="messageService.addError('Послуга поки що недоступна')" [disabled]="true">
-		    			</button>
-		    			 -->
 			    	</div>		    	
 		    	</div>		    	
 			</div>
@@ -67,16 +64,19 @@
 			<input type="text" size="20" pInputText [(ngModel)]="editVideoId"/>
 				
 			<label>  {{ 'COMMON.FROM' | translate }} </label>
-			<input type="text" size="20" pInputText [disabled]="true" value="{{newDateFrom | date: 'dd-MM-yyyy HH:mm:ss'}}" 
+			<input type="text" size="20" pInputText [disabled]="true" 
+					value="{{newDateFrom | date: 'dd-MM-yyyy HH:mm:ss'}}" 
 					title="{{ 'METRICS.CHOOSE_ON_THE_CHART' | translate }}"/>*
 			
 			<label>  {{ 'COMMON.TO' | translate }}  </label>
-			<input type="text" size="20" pInputText [disabled]="true" value="{{newDateTo | date: 'dd-MM-yyyy HH:mm:ss'}}" 
+			<input type="text" size="20" pInputText [disabled]="true"
+					value="{{newDateTo | date: 'dd-MM-yyyy HH:mm:ss'}}" 
 					title="{{ 'METRICS.CHOOSE_ON_THE_CHART' | translate }}"/>*
 			
 			<button pButton type="button" label=">" styleClass="buttonreset" class="ui-button-raised ui-button-secondary" 
 					(click)="resetRequest()" title="{{ 'METRICS.GO_RIGHT' | translate }}"></button>
-			<p-button  styleClass="buttonrequest" icon="pi pi-check" label="{{ 'COMMON.REQUEST' | translate }}" (onClick)="getMetrics()"></p-button>
+			<p-button  styleClass="buttonrequest" icon="pi pi-check" label="{{ 'COMMON.REQUEST' | translate }}" 
+					(onClick)="getMetrics()"></p-button>
 		</div>
 	
     </div>

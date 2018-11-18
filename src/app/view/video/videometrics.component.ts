@@ -421,7 +421,6 @@ export class VideoMetricsComponent implements OnInit {
                         elements: {
                             line: {
                                 tension: 0,
-                                //                                    backgroundColor: 'transparent',
                                 borderWidth: 1
                             },
                             point:

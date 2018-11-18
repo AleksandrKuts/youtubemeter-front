@@ -117,14 +117,9 @@ export class VideoPlayListComponent implements OnInit {
     }
 
     paginate(event) {
-        console.log(event);
         if (event) {
             this.getVideos(event.page * this.maxCountVideoInPlayLists);
         }
-        // event.first = Index of the first record
-        // event.rows = Number of rows to display in new page
-        // event.page = Index of the new page
-        // event.pageCount = Total number of pages
     }
 }
 
