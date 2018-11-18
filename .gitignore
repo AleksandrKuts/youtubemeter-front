@@ -2,3 +2,6 @@
 /dist/
 /.metadata/
 /RemoteSystemsTempFiles/
+./project
+./gitignore
+./settings
