@@ -4,52 +4,52 @@
 			<a href="{{fullUrlVideo}}">{{youtubeVideo.title}}</a>
 		</h1> 
 	</div>
-    	
-	<div class="ui-g-12" *ngIf="youtubeVideo">    	
+
+	<div class="ui-g-12" *ngIf="youtubeVideo">
 		<div class="p-grid">
     		
-			<div class="p-col-fixed" style="width:310px" >
+			<div class="p-col-fixed" style="width:310px">
 				<a href="https://www.youtube.com/watch?v={{videoId}}" target="_blank">
-					<img *ngIf="videoId" src="http://img.youtube.com/vi/{{videoId}}/0.jpg" 
-						alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{videoId}}"/>
+					<img *ngIf="videoId" src="http://img.youtube.com/vi/{{videoId}}/0.jpg"
+							alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{videoId}}"/>
 				</a>
 			</div>
 
-    		<div class="p-col">
+			<div class="p-col">
 				<div class="ui-g">
-		    		<div class="ui-g-2">{{ 'COMMON.CHANNEL_U' | translate }}:</div>
-		    		<div class="ui-g-10">
+					<div class="ui-g-2">{{ 'COMMON.CHANNEL_U' | translate }}:</div>
+					<div class="ui-g-10">
 						<a href="/playlist?id={{youtubeVideo.idpl}}">
 							{{youtubeVideo.chtitle}}
-						</a>		    		
+						</a>
 						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank">
 							<img src="../../assets/images/link.png" 
 									title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
-						</a>		    		
-		    		</div>
-		    	
-		    		<div class="ui-g-2">{{ 'METRICS.PABLISHED' | translate }}:</div>
-		    		<div class="ui-g-10">{{youtubeVideo.publishedat | date: 'dd-MM-yyyy HH:mm:ss'}}</div>
+						</a>
+					</div>
 
-			    	<div class="ui-g-2">{{ 'METRICS.COLLECTION_PERIOD' | translate }}:</div>
-			    	<div class="ui-g-10">
+					<div class="ui-g-2">{{ 'METRICS.PABLISHED' | translate }}:</div>
+					<div class="ui-g-10">{{youtubeVideo.publishedat | date: 'dd-MM-yyyy HH:mm:ss'}}</div>
+
+					<div class="ui-g-2">{{ 'METRICS.COLLECTION_PERIOD' | translate }}:</div>
+					<div class="ui-g-10">
 						{{ 'COMMON.FROM' | translate }} 
 						<strong>{{youtubeVideo.mintime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
 						{{ 'COMMON.TO' | translate }} 
 						<strong>{{youtubeVideo.maxtime | date: 'dd-MM-yyyy HH:mm:ss'}}</strong>
-		    		</div>
+					</div>
 
-		    		<div class="ui-g-2">{{ 'METRICS.ALL' | translate }}:</div>
-		    		<div class="ui-g-10">
-		    			{{youtubeVideo.count}}
-			    	</div>		    	
-		    	</div>		    	
+					<div class="ui-g-2">{{ 'METRICS.ALL' | translate }}:</div>
+					<div class="ui-g-10">
+						{{youtubeVideo.count}}
+					</div>
+					</div>
 			</div>
-			
-		</div>		
+
+		</div>
 	</div>
 
-   	<div class="ui-g-12">
+	<div class="ui-g-12">
 
 		<p-chart type="line" #metricschart [data]="chartData" [options]="chartOptions"
 			width="900px" height="250px" (onDataSelect)="selectData($event)" *ngIf="chartData"></p-chart>
@@ -62,30 +62,30 @@
 		<div class="detail">
 			<label>{{ 'PLAYLIST.VIDEO_ID' | translate }} :</label>
 			<input type="text" size="20" pInputText [(ngModel)]="editVideoId"/>
-				
+
 			<label>  {{ 'COMMON.FROM' | translate }} </label>
-			<input type="text" size="20" pInputText [disabled]="true" 
-					value="{{newDateFrom | date: 'dd-MM-yyyy HH:mm:ss'}}" 
+			<input type="text" size="20" pInputText [disabled]="true"
+					value="{{newDateFrom | date: 'dd-MM-yyyy HH:mm:ss'}}"
 					title="{{ 'METRICS.CHOOSE_ON_THE_CHART' | translate }}"/>*
-			
+
 			<label>  {{ 'COMMON.TO' | translate }}  </label>
 			<input type="text" size="20" pInputText [disabled]="true"
-					value="{{newDateTo | date: 'dd-MM-yyyy HH:mm:ss'}}" 
+					value="{{newDateTo | date: 'dd-MM-yyyy HH:mm:ss'}}"
 					title="{{ 'METRICS.CHOOSE_ON_THE_CHART' | translate }}"/>*
-			
+
 			<button pButton type="button" label=">" styleClass="buttonreset" class="ui-button-raised ui-button-secondary" 
 					(click)="resetRequest()" title="{{ 'METRICS.GO_RIGHT' | translate }}"></button>
-			<p-button  styleClass="buttonrequest" icon="pi pi-check" label="{{ 'COMMON.REQUEST' | translate }}" 
+			<p-button  styleClass="buttonrequest" icon="pi pi-check" label="{{ 'COMMON.REQUEST' | translate }}"
 					(onClick)="getMetrics()"></p-button>
 		</div>
-	
+
 	</div>
-	
+
 	<div class="ui-g-12">
 		<div class="p-grid">
 			<div class="p-col-fixed" style="width:5px">*</div>
 			<div class="p-col">{{ 'METRICS.CHOOSE_DESCR' | translate }}</div>
 		</div>
 	</div>
-	    
+
 </div>
