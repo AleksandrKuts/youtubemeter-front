@@ -30,7 +30,7 @@ const appRoutes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'VideoPlayListComponent',
+        redirectTo: '/playlist',
         pathMatch: 'full'
     }
 ];

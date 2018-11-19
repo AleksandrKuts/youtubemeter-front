@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>http://youtubemeter.com/playlist</loc>
+      <changefreq>daily</changefreq>
+   </url>
+   <url>
+      <loc>http://youtubemeter.com/video</loc>
+      <changefreq>hourly</changefreq>
+   </url>
+	<url>
+    	<loc>http://youtubemeter.com/about</loc>
+    	<lastmod>2018-11-19T08:34:46+02:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>   
+</urlset>

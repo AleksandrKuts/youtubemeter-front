@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /assets/css
+Disallow: /assets/i18n
+
+Host: youtubemeter.com
+Sitemap: http://youtubemeter.com/sitemap.xml
