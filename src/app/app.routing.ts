@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { VideoMetricsComponent } from './view/video/videometrics.component';
 import { VideoPlayListComponent } from './view/playlist/playlist.component';
+import { VideoAllComponent } from './view/videoall/videoall.component';
 import { AboutComponent } from './about/about.component';
 
 
@@ -12,25 +13,24 @@ const appRoutes: Routes = [
         component: AdminComponent
     },
     {
-        path: 'video',
-        component: VideoMetricsComponent
-    },
-    {
         path: 'playlist',
         component: VideoPlayListComponent
     },
     {
-        path: 'about',
-        component: AboutComponent
+        path: 'videos',
+        component: VideoAllComponent
+    },
+    {
+        path: 'video',
+        component: VideoMetricsComponent
     },
     {
         path: '',
-        redirectTo: '/playlist',
-        pathMatch: 'full'
+        component: AboutComponent
     },
     {
         path: '**',
-        redirectTo: '/playlist',
+        redirectTo: '/',
         pathMatch: 'full'
     }
 ];

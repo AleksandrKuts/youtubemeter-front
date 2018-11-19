@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { PlayLists, PlayList, YoutubeVideo, YoutubeVideoShort, Metric } from './backend';
+import { PlayLists, PlayList, YoutubeVideo, YoutubeVideoShort, Metric, GlobalCounts } from './backend';
 
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 import { MessageService } from '../message.service';
@@ -20,6 +20,8 @@ export class BackEndService {
     private getUrlByVideoId: string;
     private getUrlMetricsByVideoId: string;
     private getUrlVideosByPlaylistId: string;
+    private getUrlVideos: string;
+    private getUrlGlobalCounts: string;
 
     private handleError: HandleError;
 
@@ -33,6 +35,8 @@ export class BackEndService {
         this.getUrlByVideoId = environment.URL_BACKEND + '/view/video';
         this.getUrlMetricsByVideoId = environment.URL_BACKEND + '/view/metrics';
         this.getUrlVideosByPlaylistId = environment.URL_BACKEND + '/view/videos';
+        this.getUrlVideos = environment.URL_BACKEND + '/view/videos';
+        this.getUrlGlobalCounts = environment.URL_BACKEND + '/view/counts';
     }
 
     getPlayLists(onlyEnable: boolean): Observable<PlayLists> {
@@ -162,6 +166,34 @@ export class BackEndService {
         return this.http.get<YoutubeVideoShort[]>( url, options )
             .pipe(
             catchError( this.handleError( 'getVideosByPlaylistId', null ) )
+            );
+    }
+
+    getVideos(skip: number): Observable<YoutubeVideoShort[]> {
+        let params = new HttpParams();
+        params = params.set( 'req', Date.now().toString() );
+        if ( skip !== undefined ) {
+            params = params.set( 'skip', skip.toString() );
+        }
+
+        const options = { params: params };
+        const url = `${this.getUrlVideosByPlaylistId}`;
+
+        return this.http.get<YoutubeVideoShort[]>( url, options )
+            .pipe(
+            catchError( this.handleError( 'getVideos', null ) )
+            );
+    }
+
+    getGlobalCounts(): Observable<GlobalCounts> {
+        let params = new HttpParams();
+        params = params.set( 'req', Date.now().toString() );
+
+        const options = { params: params };
+
+        return this.http.get<GlobalCounts>( this.getUrlGlobalCounts, options )
+            .pipe(
+            catchError( this.handleError( 'getUrlGlobalCounts', null ) )
             );
     }
 

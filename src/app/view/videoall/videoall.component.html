@@ -1,0 +1,46 @@
+<div *ngIf="globalCounts" class="ui-g">
+	<div *ngIf="globalCounts && youtubeVideosShort" class="ui-g-12">
+		{{ 'COMMON.VIDEOS' | translate }}: {{videoStart}} - {{videoEnd}}
+		{{ 'COMMON.OF' | translate }} {{globalCounts.countvideo}}
+	</div>
+
+	<div *ngIf="youtubeVideosShort" class="ui-g-12">
+		<div class="p-grid p-align-start .p-col-align-start">
+
+			<ng-template ngFor let-ytubevideo [ngForOf]="youtubeVideosShort">
+				<div class="p-col videocell">
+					<div class="ui-g">
+
+						<div class="ui-g-12 videopicture">
+							<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
+								target="_blank"> <img
+								src="http://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
+								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
+							</a>
+						</div>
+
+						<div class="ui-g-12 videotitle">{{ytubevideo.title}}</div>
+
+						<div class="ui-g-12 videopablished">
+							{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date:
+							'dd-MM-yyyy HH:mm:ss'}}
+							<a href="/video?idvideo={{ytubevideo.id}}"
+								target="_blank"> <img src="../../assets/images/gr.png"
+								title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}" />
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</ng-template>
+
+		</div>
+	</div>
+
+	<div class="ui-g-12" *ngIf="globalCounts">
+		<p-paginator [rows]="globalCounts.maxcountvideo" totalRecords="{{globalCounts.countvideo}}"
+		(onPageChange)="paginate($event)"></p-paginator>
+	</div>
+
+</div>
+

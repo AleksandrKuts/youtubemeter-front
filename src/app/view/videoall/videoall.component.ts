@@ -1,0 +1,82 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { BackEndService } from '../../backend/backend.service';
+import { YoutubeVideoShort, GlobalCounts } from '../../backend/backend';
+
+import { MessageService } from '../../message.service';
+import { SelectItem } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+
+@Component( {
+    selector: 'app-videoall',
+    templateUrl: './videoall.component.html',
+    styleUrls: ['./videoall.component.css']
+} )
+
+export class VideoAllComponent implements OnInit {
+    youtubeVideosShort: YoutubeVideoShort[];
+    globalCounts: GlobalCounts;
+    videoStart: number;
+    videoEnd: number;
+
+    constructor( private backEndService: BackEndService, private messageService: MessageService,
+        private titleService: Title, public translate: TranslateService ) {
+    }
+
+    ngOnInit() {
+        this.setTitle();
+        this.getVideos( 0 );
+    }
+
+    getGlobalCounts() {
+        this.globalCounts = null;
+        this.backEndService.getGlobalCounts().subscribe(
+            globalCounts => {
+                if ( globalCounts ) {
+                    this.globalCounts = globalCounts;
+                }
+            } );
+    }
+
+    getVideos( skip: number ) {
+        if ( this.globalCounts === undefined ) {
+            this.getGlobalCounts();
+        } else {
+            const now = new Date();
+            const update = new Date( this.globalCounts.timeupdate );
+            const diff = now.valueOf() - update.valueOf();
+
+            if ( diff > this.globalCounts.periodvideocache ) {
+                this.getGlobalCounts();
+            }
+        }
+
+        this.youtubeVideosShort = null;
+        this.backEndService.getVideos( skip ).subscribe(
+            youtubeVideosShort => {
+                if ( youtubeVideosShort ) {
+                    this.youtubeVideosShort = youtubeVideosShort;
+
+                    this.videoStart = skip + 1;
+                    this.videoEnd = this.videoStart + youtubeVideosShort.length - 1;
+                }
+            } );
+    }
+
+    setTitle() {
+        this.translate.get( 'METRICS.TITLE' ).subscribe( s =>
+            this.titleService.setTitle( s )
+        );
+    }
+
+    paginate( event ) {
+        if ( event ) {
+            this.getVideos( event.page * this.globalCounts.maxcountvideo );
+        }
+    }
+
+}
+

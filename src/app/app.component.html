@@ -2,8 +2,14 @@
 	<div id="header">
 
 		<div class="p-grid p-justify-between head">
-			<div class="p-col-2">
+			<div class="p-col-2">		
+				<nav>
+					<a routerLink="about" routerLinkActive="active"><img src="../assets/images/home.png" alt="about" width="16" height="16"></a>
+					<a routerLink="playlist" routerLinkActive="active">Плейлисти</a>
+					<a routerLink="videos" routerLinkActive="active">Відео</a>
+				</nav>		
 			</div>
+			
 			<div class="p-col-6 headtitle">
 					<a href="/"><h1>Youtube</h1><h1 class="decor"> METER </h1></a><br/>
 					<label>{{ 'HEADER.DESCRIPTION' | translate }}</label>
@@ -20,8 +26,7 @@
 				<img id="idhelp" src="../../assets/images/info.png" title="{{ 'HEADER.ABOUT' | translate }}"
 					class="titleimg" alt="yfrhenrf kfqrjd"/>
 				</a>			
-			</div>
-		
+			</div>		
 		</div>
 	</div>
 

@@ -3,6 +3,7 @@
 		"DATE": "Date",
 		"FROM": "from",
 		"TO": "to",
+		"OF": "of",
 		"LOAD": "Load",
 		"DIRECTL_REF": "Direct link to this page",
 		"REQUEST": "Query",
@@ -10,6 +11,9 @@
 		"PLAYLIST_L": "pleylist",
 		"CHANNEL_U": "Cannel",
 		"CHANNEL_L": "cannel",
+		"ALL": "All",
+		"CHANNELS": "Channels",
+		"VIDEOS": "Videos",
 		"CHANGE": "Change"
 	},
 	"HEADER": {

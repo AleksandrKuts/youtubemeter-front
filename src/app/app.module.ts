@@ -40,6 +40,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AdminComponent } from './admin/admin.component';
 import { VideoMetricsComponent } from './view/video/videometrics.component';
 import { VideoPlayListComponent } from './view/playlist/playlist.component';
+import { VideoAllComponent } from './view/videoall/videoall.component';
 import { AboutComponent } from './about/about.component';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
@@ -57,7 +58,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminComponent,
     VideoPlayListComponent,
     AboutComponent,
-    VideoMetricsComponent
+    VideoMetricsComponent,
+    VideoAllComponent
   ],
   imports: [
     BrowserModule,

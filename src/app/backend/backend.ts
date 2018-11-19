@@ -39,3 +39,11 @@ export interface Metric {
     view: number;
     mtime: Date;
 }
+
+export interface GlobalCounts {
+    timeupdate: Date;
+    countpl: number;
+    countvideo: number;
+    maxcountvideo: number;
+    periodvideocache: number;
+}
