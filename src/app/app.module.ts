@@ -13,6 +13,9 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 
+import { GlobalCountsService } from './global_counts/globalcounts.service';
+import { GlobalCountsComponent } from './global_counts/globalcounts.component';
+
 import {CalendarModule} from 'primeng/calendar';
 import {CheckboxModule} from 'primeng/checkbox';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +39,7 @@ import {ListboxModule} from 'primeng/listbox';
 import {PaginatorModule} from 'primeng/paginator';
 
 import { CookieService } from 'ngx-cookie-service';
+import { BackEndService } from './backend/backend.service';
 
 import { AdminComponent } from './admin/admin.component';
 import { VideoMetricsComponent } from './view/video/videometrics.component';
@@ -55,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     MessagesComponent,
+    GlobalCountsComponent,
     AdminComponent,
     VideoPlayListComponent,
     AboutComponent,
@@ -99,6 +104,8 @@ export function HttpLoaderFactory(http: HttpClient) {
               MessageService,
               CookieService,
               ConfirmationService,
+              BackEndService,
+              GlobalCountsService,
               DatePipe],
   bootstrap: [AppComponent]
 })

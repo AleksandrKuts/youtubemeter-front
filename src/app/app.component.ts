@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('ngOnInit');
+        
         const lang = this.cookieService.get( LANGUAGE_TAG );
 
         if ( lang && lang.match( /en|ua|ru/ ) ) {
@@ -38,13 +40,7 @@ export class AppComponent implements OnInit {
         this.addMETA();
         this.getGlobalCounts();
     }
-
-    setLang() {
-        this.cookieService.set( LANGUAGE_TAG, this.langSelect );
-        this.translate.use( this.langSelect );
-        this.updateMETA();
-    }
-
+    
     addMETA() {
         this.translate.get( 'META.TITLE' ).
             subscribe( s => this.meta.addTag( { name: 'title', content: s } ) );
