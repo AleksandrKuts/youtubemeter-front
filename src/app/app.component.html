@@ -2,27 +2,27 @@
 	<div id="header">
 
 		<div class="p-grid p-justify-between head">
-			<div class="p-col-2">		
+			<div class="p-col-3">		
 				<nav>
-					<a routerLink="about" routerLinkActive="active"><img src="../assets/images/home.png" alt="about" width="16" height="16"></a>
-					<a routerLink="playlist" routerLinkActive="active">Плейлисти</a>
-					<a routerLink="videos" routerLinkActive="active">Відео</a>
+					<a routerLink="" routerLinkActive="active">{{ 'COMMON.PLAYLISTS' | translate }}</a>
+					<a routerLink="videos" routerLinkActive="active">{{ 'COMMON.VIDEOS_U' | translate }}</a>
+					<a routerLink="about" routerLinkActive="active">{{ 'COMMON.INFO' | translate }}</a>
 				</nav>		
 			</div>
 			
-			<div class="p-col-6 headtitle">
+			<div class="p-col-4 headtitle">
 					<a href="/"><h1>Youtube</h1><h1 class="decor"> METER </h1></a><br/>
 					<label>{{ 'HEADER.DESCRIPTION' | translate }}</label>
 			</div>
 
-			<div class="p-col-2 headsupport">
+			<div class="p-col-3 headsupport">
 				<label  title="{{ 'HEADER.LANG' | translate }}">
 					<select [(ngModel)]="langSelect" (change)="setLang()" id="changelang">
 						<option *ngFor="let lang of translate.getLangs()" [value]="lang"
 							[selected]="lang === translate.currentLang">{{ lang }}</option>
 					</select>
 				</label>
-				<a href="/about">
+				<a href="https://docs.google.com/document/d/1riapDk1TKfmTxEm-WS3Zla25dFqpSiEAO-5ExN406QM/edit?usp=sharing">
 				<img id="idhelp" src="../../assets/images/info.png" title="{{ 'HEADER.ABOUT' | translate }}"
 					class="titleimg" alt="yfrhenrf kfqrjd"/>
 				</a>			
@@ -36,9 +36,11 @@
 	</div>
 
 	<div id="footer">
-		<form style="margin-top: 2em; text-align: center;">
-				YoutubeMETER, version: 0.2beta
-		</form>
+		<div *ngIf="globalCounts" class="globalcounts">
+			YoutubeMETER
+			({{ 'COMMON.CHANNELS' | translate }} - {{globalCounts.countpl}},
+			{{ 'COMMON.VIDEOS_L' | translate }} - {{globalCounts.countvideo}})
+		<div>
 	</div>
 
 </div>

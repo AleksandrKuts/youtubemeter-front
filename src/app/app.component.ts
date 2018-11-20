@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Meta } from '@angular/platform-browser';
+import { BackEndService } from './backend/backend.service';
+import { GlobalCounts } from './backend/backend';
 
 const LANGUAGE_TAG = 'langinterface';
 
@@ -12,9 +14,10 @@ const LANGUAGE_TAG = 'langinterface';
 } )
 export class AppComponent implements OnInit {
     langSelect: any;
+    globalCounts: GlobalCounts;
 
     constructor( public translate: TranslateService, private cookieService: CookieService,
-        private meta: Meta ) {
+        private meta: Meta, private backEndService: BackEndService ) {
 
         translate.addLangs( ['en', 'ua', 'ru'] );
         translate.setDefaultLang( 'ua' );
@@ -22,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        const lang = this.cookieService.get(LANGUAGE_TAG);
+        const lang = this.cookieService.get( LANGUAGE_TAG );
 
         if ( lang && lang.match( /en|ua|ru/ ) ) {
             this.langSelect = lang;
@@ -33,6 +36,7 @@ export class AppComponent implements OnInit {
         this.translate.use( this.langSelect );
 
         this.addMETA();
+        this.getGlobalCounts();
     }
 
     setLang() {
@@ -42,17 +46,40 @@ export class AppComponent implements OnInit {
     }
 
     addMETA() {
-        this.translate.get('META.TITLE').
-            subscribe( s =>  this.meta.addTag({ name: 'title', content: s }));
-        this.translate.get('META.DESCRIPTION').
-            subscribe( s =>  this.meta.addTag({ name: 'description', content: s }));
+        this.translate.get( 'META.TITLE' ).
+            subscribe( s => this.meta.addTag( { name: 'title', content: s } ) );
+        this.translate.get( 'META.DESCRIPTION' ).
+            subscribe( s => this.meta.addTag( { name: 'description', content: s } ) );
     }
 
     updateMETA() {
-        this.translate.get('META.TITLE').
-            subscribe( s =>  this.meta.updateTag({ name: 'title', content: s }));
-        this.translate.get('META.DESCRIPTION').
-            subscribe( s =>  this.meta.updateTag({ name: 'description', content: s }));
+        this.translate.get( 'META.TITLE' ).
+            subscribe( s => this.meta.updateTag( { name: 'title', content: s } ) );
+        this.translate.get( 'META.DESCRIPTION' ).
+            subscribe( s => this.meta.updateTag( { name: 'description', content: s } ) );
     }
 
+    getGlobalCounts() {
+        if ( this.globalCounts === undefined ) {
+            this.getGlobalCountsFromService();
+        } else {
+            const now = new Date();
+            const update = new Date( this.globalCounts.timeupdate );
+            const diff = now.valueOf() - update.valueOf();
+
+            if ( diff > this.globalCounts.periodvideocache ) {
+
+                this.getGlobalCountsFromService();
+            }
+        }
+    }
+
+    getGlobalCountsFromService() {
+        this.backEndService.getGlobalCounts().subscribe(
+            g => {
+                if ( g ) {
+                    this.globalCounts = g;
+                }
+            } );
+    }
 }

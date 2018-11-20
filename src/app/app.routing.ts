@@ -13,10 +13,6 @@ const appRoutes: Routes = [
         component: AdminComponent
     },
     {
-        path: 'playlist',
-        component: VideoPlayListComponent
-    },
-    {
         path: 'videos',
         component: VideoAllComponent
     },
@@ -25,8 +21,12 @@ const appRoutes: Routes = [
         component: VideoMetricsComponent
     },
     {
-        path: '',
+        path: 'about',
         component: AboutComponent
+    },
+    {
+        path: '',
+        component: VideoPlayListComponent
     },
     {
         path: '**',

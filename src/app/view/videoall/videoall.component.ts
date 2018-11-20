@@ -31,28 +31,8 @@ export class VideoAllComponent implements OnInit {
         this.getVideos( 0 );
     }
 
-    getGlobalCounts() {
-        this.globalCounts = null;
-        this.backEndService.getGlobalCounts().subscribe(
-            globalCounts => {
-                if ( globalCounts ) {
-                    this.globalCounts = globalCounts;
-                }
-            } );
-    }
-
     getVideos( skip: number ) {
-        if ( this.globalCounts === undefined ) {
-            this.getGlobalCounts();
-        } else {
-            const now = new Date();
-            const update = new Date( this.globalCounts.timeupdate );
-            const diff = now.valueOf() - update.valueOf();
-
-            if ( diff > this.globalCounts.periodvideocache ) {
-                this.getGlobalCounts();
-            }
-        }
+        this.getGlobalCounts();
 
         this.youtubeVideosShort = null;
         this.backEndService.getVideos( skip ).subscribe(
@@ -76,6 +56,29 @@ export class VideoAllComponent implements OnInit {
         if ( event ) {
             this.getVideos( event.page * this.globalCounts.maxcountvideo );
         }
+    }
+
+    getGlobalCounts() {
+        if ( this.globalCounts === undefined ) {
+            this.getGlobalCountsFromService();
+        } else {
+            const now = new Date();
+            const update = new Date( this.globalCounts.timeupdate );
+            const diff = now.valueOf() - update.valueOf();
+
+            if ( diff > this.globalCounts.periodvideocache ) {
+                this.getGlobalCountsFromService();
+            }
+        }
+    }
+
+    getGlobalCountsFromService() {
+        this.backEndService.getGlobalCounts().subscribe(
+            g => {
+                if ( g ) {
+                    this.globalCounts = g;
+                }
+            } );
     }
 
 }

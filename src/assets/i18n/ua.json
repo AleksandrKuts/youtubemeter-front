@@ -11,9 +11,12 @@
 		"PLAYLIST_L": "плейлист",
 		"CHANNEL_U": "Канал",
 		"CHANNEL_L": "канал",
-		"ALL": "Всього",
+		"ALL": "всього",
 		"CHANNELS": "каналів",
-		"VIDEOS": "Відео",
+		"VIDEOS_U": "Відео",
+		"VIDEOS_L": "відео",
+		"PLAYLISTS": "Плейлисти",
+		"INFO": "Інформація",
 		"CHANGE": "Змінити"
 	},
 	"META": {
@@ -25,7 +28,7 @@
 		"TITLE": "YoutubeMETER",
 		"DESCRIPTION": "служба аналитики каналов youtube",
 		"LANG": "Змінити мову",
-		"ABOUT": "Про програму"
+		"ABOUT": "Актуальний докладний опис сервісу"
 	},
 	"PLAYLIST": {
 		"TITLE": "YoutubeMETER - аналітика youtube каналу",

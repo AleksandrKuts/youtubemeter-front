@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BackEndService } from '../../backend/backend.service';
-import { PlayList, YoutubeVideoShort } from '../../backend/backend';
+import { PlayList, YoutubeVideoShort, GlobalCounts } from '../../backend/backend';
 
 import { MessageService } from '../../message.service';
 import { SelectItem } from 'primeng/api';
@@ -32,7 +32,7 @@ export class VideoPlayListComponent implements OnInit {
 
     constructor( private route: ActivatedRoute, private backEndService: BackEndService,
         private cookieService: CookieService,   private messageService: MessageService,
-        private titleService: Title, public translate: TranslateService ) {
+        private titleService: Title, public translate: TranslateService) {
     }
 
     ngOnInit() {
@@ -90,6 +90,7 @@ export class VideoPlayListComponent implements OnInit {
                     }
                 }
             } );
+
     }
 
     getVideos(skip: number) {

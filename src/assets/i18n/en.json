@@ -12,8 +12,11 @@
 		"CHANNEL_U": "Cannel",
 		"CHANNEL_L": "cannel",
 		"ALL": "All",
-		"CHANNELS": "Channels",
-		"VIDEOS": "Videos",
+		"CHANNELS": "channels",
+		"VIDEOS_U": "Videos",
+		"VIDEOS_L": "videos",
+		"PLAYLISTS": "Playlists",
+		"INFO": "Info",
 		"CHANGE": "Change"
 	},
 	"HEADER": {
@@ -21,7 +24,7 @@
 		"TITLE": "YoutubeMETER",
 		"DESCRIPTION": "service analytics channels youtube",
 		"LANG": "Change the language",
-		"ABOUT": "About"
+		"ABOUT": "An actual detailed description of the service"
 	},
 	"META": {
 		"TITLE": "Youtube stats. Analytics Youtube channel: likes cheating, cheating dislikes, twisting views",

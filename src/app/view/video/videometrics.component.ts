@@ -550,7 +550,6 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     setDates( d1: Date, d2: Date ) {
-        console.log(d1, d2);
         if ( d1 > d2 ) {
             this.newDateFrom = d2;
             this.newDateTo = d1;
