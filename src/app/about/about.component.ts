@@ -12,7 +12,7 @@ import { Meta } from '@angular/platform-browser';
 export class AboutComponent implements OnInit {
     myVal: any;
 
-    constructor(private http: HttpClient, public translate: TranslateService,
+    constructor( http: HttpClient, public translate: TranslateService,
             private backEndService: BackEndService, private meta: Meta) {
 
         const url = '/assets/html/about-' + translate.currentLang + '.html';

@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { BackEndService } from '../../backend/backend.service';
 import { YoutubeVideoShort, GlobalCounts } from '../../backend/backend';
 
-import { MessageService } from '../../message.service';
-import { SelectItem } from 'primeng/api';
-import { CookieService } from 'ngx-cookie-service';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Meta } from '@angular/platform-browser';
@@ -23,8 +19,8 @@ export class VideoAllComponent implements OnInit {
     videoStart: number;
     videoEnd: number;
 
-    constructor( private backEndService: BackEndService, private messageService: MessageService,
-        private titleService: Title, private meta: Meta, public translate: TranslateService ) {
+    constructor( private backEndService: BackEndService, private titleService: Title, private meta: Meta,
+         public translate: TranslateService ) {
     }
 
     ngOnInit() {
