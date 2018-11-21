@@ -18,15 +18,12 @@ export class AppComponent implements OnInit {
 
     constructor( public translate: TranslateService, private cookieService: CookieService,
         private meta: Meta, private backEndService: BackEndService ) {
-        console.log('AppComponent constructor');
 
         translate.addLangs( ['en', 'ua', 'ru'] );
         translate.setDefaultLang( 'ua' );
-
     }
 
     ngOnInit() {
-        console.log('AppComponent ngOnInit');
         const lang = this.cookieService.get( LANGUAGE_TAG );
 
         if ( lang && lang.match( /en|ua|ru/ ) ) {
@@ -45,12 +42,5 @@ export class AppComponent implements OnInit {
             subscribe( s => this.meta.addTag( { name: 'title', content: s } ) );
         this.translate.get( 'META.DESCRIPTION' ).
             subscribe( s => this.meta.addTag( { name: 'description', content: s } ) );
-    }
-
-    updateMETA() {
-        this.translate.get( 'META.TITLE' ).
-            subscribe( s => this.meta.updateTag( { name: 'title', content: s } ) );
-        this.translate.get( 'META.DESCRIPTION' ).
-            subscribe( s => this.meta.updateTag( { name: 'description', content: s } ) );
     }
 }

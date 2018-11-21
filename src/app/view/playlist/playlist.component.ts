@@ -9,6 +9,7 @@ import { SelectItem } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { Meta } from '@angular/platform-browser';
 
 const PLAYLISTID_TAG = 'playlistid';
 
@@ -32,12 +33,11 @@ export class VideoPlayListComponent implements OnInit {
 
     constructor( private route: ActivatedRoute, private backEndService: BackEndService,
         private cookieService: CookieService,   private messageService: MessageService,
-        private titleService: Title, public translate: TranslateService) {
-        console.log('VideoPlayListComponent constructor');
+        private titleService: Title, public translate: TranslateService,
+        private meta: Meta) {
     }
 
     ngOnInit() {
-        console.log('VideoPlayListComponent ngOnInit');
         this.route.queryParams.subscribe(( p ) => {
             const id = p['id'];
             if ( id ) {
@@ -48,6 +48,7 @@ export class VideoPlayListComponent implements OnInit {
 
         this.getPlayLists();
         this.coockePlayListId = this.cookieService.get(PLAYLISTID_TAG);
+        this.updateMETA();
     }
 
     getPlayLists() {
@@ -126,5 +127,13 @@ export class VideoPlayListComponent implements OnInit {
             this.getVideos(event.page * this.maxCountVideoInPlayLists);
         }
     }
+
+    updateMETA() {
+        this.translate.get( 'META.TITLE' ).
+            subscribe( s => this.meta.updateTag( { name: 'title', content: s } ) );
+        this.translate.get( 'META.DESCRIPTION' ).
+            subscribe( s => this.meta.updateTag( { name: 'description', content: s } ) );
+    }
+
 }
 

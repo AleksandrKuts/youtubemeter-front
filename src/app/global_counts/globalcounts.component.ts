@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GlobalCountsService } from './globalcounts.service';
 import { GlobalCounts } from '../backend/backend';
 
@@ -7,16 +7,9 @@ import { GlobalCounts } from '../backend/backend';
   templateUrl: './globalcounts.component.html',
     styleUrls: ['./globalcounts.component.css']
 })
-export class GlobalCountsComponent implements OnInit {
+export class GlobalCountsComponent {
   globalCounts: GlobalCounts;
 
   constructor( private globalCountsService: GlobalCountsService) {
-      console.log('GlobalCountsComponent constructor');
   }
-
-  ngOnInit() {
-      console.log('GlobalCountsComponent ngOnInit');
-      console.log('GlobalCountsComponent, this.globalCounts: ', this.globalCounts);
-  }
-
 }

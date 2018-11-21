@@ -9,6 +9,7 @@ import { SelectItem } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { Meta } from '@angular/platform-browser';
 
 @Component( {
     selector: 'app-videoall',
@@ -23,12 +24,11 @@ export class VideoAllComponent implements OnInit {
     videoEnd: number;
 
     constructor( private backEndService: BackEndService, private messageService: MessageService,
-        private titleService: Title, public translate: TranslateService ) {
-        console.log('VideoAllComponent constructor');
+        private titleService: Title, private meta: Meta, public translate: TranslateService ) {
     }
 
     ngOnInit() {
-        console.log('VideoAllComponent ngOnInit');
+        this.updateMETA();
         this.setTitle();
         this.getVideos( 0 );
     }
@@ -68,5 +68,13 @@ export class VideoAllComponent implements OnInit {
                     }
                 } );
     }
+
+    updateMETA() {
+        this.translate.get( 'META.TITLE_VIDEOS' ).
+            subscribe( s => this.meta.updateTag( { name: 'title', content: s } ) );
+        this.translate.get( 'META.DESCRIPTION_VIDEOS' ).
+            subscribe( s => this.meta.updateTag( { name: 'description', content: s } ) );
+    }
+
 }
 

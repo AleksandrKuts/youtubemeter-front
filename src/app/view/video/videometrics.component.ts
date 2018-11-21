@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UIChart } from 'primeng/primeng';
 import { Title } from '@angular/platform-browser';
 import { MessageService } from '../../message.service';
+import { Meta } from '@angular/platform-browser';
 
 @Component( {
     selector: 'app-videometrics',
@@ -58,7 +59,6 @@ export class VideoMetricsComponent implements OnInit {
     hidenDiffView: boolean;
 
     onClickLegendChart = ( function( e, legendItem ) {
-        console.log('VideoMetricsComponent ngOnInit');
         const index = legendItem.datasetIndex;
         const ci = this.metricsChart.chart;
         const meta = ci.getDatasetMeta( index );
@@ -96,8 +96,7 @@ export class VideoMetricsComponent implements OnInit {
 
     constructor( public translate: TranslateService, private route: ActivatedRoute,
         private backEndService: BackEndService, private titleService: Title,
-        private messageService: MessageService) {
-        console.log('VideoMetricsComponent constructor');
+        private meta: Meta, private messageService: MessageService) {
 
         this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
     }
@@ -107,7 +106,6 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('VideoMetricsComponent ngOnInit');
         this.dateFrom = undefined;
         this.dateTo = undefined;
         this.videoId = '';
@@ -510,8 +508,6 @@ export class VideoMetricsComponent implements OnInit {
                     }
 
                     this.setRefUrl();
-//                    this.newDateFrom = undefined;
-//                    this.newDateTo = undefined;
                 }
 
             } );
@@ -622,9 +618,19 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     setTitle( title: string ) {
-        this.translate.get( 'METRICS.TITLE' ).subscribe( s =>
-            this.titleService.setTitle( s + ': ' + title )
+        this.translate.get( 'METRICS.TITLE' ).subscribe( s => {
+                this.titleService.setTitle( s + ': ' + title );
+                this.updateMETA(title);
+            }
         );
+    }
+
+    updateMETA(title: string) {
+        this.translate.get( 'META.TITLE_VIDEOS' ).
+            subscribe( s => this.meta.updateTag( { name: 'title', content: s } ) );
+        this.translate.get( ['META.DESCRIPTION_V1', 'META.DESCRIPTION_V2'] ).
+            subscribe( s => this.meta.updateTag( { name: 'description', content: s['META.DESCRIPTION_V1'] +
+                ': ' + title + ' - ' + s['META.DESCRIPTION_V2']} ) );
     }
 
 }

@@ -41,8 +41,6 @@ export class BackEndService {
         this.getUrlVideos = environment.URL_BACKEND + '/view/videos';
         this.getUrlGlobalCounts = environment.URL_BACKEND + '/view/counts';
 
-        console.log( 'BackEndService constructor' );
-
     }
 
     getPlayLists( onlyEnable: boolean ): Observable<PlayLists> {
@@ -192,24 +190,24 @@ export class BackEndService {
     }
 
     getGlobalCounts(): Observable<GlobalCounts> {
-        console.log('BackEndService.globalCounts 1: ', this.globalCounts);
+//        console.log('BackEndService.globalCounts 1: ', this.globalCounts);
 
         if ( this.globalCounts !== undefined ) {
             const now = new Date();
             const update = new Date( this.globalCounts.timeupdate );
             const diff = now.valueOf() - update.valueOf();
 
-            console.log( 'diff: ', diff );
+//            console.log( 'diff: ', diff );
 
             if ( diff < this.globalCounts.periodvideocache ) {
-                console.log('BackEndService.globalCounts get from cache');
+//                console.log('BackEndService.globalCounts get from cache');
 
                 this.globalCountsService.refresh(this.globalCounts);
                 return of( this.globalCounts );
             }
         }
 
-        console.log('BackEndService.globalCounts 2: ', this.globalCounts);
+//        console.log('BackEndService.globalCounts 2: ', this.globalCounts);
 
         return this.getGlobalCountsFromService();
     }
@@ -226,20 +224,20 @@ export class BackEndService {
                         this.globalCounts = event;
                         // There may be other events besides the response.
                         this.globalCountsService.refresh(this.globalCounts);
-                        console.log( 'tap', event ); // Update the cache.
+//                        console.log( 'tap', event ); // Update the cache.
                     }),
                     catchError( this.handleError( 'getUrlGlobalCounts', null ) )
             );
     }
 
     loadConfigurationData(): Promise<GlobalCounts> {
-        console.log('BackEndService.loadConfigurationData');
+//        console.log('BackEndService.loadConfigurationData');
         return new Promise( (resolve, reject) => {
         this.http.get( this.getUrlGlobalCounts ).toPromise().then( result => {
-                console.log('BackEndService.loadConfigurationData - 1');
+//                console.log('BackEndService.loadConfigurationData - 1');
                 const data = result as any;
                 this.globalCounts = data;
-                console.log('BackEndService.loadConfigurationData: APP_INITIALIZER', result);
+//                console.log('BackEndService.loadConfigurationData: APP_INITIALIZER', result);
                 resolve();
             }).catch(this.handleErrorPromise());
         });

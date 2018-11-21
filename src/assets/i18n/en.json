@@ -28,7 +28,11 @@
 	},
 	"META": {
 		"TITLE": "Youtube stats. Analytics Youtube channel: likes cheating, cheating dislikes, twisting views",
-		"DESCRIPTION": "Youtube channel analytics service. Track YouTube statistics - video features: likes, dislikes, views, comments. Allows you to capture scrolls, scrolls, and more"
+		"TITLE_VIDEOS": "Youtube stats. Analytics Youtube video: likes cheating, cheating dislikes, twisting views",
+		"DESCRIPTION": "Youtube channel analytics service. Track YouTube statistics - video features: likes, dislikes, views, comments. Allows you to fix the twisting views, winding dislikes etc.",
+		"DESCRIPTION_V1": "Track video statistics",
+		"DESCRIPTION_V2": "likes, dislikes, views, comments. Allows you to capture scrolls, scrolls, and more",
+		"DESCRIPTION_VIDEOS": "Service analytics video youtube. Tracks video statistics: likes, dislikes, views, comments. Allows you to fix the twisting views, winding dislikes etc."
 	},
 	"PLAYLIST": {
 		"TITLE": "YoutubeMETER - analytics youtube channel",
