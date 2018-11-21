@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { BackEndService } from '../backend/backend.service';
 
 @Component( {
     selector: 'app-about',
@@ -10,7 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class AboutComponent implements OnInit {
     myVal: any;
 
-    constructor(private http: HttpClient, public translate: TranslateService ) {
+    constructor(private http: HttpClient, public translate: TranslateService,
+            private backEndService: BackEndService) {
+
         const url = '/assets/html/about-' + translate.currentLang + '.html';
         console.log('AboutComponent constructor');
 
@@ -21,6 +24,7 @@ export class AboutComponent implements OnInit {
 
     ngOnInit() {
         console.log('AboutComponent ngOnInit');
+        this.backEndService.getGlobalCounts();
     }
 }
 

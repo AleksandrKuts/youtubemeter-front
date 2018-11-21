@@ -32,8 +32,9 @@
 	</div>
 
 	<div class="ui-g-12">
-		{{ 'PLAYLIST.ID' | translate }}: {{selectedPlayList.id}}, 
-		{{ 'PLAYLIST.IDCHANNEL' | translate }}: {{selectedPlayList.idch}}, 
+		{{ 'PLAYLIST.ID' | translate }}:
+		<a href="https://www.youtube.com/playlist?list={{selectedPlayList.id}}" target="_blank">
+			{{selectedPlayList.id}}</a>,
 		{{ 'PLAYLIST.START' | translate }} {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}},
 		{{ 'PLAYLIST.COUNT_VIDEO' | translate }}: {{selectedPlayList.countvideo}}
 	</div>

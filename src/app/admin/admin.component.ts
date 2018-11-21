@@ -39,6 +39,8 @@ export class AdminComponent implements OnInit {
 
         this.getPlayLists();
         this.setEditForm( '', '', true, '' );
+
+        this.backEndService.getGlobalCounts();
     }
 
     setEditForm( id: string, title: string, enable: boolean, idch: string ) {

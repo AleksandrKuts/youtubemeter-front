@@ -15,11 +15,12 @@
 							<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
 								target="_blank"> <img
 								src="https://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
-								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
+								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"
+								title="{{ytubevideo.ptitle}}"/>
 							</a>
 						</div>
 
-						<div class="ui-g-12 videotitle">{{ytubevideo.title}}</div>
+						<div class="ui-g-12 videotitle">{{ytubevideo.ptitle}}: {{ytubevideo.title}}</div>
 
 						<div class="ui-g-12 videopablished">
 							{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date:
