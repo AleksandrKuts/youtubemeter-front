@@ -58,6 +58,7 @@ export class VideoMetricsComponent implements OnInit {
     hidenDiffView: boolean;
 
     onClickLegendChart = ( function( e, legendItem ) {
+        console.log('VideoMetricsComponent ngOnInit');
         const index = legendItem.datasetIndex;
         const ci = this.metricsChart.chart;
         const meta = ci.getDatasetMeta( index );
@@ -96,6 +97,7 @@ export class VideoMetricsComponent implements OnInit {
     constructor( public translate: TranslateService, private route: ActivatedRoute,
         private backEndService: BackEndService, private titleService: Title,
         private messageService: MessageService) {
+        console.log('VideoMetricsComponent constructor');
 
         this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
     }
@@ -105,6 +107,7 @@ export class VideoMetricsComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('VideoMetricsComponent ngOnInit');
         this.dateFrom = undefined;
         this.dateTo = undefined;
         this.videoId = '';

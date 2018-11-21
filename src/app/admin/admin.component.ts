@@ -29,10 +29,14 @@ export class AdminComponent implements OnInit {
     userform: FormGroup;
 
     constructor( private backEndService: BackEndService,
-        private confirmationService: ConfirmationService, private fb: FormBuilder ) { }
+        private confirmationService: ConfirmationService, private fb: FormBuilder ) {
+        console.log('AdminComponent constructor');
+    }
 
 
     ngOnInit() {
+        console.log('AdminComponent ngOnInit');
+
         this.getPlayLists();
         this.setEditForm( '', '', true, '' );
     }

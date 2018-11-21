@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
     constructor( public translate: TranslateService, private cookieService: CookieService,
         private meta: Meta, private backEndService: BackEndService ) {
+        console.log('AppComponent constructor');
 
         translate.addLangs( ['en', 'ua', 'ru'] );
         translate.setDefaultLang( 'ua' );
@@ -25,8 +26,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('ngOnInit');
-        
+        console.log('AppComponent ngOnInit');
         const lang = this.cookieService.get( LANGUAGE_TAG );
 
         if ( lang && lang.match( /en|ua|ru/ ) ) {
@@ -38,9 +38,8 @@ export class AppComponent implements OnInit {
         this.translate.use( this.langSelect );
 
         this.addMETA();
-        this.getGlobalCounts();
     }
-    
+
     addMETA() {
         this.translate.get( 'META.TITLE' ).
             subscribe( s => this.meta.addTag( { name: 'title', content: s } ) );
@@ -53,29 +52,5 @@ export class AppComponent implements OnInit {
             subscribe( s => this.meta.updateTag( { name: 'title', content: s } ) );
         this.translate.get( 'META.DESCRIPTION' ).
             subscribe( s => this.meta.updateTag( { name: 'description', content: s } ) );
-    }
-
-    getGlobalCounts() {
-        if ( this.globalCounts === undefined ) {
-            this.getGlobalCountsFromService();
-        } else {
-            const now = new Date();
-            const update = new Date( this.globalCounts.timeupdate );
-            const diff = now.valueOf() - update.valueOf();
-
-            if ( diff > this.globalCounts.periodvideocache ) {
-
-                this.getGlobalCountsFromService();
-            }
-        }
-    }
-
-    getGlobalCountsFromService() {
-        this.backEndService.getGlobalCounts().subscribe(
-            g => {
-                if ( g ) {
-                    this.globalCounts = g;
-                }
-            } );
     }
 }

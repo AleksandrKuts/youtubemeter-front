@@ -12,6 +12,7 @@ export class AboutComponent implements OnInit {
 
     constructor(private http: HttpClient, public translate: TranslateService ) {
         const url = '/assets/html/about-' + translate.currentLang + '.html';
+        console.log('AboutComponent constructor');
 
         http.get(url, { responseType: 'text' })
         .subscribe(
@@ -19,6 +20,7 @@ export class AboutComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('AboutComponent ngOnInit');
     }
 }
 

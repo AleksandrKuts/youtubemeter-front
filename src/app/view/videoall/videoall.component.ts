@@ -24,9 +24,11 @@ export class VideoAllComponent implements OnInit {
 
     constructor( private backEndService: BackEndService, private messageService: MessageService,
         private titleService: Title, public translate: TranslateService ) {
+        console.log('VideoAllComponent constructor');
     }
 
     ngOnInit() {
+        console.log('VideoAllComponent ngOnInit');
         this.setTitle();
         this.getVideos( 0 );
     }
@@ -59,27 +61,12 @@ export class VideoAllComponent implements OnInit {
     }
 
     getGlobalCounts() {
-        if ( this.globalCounts === undefined ) {
-            this.getGlobalCountsFromService();
-        } else {
-            const now = new Date();
-            const update = new Date( this.globalCounts.timeupdate );
-            const diff = now.valueOf() - update.valueOf();
-
-            if ( diff > this.globalCounts.periodvideocache ) {
-                this.getGlobalCountsFromService();
-            }
-        }
-    }
-
-    getGlobalCountsFromService() {
         this.backEndService.getGlobalCounts().subscribe(
-            g => {
-                if ( g ) {
-                    this.globalCounts = g;
-                }
-            } );
+                g => {
+                    if ( g ) {
+                        this.globalCounts = g;
+                    }
+                } );
     }
-
 }
 
