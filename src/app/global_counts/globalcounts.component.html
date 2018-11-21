@@ -1,5 +1,5 @@
-<div *ngIf="globalCountsService.globalCounts" class="globalcounts">
+<div *ngIf="backEndService.globalCounts" class="globalcounts">
 		YoutubeMETER
-		({{ 'COMMON.CHANNELS' | translate }} - {{globalCountsService.globalCounts.countpl}},
-		{{ 'COMMON.VIDEOS_L' | translate }} - {{globalCountsService.globalCounts.countvideo}})
+		({{ 'COMMON.CHANNELS' | translate }} - {{backEndService.globalCounts.countpl}},
+		{{ 'COMMON.VIDEOS_L' | translate }} - {{backEndService.globalCounts.countvideo}})
 <div>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { GlobalCountsService } from './globalcounts.service';
-import { GlobalCounts } from '../backend/backend';
+import { BackEndService } from '../backend/backend.service';
 
 @Component({
   selector: 'app-globalcounts',
@@ -8,8 +7,7 @@ import { GlobalCounts } from '../backend/backend';
     styleUrls: ['./globalcounts.component.css']
 })
 export class GlobalCountsComponent {
-  globalCounts: GlobalCounts;
 
-  constructor( private globalCountsService: GlobalCountsService) {
+  constructor( public backEndService: BackEndService) {
   }
 }

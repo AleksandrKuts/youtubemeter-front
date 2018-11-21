@@ -13,7 +13,6 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 
-import { GlobalCountsService } from './global_counts/globalcounts.service';
 import { GlobalCountsComponent } from './global_counts/globalcounts.component';
 
 import { CalendarModule } from 'primeng/calendar';
@@ -105,7 +104,6 @@ export function HttpLoaderFactory( http: HttpClient ) {
         CookieService,
         ConfirmationService,
         BackEndService,
-        GlobalCountsService,
         DatePipe,
         {
             provide: APP_INITIALIZER,

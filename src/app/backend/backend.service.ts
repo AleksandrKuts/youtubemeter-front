@@ -10,8 +10,6 @@ import { PlayLists, PlayList, YoutubeVideo, YoutubeVideoShort, Metric, GlobalCou
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 import { MessageService } from '../message.service';
 
-import { GlobalCountsService } from '../global_counts/globalcounts.service';
-
 @Injectable( {
     providedIn: 'root',
 } )
@@ -26,11 +24,10 @@ export class BackEndService {
 
     private handleError: HandleError;
 
-    private globalCounts: GlobalCounts;
+    public globalCounts: GlobalCounts;
 
-    constructor( private http: HttpClient,
-        httpErrorHandler: HttpErrorHandler, private messageService: MessageService,
-        private globalCountsService: GlobalCountsService) {
+    constructor( private http: HttpClient, httpErrorHandler: HttpErrorHandler,
+            private messageService: MessageService) {
 
         this.handleError = httpErrorHandler.createHandleError( 'PlayListsService' );
         this.PlayListsUrl = environment.URL_BACKEND + '/playlists';
@@ -201,8 +198,6 @@ export class BackEndService {
 
             if ( diff < this.globalCounts.periodvideocache ) {
 //                console.log('BackEndService.globalCounts get from cache');
-
-                this.globalCountsService.refresh(this.globalCounts);
                 return of( this.globalCounts );
             }
         }
@@ -222,8 +217,6 @@ export class BackEndService {
             .pipe(
                     tap( event => {
                         this.globalCounts = event;
-                        // There may be other events besides the response.
-                        this.globalCountsService.refresh(this.globalCounts);
 //                        console.log( 'tap', event ); // Update the cache.
                     }),
                     catchError( this.handleError( 'getUrlGlobalCounts', null ) )

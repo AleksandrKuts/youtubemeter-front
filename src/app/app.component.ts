@@ -37,6 +37,11 @@ export class AppComponent implements OnInit {
         this.addMETA();
     }
 
+    setLang() {
+        this.cookieService.set( LANGUAGE_TAG, this.langSelect );
+        this.translate.use( this.langSelect );
+    }
+
     addMETA() {
         this.translate.get( 'META.TITLE' ).
             subscribe( s => this.meta.addTag( { name: 'title', content: s } ) );
