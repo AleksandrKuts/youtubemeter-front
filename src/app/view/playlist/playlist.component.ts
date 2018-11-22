@@ -97,7 +97,7 @@ export class VideoPlayListComponent implements OnInit {
     }
 
     getVideos(skip: number) {
-        this.backEndService.getGlobalCounts();
+        this.backEndService.getGlobalCounts().subscribe(); // update globalCounts
 
         this.youtubeVideosShort = null;
 

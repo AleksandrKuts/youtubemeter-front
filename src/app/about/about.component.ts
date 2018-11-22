@@ -23,7 +23,7 @@ export class AboutComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.backEndService.getGlobalCounts();
+        this.backEndService.getGlobalCounts().subscribe(); // update globalCounts
         this.updateMETA();
     }
 
