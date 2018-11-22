@@ -20,6 +20,12 @@ h2 {
 	padding-top: 0;
 }
 
+h4 {
+	color: #777;
+	margin-bottom: 0;
+	display: inline;
+}
+
 button {
   font-family: Arial;
   background-color: #eee;
