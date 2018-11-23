@@ -2,6 +2,10 @@
 	<div *ngIf="globalCounts && youtubeVideosShort" class="ui-g-12">
 		{{ 'COMMON.VIDEOS_U' | translate }}: {{videoStart}} - {{videoEnd}}
 		{{ 'COMMON.OF' | translate }} {{globalCounts.countvideo}}
+		<button pButton type="button" icon="pi pi-refresh" styleClass="buttonreset"
+			class="ui-button-raised ui-button-secondary" (click)="getVideos(0)"	
+			title="{{ 'COMMON.REFRESH' | translate }}">
+		</button>
 	</div>
 
 	<div *ngIf="youtubeVideosShort" class="ui-g-12">
