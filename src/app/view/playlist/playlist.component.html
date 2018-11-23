@@ -27,7 +27,8 @@
 		</h1>
 
 		<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
-			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" />
+			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" 
+				alt="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}"/>
 		</a>
 	</div>
 
@@ -48,7 +49,7 @@
 
 						<div class="ui-g-12 videopicture">
 							<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
-								target="_blank"> <img
+								target="_blank"><img
 								src="https://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
 								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
 							</a>

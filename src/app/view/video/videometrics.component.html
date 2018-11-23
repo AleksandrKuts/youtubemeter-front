@@ -61,15 +61,15 @@
 
 		<div class="detail">
 			<label>{{ 'PLAYLIST.VIDEO_ID' | translate }} :</label>
-			<input type="text" size="20" pInputText [(ngModel)]="editVideoId"/>
+			<input type="text" size="17" pInputText [(ngModel)]="editVideoId"/>
 
 			<label>  {{ 'COMMON.FROM' | translate }} </label>
-			<input type="text" size="20" pInputText [disabled]="true"
+			<input type="text" size="17" pInputText [disabled]="true"
 					value="{{newDateFrom | date: 'dd-MM-yyyy HH:mm:ss'}}"
 					title="{{ 'METRICS.CHOOSE_ON_THE_CHART' | translate }}"/>*
 
 			<label>  {{ 'COMMON.TO' | translate }}  </label>
-			<input type="text" size="20" pInputText [disabled]="true"
+			<input type="text" size="17" pInputText [disabled]="true"
 					value="{{newDateTo | date: 'dd-MM-yyyy HH:mm:ss'}}"
 					title="{{ 'METRICS.CHOOSE_ON_THE_CHART' | translate }}"/>*
 

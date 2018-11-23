@@ -66,6 +66,6 @@
 		"DETAILING": "Detailed metrics",
 		"ALL": "Total metrics",
 		"CHOOSE_ON_THE_CHART": "Choose on the appropriate chart",
-		"CHOOSE_DESCR": "To select or reset, select an indicator in the corresponding chart. If the dates are not specified, the graph is constructed throughout the period"
+		"CHOOSE_DESCR": "Select an indicator in the corresponding chart. If the dates are not specified, the graph is constructed throughout the period"
 	}
 }
