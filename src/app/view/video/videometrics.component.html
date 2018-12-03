@@ -9,7 +9,7 @@
 		<div class="p-grid">
 
 			<div class="p-col-fixed" style="width:310px">
-				<a href="https://www.youtube.com/watch?v={{videoId}}" target="_blank">
+				<a href="https://www.youtube.com/watch?v={{videoId}}" target="_blank" rel="noopener">
 					<img *ngIf="videoId" src="http://img.youtube.com/vi/{{videoId}}/0.jpg"
 							alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{videoId}}"/>
 				</a>
@@ -22,7 +22,7 @@
 						<a href="/playlist?id={{youtubeVideo.idpl}}">
 							{{youtubeVideo.chtitle}}
 						</a>
-						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank">
+						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank" rel="noopener">
 							<img src="../../assets/images/link.png" 
 									title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
 						</a>

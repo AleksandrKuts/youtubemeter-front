@@ -24,7 +24,8 @@
 							"src/favicon.ico",
 							"src/sitemap.xml",
 							"src/robots.txt",
-							"src/assets"
+							"src/assets",
+							"src/manifest.json"
 						],
 						"styles": [
 							"node_modules/primeicons/primeicons.css",

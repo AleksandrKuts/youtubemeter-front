@@ -5,6 +5,10 @@
       <changefreq>daily</changefreq>
    </url>
    <url>
+      <loc>http://youtubemeter.com/playlist</loc>
+      <changefreq>daily</changefreq>
+   </url>
+   <url>
       <loc>http://youtubemeter.com/videos</loc>
       <changefreq>hourly</changefreq>
    </url>

@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     }
 
     addMETA() {
+        this.meta.addTag( { name: 'theme-color', content: '#317EFB' } );
         this.translate.get( 'META.TITLE' ).
             subscribe( s => this.meta.addTag( { name: 'title', content: s } ) );
         this.translate.get( 'META.DESCRIPTION' ).

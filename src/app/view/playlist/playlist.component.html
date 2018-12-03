@@ -21,12 +21,12 @@
 
 		<h1 title="{{ 'COMMON.DIRECTL_REF' | translate }}">
 			<span>{{ 'COMMON.CHANNEL_U' | translate }}: </span>
-			<a href="/playlist?id={{selectedPlayList.id}}" target="_blank">
+			<a href="/playlist?id={{selectedPlayList.id}}" target="_blank" rel="noopener">
 				<label>{{selectedPlayList.title}}</label>
 			</a>
 		</h1>
 
-		<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank">
+		<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank" rel="noopener">
 			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" 
 				alt="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}"/>
 		</a>
@@ -34,7 +34,7 @@
 
 	<div class="ui-g-12">
 		{{ 'PLAYLIST.ID' | translate }}:
-		<a href="https://www.youtube.com/playlist?list={{selectedPlayList.id}}" target="_blank">
+		<a href="https://www.youtube.com/playlist?list={{selectedPlayList.id}}" target="_blank" rel="noopener">
 			{{selectedPlayList.id}}</a>,
 		{{ 'PLAYLIST.START' | translate }} {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}},
 		{{ 'PLAYLIST.COUNT_VIDEO' | translate }}: {{selectedPlayList.countvideo}}
@@ -49,7 +49,7 @@
 
 						<div class="ui-g-12 videopicture">
 							<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
-								target="_blank"><img
+								target="_blank" rel="noopener"><img
 								src="https://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
 								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
 							</a>
@@ -61,7 +61,7 @@
 							{{ 'COMMON.DATE' | translate }}: {{ytubevideo.publishedat | date:
 							'dd-MM-yyyy HH:mm:ss'}}
 							<a href="/video?idvideo={{ytubevideo.id}}"
-								target="_blank"> <img src="../../assets/images/gr.png"
+								target="_blank" rel="noopener"> <img src="../../assets/images/gr.png"
 								title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}" />
 							</a>
 						</div>

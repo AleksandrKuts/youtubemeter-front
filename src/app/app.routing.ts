@@ -25,8 +25,13 @@ const appRoutes: Routes = [
         component: AboutComponent
     },
     {
-        path: '',
+        path: 'playlist',
         component: VideoPlayListComponent
+    },
+    {
+        path: '',
+        redirectTo: '/videos',
+        pathMatch: 'full'
     },
     {
         path: '**',
