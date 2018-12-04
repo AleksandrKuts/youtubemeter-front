@@ -6,6 +6,8 @@
 				<nav>
 					<a routerLink="playlist" routerLinkActive="active">{{ 'PLAYLIST.CHANNELS' | translate }}</a>
 					<a routerLink="videos" routerLinkActive="active">{{ 'COMMON.VIDEOS_U' | translate }}</a>
+					<a *ngIf="backEndService?.globalCounts.listenadmin" routerLink="admin" 
+						routerLinkActive="active">{{ 'COMMON.ADMIN' | translate }}</a>
 					<a routerLink="about" routerLinkActive="active">{{ 'COMMON.INFO' | translate }}</a>
 				</nav>		
 			</div>

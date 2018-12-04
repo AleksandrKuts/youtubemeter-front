@@ -46,4 +46,6 @@ export interface GlobalCounts {
     countvideo: number;
     maxcountvideo: number;
     periodvideocache: number;
+    version: string;
+    listenadmin: boolean;
 }
