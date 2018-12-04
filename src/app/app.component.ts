@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     globalCounts: GlobalCounts;
 
     constructor( public translate: TranslateService, private cookieService: CookieService,
-        private meta: Meta, private backEndService: BackEndService ) {
+        private meta: Meta, public backEndService: BackEndService ) {
 
         translate.addLangs( ['en', 'ua', 'ru'] );
         translate.setDefaultLang( 'ua' );
