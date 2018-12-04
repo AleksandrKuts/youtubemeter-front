@@ -14,7 +14,10 @@
 			
 			<div class="p-col-4 headtitle">
 					<a href="/"><h1>Youtube</h1><h1 class="decor"> METER </h1></a><br/>
-					<label>{{ 'HEADER.DESCRIPTION' | translate }}</label>
+					<label>{{ 'HEADER.DESCRIPTION' | translate }}
+						({{ 'COMMON.CHANNELS' | translate }} - {{backEndService.globalCounts.countpl}},
+						{{ 'COMMON.VIDEOS_L' | translate }} - {{backEndService.globalCounts.countvideo}})
+					</label>
 			</div>
 
 			<div class="p-col-3 headsupport">
