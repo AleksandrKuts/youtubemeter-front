@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host youtubemeter.com --port 4200 --ssl true --ssl-key /etc/letsencrypt/live/youtubemeter.com/privkey.pem --ssl-cert /etc/letsencrypt/live/youtubemeter.com/cert.pem",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
