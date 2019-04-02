@@ -19,12 +19,13 @@
 				<div class="ui-g">
 					<div class="ui-g-2">{{ 'COMMON.CHANNEL_U' | translate }}:</div>
 					<div class="ui-g-10">
-						<a href="/CHANNEL?id={{youtubeVideo.idpl}}">
+						<a href="/channel?id={{youtubeVideo.idch}}">
 							{{youtubeVideo.chtitle}}
 						</a>
-						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank" rel="noopener">
+						<a href="https://www.youtube.com/channel/{{youtubeVideo.idch}}" target="_blank" 
+							rel="noopener">
 							<img src="../../assets/images/link.png" 
-									title="{{ 'CHANNEL.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
+							title="{{ 'CHANNEL.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
 						</a>
 					</div>
 
@@ -40,10 +41,12 @@
 					</div>
 
 					<div class="ui-g-2">{{ 'METRICS.ALL' | translate }}:</div>
+					
 					<div class="ui-g-10">
 						{{youtubeVideo.count}}
 					</div>
-					</div>
+					
+				</div>
 			</div>
 
 		</div>

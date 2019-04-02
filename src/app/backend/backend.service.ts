@@ -29,8 +29,8 @@ export class BackEndService {
             private messageService: MessageService) {
 
         this.handleError = httpErrorHandler.createHandleError( 'ChannelsService' );
-        this.ChannelsUrl = environment.URL_BACKEND + '/playlists';
-        this.adminChannelUrl = environment.URL_BACKEND + '/playlists/admin';
+        this.ChannelsUrl = environment.URL_BACKEND + '/channels';
+        this.adminChannelUrl = environment.URL_BACKEND + '/channels/admin';
         this.getUrlByVideoId = environment.URL_BACKEND + '/view/video';
         this.getUrlMetricsByVideoId = environment.URL_BACKEND + '/view/metrics';
         this.getUrlVideos = environment.URL_BACKEND + '/view/videos';

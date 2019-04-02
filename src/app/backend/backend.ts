@@ -26,6 +26,7 @@ export interface YoutubeVideoShort {
     id: string;
     title: string;
     publishedat: string;
+    duration: number;
 }
 
 export interface Metric {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackEndService } from '../backend/backend.service';
-import { PlayList } from '../backend/backend';
+import { Channel } from '../backend/backend';
 import { ConfirmationService } from 'primeng/api';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -15,12 +15,12 @@ export class AdminComponent implements OnInit {
 
     errorMessage: string = null;
 
-    playlists: PlayList[];
+    channels: Channel[];
 
     sortBy: string = undefined;
     sortOrder = false; // true = asc, false = desc
 
-    selectedPlayList: PlayList;
+    selectedChannel: Channel;
     display = false;
     modeEdit = false;
 
@@ -34,30 +34,28 @@ export class AdminComponent implements OnInit {
 
 
     ngOnInit() {
-        this.getPlayLists();
-        this.setEditForm( '', '', true, '' );
+        this.getChannels();
+        this.setEditForm( '', '', true );
 
         this.backEndService.getGlobalCounts();
     }
 
-    setEditForm( id: string, title: string, enable: boolean, idch: string ) {
+    setEditForm( id: string, title: string, enable: boolean ) {
         this.userform = this.fb.group( {
             'id': new FormControl( id, Validators.compose( [Validators.required, Validators.minLength( 24 ),
                                                                 Validators.maxLength( 24 )] ) ),
             'title': new FormControl( title, Validators.required ),
-            'enable': new FormControl( enable ),
-            'idch': new FormControl( idch, Validators.compose( [Validators.required, Validators.minLength( 24 ),
-                                                                Validators.maxLength( 24 )] ) )
+            'enable': new FormControl( enable )
         } );
     }
 
-    getPlayLists() {
+    getChannels() {
 
-        this.playlists = null;
+        this.channels = null;
 
-        this.backEndService.getPlayLists( false ).subscribe(
+        this.backEndService.getChannels( false ).subscribe(
             responsePlaylists => {
-                this.playlists = responsePlaylists.playlists;
+                this.channels = responsePlaylists.channels;
             },
             error => this.errorMessage = <any>error,
             () => this.sort() );
@@ -83,7 +81,7 @@ export class AdminComponent implements OnInit {
 
 
     sort() {
-        if ( this.sortBy === undefined || this.playlists === null || this.playlists === undefined ) {
+        if ( this.sortBy === undefined || this.channels === null || this.channels === undefined ) {
             return;
         }
 
@@ -98,41 +96,34 @@ export class AdminComponent implements OnInit {
         switch ( this.sortBy ) {
             case 'id':
                 if ( this.sortOrder ) {
-                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c1.id, c2.id ) );
+                    this.channels = this.channels.sort(( c1, c2 ) => this.comparatorString( c1.id, c2.id ) );
                 } else {
-                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c2.id, c1.id ) );
+                    this.channels = this.channels.sort(( c1, c2 ) => this.comparatorString( c2.id, c1.id ) );
                 }
                 break;
             case 'title':
                 if ( this.sortOrder ) {
-                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c1.title, c2.title ) );
+                    this.channels = this.channels.sort(( c1, c2 ) => this.comparatorString( c1.title, c2.title ) );
                 } else {
-                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c2.title, c1.title ) );
-                }
-                break;
-            case 'idch':
-                if ( this.sortOrder ) {
-                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c1.idch, c2.idch ) );
-                } else {
-                    this.playlists = this.playlists.sort(( c1, c2 ) => this.comparatorString( c2.idch, c1.idch ) );
+                    this.channels = this.channels.sort(( c1, c2 ) => this.comparatorString( c2.title, c1.title ) );
                 }
                 break;
         }
     }
 
-    addOrUpdateplaylist( playlist: PlayList ) {
-        if ( this.selectedPlayList ) {
-            this.updatePlayList( this.selectedPlayList.id, playlist );
+    addOrUpdatechannel( channel: Channel ) {
+        if ( this.selectedChannel ) {
+            this.updateChannel( this.selectedChannel.id, channel );
         } else {
-            this.addPlayList( playlist );
+            this.addChannel( channel );
         }
     }
 
-    addPlayList( playlist: PlayList ) {
-        this.backEndService.addPlayList( playlist ).subscribe(
+    addChannel( channel: Channel ) {
+        this.backEndService.addChannel( channel ).subscribe(
             ret => {
                 if ( !ret ) {
-                    this.playlists.push( playlist );
+                    this.channels.push( channel );
                 }
             },
             error => this.errorMessage = <any>error,
@@ -141,14 +132,13 @@ export class AdminComponent implements OnInit {
         this.display = false;
     }
 
-    updatePlayList( id: string, playlist: PlayList ) {
-        this.backEndService.updatePlayList( id, playlist ).subscribe(
+    updateChannel( id: string, channel: Channel ) {
+        this.backEndService.updateChannel( id, channel ).subscribe(
             ret => {
                 if ( !ret ) {
-                    this.selectedPlayList.id = playlist.id;
-                    this.selectedPlayList.title = playlist.title;
-                    this.selectedPlayList.enable = playlist.enable;
-                    this.selectedPlayList.idch = playlist.idch;
+                    this.selectedChannel.id = channel.id;
+                    this.selectedChannel.title = channel.title;
+                    this.selectedChannel.enable = channel.enable;
                 }
 
             },
@@ -158,16 +148,16 @@ export class AdminComponent implements OnInit {
         this.display = false;
     }
 
-    newPlayList() {
-        this.selectedPlayList = null;
-        this.setEditForm( '', '', true, '' );
+    newChannel() {
+        this.selectedChannel = null;
+        this.setEditForm( '', '', true );
         this.modeEdit = false;
         this.display = true;
     }
 
-    editPlayList( ch: PlayList ) {
-        this.selectedPlayList = ch;
-        this.setEditForm( ch.id, ch.title, ch.enable, ch.idch );
+    editChannel( ch: Channel ) {
+        this.selectedChannel = ch;
+        this.setEditForm( ch.id, ch.title, ch.enable );
         this.modeEdit = true;
         this.display = true;
     }
@@ -180,19 +170,19 @@ export class AdminComponent implements OnInit {
             header: 'Підтвердження видалення',
             icon: 'pi pi-info-circle',
             accept: () => {
-                this.backEndService.deletePlayList( this.selectedPlayList ).subscribe(
+                this.backEndService.deleteChannel( this.selectedChannel ).subscribe(
                     ret => {
                         if ( !ret ) {
-                            const updatedPlayListResp: PlayList[] = [];
+                            const updatedChannelResp: Channel[] = [];
 
-                            for ( const el of this.playlists ) {
-                                if ( el.id !== this.selectedPlayList.id ) {
-                                    updatedPlayListResp.push( el );
+                            for ( const el of this.channels ) {
+                                if ( el.id !== this.selectedChannel.id ) {
+                                    updatedChannelResp.push( el );
                                 }
                             }
-                            this.playlists = updatedPlayListResp;
+                            this.channels = updatedChannelResp;
 
-                            this.selectedPlayList = null;
+                            this.selectedChannel = null;
                         }
                     }
                 );

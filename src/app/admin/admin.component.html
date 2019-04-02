@@ -1,7 +1,7 @@
 <div>
 	<h3>
 		Cпискі відтворення:
-		<button *ngIf="playlists" (click)="newPlayList()">Додати
+		<button *ngIf="channels" (click)="newChannel()">Додати
 			новий список</button>
 	</h3>
 
@@ -15,14 +15,14 @@
 	<form [formGroup]="userform">
 		<div class="ui-grid ui-grid-responsive ui-grid-pad"
 			style="margin: 5px 0px">
-			<div class="ui-grid-row" *ngIf="modeEdit && selectedPlayList">
+			<div class="ui-grid-row" *ngIf="modeEdit && selectedChannel">
 				<div class="ui-grid-col-3">ID списку відтворення</div>
 				<div class="ui-grid-col-9">
-						{{selectedPlayList.id}}
+						{{selectedChannel.id}}
 				</div>
 			</div>
 			<div class="ui-grid-row" *ngIf="!modeEdit">
-				<div class="ui-grid-col-3">ID списку відтворення*</div>
+				<div class="ui-grid-col-3">ID каналу *</div>
 				<div class="ui-grid-col-9">
 					<input pInputText type="text" formControlName="id"
 						placeholder="Required" [size]="24" [disabled]="true"/>
@@ -37,15 +37,6 @@
 						placeholder="Required" [size]="30" />
 					<p-message severity="error" text="Введить назву каналу"
 						*ngIf="!userform.controls['title'].valid&&userform.controls['title'].dirty"></p-message>
-				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-3">ID каналу *</div>
-				<div class="ui-grid-col-9">
-					<input pInputText type="text" formControlName="idch"
-						placeholder="Required" [size]="24" />
-					<p-message severity="error" text="Повинно буди рівно 24 символи"
-						*ngIf="!userform.controls['idch'].valid&&userform.controls['idch'].dirty"></p-message>
 				</div>
 			</div>
 
@@ -64,11 +55,11 @@
 	<div class="ui-g">
 		<div class="ui-md-2">
 			<button type="button" pButton (click)="confirm()" label="Видалити"
-				class="ui-button-danger" *ngIf="selectedPlayList"></button>
+				class="ui-button-danger" *ngIf="selectedChannel"></button>
 		</div>
 		<div class="ui-md-10">
 			<button type="button" pButton
-				(click)="addOrUpdateplaylist(userform.value)" label="Зберегти"
+				(click)="addOrUpdatechannel(userform.value)" label="Зберегти"
 				[disabled]="!userform.valid"></button>
 			<button type="button" pButton icon="pi pi-close"
 				(click)="display=false" label="Відміна" class="ui-button-secondary"></button>
@@ -77,23 +68,21 @@
 	</p-footer> 
 	</p-dialog>
 
-	<div *ngIf="playlists">
+	<div *ngIf="channels">
 
 		<table>
 			<tr title=" Натисніть для сортування ">
-				<th (click)="sortI('id')">ID списку відтворення</th>
+				<th (click)="sortI('id')">ID Каналу</th>
 				<th (click)="sortI('title')">Назва каналу</th>
-				<th (click)="sortI('idch')">ID Каналу</th>
 				<th>Актив.</th>
 			</tr>
 
-			<tr *ngFor="let playlist of playlists; let col = index"
-				(click)="editPlayList(playlist)">
+			<tr *ngFor="let channel of channels; let col = index"
+				(click)="editChannel(channel)">
 
-				<td style="text-align: left;">{{playlist.id}}</td>
-				<td style="text-align: left;">{{playlist.title}}</td>
-				<td style="text-align: left;">{{playlist.idch}}</td>
-				<td><p-checkbox [(ngModel)]="playlist.enable" binary="true"
+				<td style="text-align: left;">{{channel.id}}</td>
+				<td style="text-align: left;">{{channel.title}}</td>
+				<td><p-checkbox [(ngModel)]="channel.enable" binary="true"
 						disabled="true"></p-checkbox></td>
 			</tr>
 

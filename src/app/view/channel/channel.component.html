@@ -6,15 +6,14 @@
 	<p-listbox [options]="channelItems" [(ngModel)]="selectedChannel"
 		filter="filter" [style]="{'width':'300px', 'border':'none'}"
 		(onChange)="getVideos()">
-		<ng-template let-CHANNELItem pTemplate="item">
-			<div class="ui-helper-clearfix">{{CHANNELItem.label}}</div>
+		<ng-template let-ChannelItem pTemplate="item">
+			<div class="ui-helper-clearfix">{{ChannelItem.label}}</div>
 		</ng-template>
 	</p-listbox>
-
 </p-sidebar>
 
 <div *ngIf="selectedChannel" class="ui-g">
-	<div class="ui-g-12 headCHANNEL">
+	<div class="ui-g-12 headchannel">
 		<button pButton type="button" (click)="visibleSidebar1 = true"
 			icon="pi pi-arrow-left" label="{{ 'COMMON.CHANGE' | translate }}">
 		</button>
@@ -26,16 +25,13 @@
 			</a>
 		</h1>
 
-		<a href="https://www.youtube.com/channel/{{selectedChannel.idch}}" target="_blank" rel="noopener">
+		<a href="https://www.youtube.com/channel/{{selectedChannel.id}}" target="_blank" rel="noopener">
 			<img src="../../assets/images/link.png" title="{{ 'CHANNEL.CHANNEL_REF_YOUTUBE' | translate }}" 
 				alt="{{ 'CHANNEL.CHANNEL_REF_YOUTUBE' | translate }}"/>
 		</a>
 	</div>
 
 	<div class="ui-g-12">
-		{{ 'CHANNEL.ID' | translate }}:
-		<a href="https://www.youtube.com/CHANNEL?list={{selectedChannel.id}}" target="_blank" rel="noopener">
-			{{selectedChannel.id}}</a>,
 		{{ 'CHANNEL.START' | translate }} {{selectedChannel.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}},
 		{{ 'CHANNEL.COUNT_VIDEO' | translate }}: {{selectedChannel.countvideo}}
 	</div>

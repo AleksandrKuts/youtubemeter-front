@@ -49,6 +49,8 @@ import { AboutComponent } from './about/about.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { MomentPipe } from './momentPipe';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory( http: HttpClient ) {
     return new TranslateHttpLoader( http );
@@ -63,7 +65,8 @@ export function HttpLoaderFactory( http: HttpClient ) {
         VideoChannelComponent,
         AboutComponent,
         VideoMetricsComponent,
-        VideoAllComponent
+        VideoAllComponent,
+        MomentPipe
     ],
     imports: [
         BrowserModule,
