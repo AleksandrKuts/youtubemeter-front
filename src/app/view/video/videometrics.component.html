@@ -11,7 +11,7 @@
 			<div class="p-col-fixed" style="width:310px">
 				<a href="https://www.youtube.com/watch?v={{videoId}}" target="_blank" rel="noopener">
 					<img *ngIf="videoId" src="https://img.youtube.com/vi/{{videoId}}/0.jpg"
-							alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{videoId}}"/>
+							alt="{{ 'CHANNEL.VIDEO_ID' | translate }}: {{videoId}}"/>
 				</a>
 			</div>
 
@@ -19,12 +19,12 @@
 				<div class="ui-g">
 					<div class="ui-g-2">{{ 'COMMON.CHANNEL_U' | translate }}:</div>
 					<div class="ui-g-10">
-						<a href="/playlist?id={{youtubeVideo.idpl}}">
+						<a href="/CHANNEL?id={{youtubeVideo.idpl}}">
 							{{youtubeVideo.chtitle}}
 						</a>
 						<a href="https://www.youtube.com/channel/{{youtubeVideo.chid}}" target="_blank" rel="noopener">
 							<img src="../../assets/images/link.png" 
-									title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
+									title="{{ 'CHANNEL.CHANNEL_REF_YOUTUBE' | translate }}" class="imglink"/>
 						</a>
 					</div>
 
@@ -60,7 +60,7 @@
 		<h3>{{ 'METRICS.DETAILING' | translate }}:</h3>
 
 		<div class="detail">
-			<label>{{ 'PLAYLIST.VIDEO_ID' | translate }} :</label>
+			<label>{{ 'CHANNEL.VIDEO_ID' | translate }} :</label>
 			<input type="text" size="17" pInputText [(ngModel)]="editVideoId"/>
 
 			<label>  {{ 'COMMON.FROM' | translate }} </label>

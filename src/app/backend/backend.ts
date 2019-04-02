@@ -1,24 +1,21 @@
-export interface PlayLists {
+export interface Channels {
     maxvideocount: number;
-    playlists: PlayList[];
+    channels: Channel[];
 }
 
-
-export interface PlayList {
+export interface Channel {
     id: string;
     title: string;
     enable: boolean;
-    idch: string;
     timeadd: Date;
     countvideo: number;
 }
 
 export interface YoutubeVideo {
-    idpl: string;
     title: string;
     description: string;
+    idch: string;
     chtitle: string;
-    chid: string;
     publishedat: string;
     count: number;
     mintime: Date;
@@ -31,7 +28,6 @@ export interface YoutubeVideoShort {
     publishedat: string;
 }
 
-
 export interface Metric {
     comment: number;
     like: number;
@@ -42,7 +38,7 @@ export interface Metric {
 
 export interface GlobalCounts {
     timeupdate: Date;
-    countpl: number;
+    countch: number;
     countvideo: number;
     maxcountvideo: number;
     periodvideocache: number;

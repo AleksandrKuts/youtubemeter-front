@@ -42,7 +42,7 @@ import { BackEndService } from './backend/backend.service';
 
 import { AdminComponent } from './admin/admin.component';
 import { VideoMetricsComponent } from './view/video/videometrics.component';
-import { VideoPlayListComponent } from './view/playlist/playlist.component';
+import { VideoChannelComponent } from './view/channel/channel.component';
 import { VideoAllComponent } from './view/videoall/videoall.component';
 import { AboutComponent } from './about/about.component';
 
@@ -60,7 +60,7 @@ export function HttpLoaderFactory( http: HttpClient ) {
         MessagesComponent,
         GlobalCountsComponent,
         AdminComponent,
-        VideoPlayListComponent,
+        VideoChannelComponent,
         AboutComponent,
         VideoMetricsComponent,
         VideoAllComponent

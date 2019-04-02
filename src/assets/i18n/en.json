@@ -36,7 +36,7 @@
 		"DESCRIPTION_V2": "likes, dislikes, views, comments. Allows you to capture scrolls, scrolls, and more",
 		"DESCRIPTION_VIDEOS": "Service analytics video youtube. Tracks video statistics: likes, dislikes, views, comments. Allows you to fix the twisting views, winding dislikes etc."
 	},
-	"PLAYLIST": {
+	"CHANNEL": {
 		"TITLE": "YoutubeMETER - analytics youtube channel",
 		"ID": "Playlist id",
 		"IDCHANNEL": "channel id",

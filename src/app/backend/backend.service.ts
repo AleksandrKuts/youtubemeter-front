@@ -5,7 +5,7 @@ import { Observable, of} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { PlayLists, PlayList, YoutubeVideo, YoutubeVideoShort, Metric, GlobalCounts } from './backend';
+import { Channels, Channel, YoutubeVideo, YoutubeVideoShort, Metric, GlobalCounts } from './backend';
 
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 import { MessageService } from '../message.service';
@@ -14,11 +14,10 @@ import { MessageService } from '../message.service';
     providedIn: 'root',
 } )
 export class BackEndService {
-    private PlayListsUrl: string;
-    private adminPlayListUrl: string;
+    private ChannelsUrl: string;
+    private adminChannelUrl: string;
     private getUrlByVideoId: string;
     private getUrlMetricsByVideoId: string;
-    private getUrlVideosByPlaylistId: string;
     private getUrlVideos: string;
     private getUrlGlobalCounts: string;
 
@@ -29,50 +28,49 @@ export class BackEndService {
     constructor( private http: HttpClient, httpErrorHandler: HttpErrorHandler,
             private messageService: MessageService) {
 
-        this.handleError = httpErrorHandler.createHandleError( 'PlayListsService' );
-        this.PlayListsUrl = environment.URL_BACKEND + '/playlists';
-        this.adminPlayListUrl = environment.URL_BACKEND + '/playlists/admin';
+        this.handleError = httpErrorHandler.createHandleError( 'ChannelsService' );
+        this.ChannelsUrl = environment.URL_BACKEND + '/playlists';
+        this.adminChannelUrl = environment.URL_BACKEND + '/playlists/admin';
         this.getUrlByVideoId = environment.URL_BACKEND + '/view/video';
         this.getUrlMetricsByVideoId = environment.URL_BACKEND + '/view/metrics';
-        this.getUrlVideosByPlaylistId = environment.URL_BACKEND + '/view/videos';
         this.getUrlVideos = environment.URL_BACKEND + '/view/videos';
         this.getUrlGlobalCounts = environment.URL_BACKEND + '/view/counts';
 
     }
 
-    getPlayLists( onlyEnable: boolean ): Observable<PlayLists> {
+    getChannels( onlyEnable: boolean ): Observable<Channels> {
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
 
-        let url = this.adminPlayListUrl;
+        let url = this.adminChannelUrl;
         if ( onlyEnable ) {
-            url = this.PlayListsUrl;
+            url = this.ChannelsUrl;
         }
         const options = { params: params };
 
-        return this.http.get<PlayLists>( url, options )
+        return this.http.get<Channels>( url, options )
             .pipe(
-            catchError( this.handleError( 'getPlayLists', null ) )
+            catchError( this.handleError( 'getChannels', null ) )
             );
 
     }
 
 
-    addPlayList( playlist: PlayList ): Observable<{}> {
+    addChannel( playlist: Channel ): Observable<{}> {
         let params = new HttpParams();
 
         params = params.set( 'req', Date.now().toString() );
 
         const options = { params: params };
 
-        return this.http.post<PlayList>( this.adminPlayListUrl, playlist, options )
+        return this.http.post<Channel>( this.adminChannelUrl, playlist, options )
             .pipe(
             tap( _ => this.messageService.addSuccess( 'Доданий запис:<br />' + playlist.title + ' (' + playlist.id + ')' ) ),
-            catchError( this.handleError( 'addPlayList', playlist ) )
+            catchError( this.handleError( 'addChannel', playlist ) )
             );
     }
 
-    updatePlayList( id: string, playlist: PlayList ): Observable<PlayList> {
+    updateChannel( id: string, playlist: Channel ): Observable<Channel> {
         if ( id === undefined ) {
             this.messageService.addError( 'playlist id is emtpy' );
             return new Observable;
@@ -82,27 +80,27 @@ export class BackEndService {
         params = params.set( 'req', Date.now().toString() );
 
         const options = { params: params };
-        const url = `${this.adminPlayListUrl}/${id}`;
+        const url = `${this.adminChannelUrl}/${id}`;
 
-        return this.http.put<PlayList>( url, playlist, options )
+        return this.http.put<Channel>( url, playlist, options )
             .pipe(
             tap( _ => this.messageService.addSuccess( 'Оновлений запис:<br />' + playlist.title + ' (' + playlist.id + ')' ) ),
-            catchError( this.handleError( 'updatePlayList', playlist ) )
+            catchError( this.handleError( 'updateChannel', playlist ) )
             );
     }
 
-    deletePlayList( playlist: PlayList ): Observable<{}> {
+    deleteChannel( playlist: Channel ): Observable<{}> {
         let params = new HttpParams();
 
         params = params.set( 'req', Date.now().toString() );
 
         const options = { params: params };
-        const url = `${this.adminPlayListUrl}/${playlist.id}`;
+        const url = `${this.adminChannelUrl}/${playlist.id}`;
 
         return this.http.delete( url, options )
             .pipe(
             tap( _ => this.messageService.addSuccess( 'Видалений запис:<br />' + playlist.title + ' (' + playlist.id + ')' ) ),
-            catchError( this.handleError( 'deletePlayList', playlist ) )
+            catchError( this.handleError( 'deleteChannel', playlist ) )
             );
     }
 
@@ -149,7 +147,7 @@ export class BackEndService {
             );
     }
 
-    getVideosByPlaylistId( id: string, skip: number ): Observable<YoutubeVideoShort[]> {
+    getVideosByChannelId( id: string, skip: number ): Observable<YoutubeVideoShort[]> {
         if ( id === undefined ) {
             this.messageService.addError( 'playlist id is emtpy' );
             return new Observable;
@@ -162,11 +160,11 @@ export class BackEndService {
         }
 
         const options = { params: params };
-        const url = `${this.getUrlVideosByPlaylistId}/${id}`;
+        const url = `${this.getUrlVideos}/${id}`;
 
         return this.http.get<YoutubeVideoShort[]>( url, options )
             .pipe(
-            catchError( this.handleError( 'getVideosByPlaylistId', null ) )
+            catchError( this.handleError( 'getVideosByChannelId', null ) )
             );
     }
 
@@ -178,7 +176,7 @@ export class BackEndService {
         }
 
         const options = { params: params };
-        const url = `${this.getUrlVideosByPlaylistId}`;
+        const url = `${this.getUrlVideos}`;
 
         return this.http.get<YoutubeVideoShort[]>( url, options )
             .pipe(

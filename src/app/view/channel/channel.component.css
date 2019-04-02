@@ -1,36 +1,36 @@
-.headplaylist {
+.headchannel {
 	padding: 0;
 	padding-bottom: 10px;
 	vertical-align: middle;
 }
 
-.headplaylist h1 {
+.headchannel h1 {
 	display: inline;
 }
 
-.headplaylist h1 a {
+.headchannel h1 a {
 	text-decoration: none;
 }
 
-.headplaylist h1 a:hover {
+.headchannel h1 a:hover {
 	text-decoration: underline;
 }
 
-.headplaylist h1 a label {
+.headchannel h1 a label {
 	color: #999;
 	font-style: bold;
 	font-size: large;
 	cursor: pointer;
 }
 
-.headplaylist span {
+.headchannel span {
 	margin-left: 1em;
 	color: black;
 	font-style: bold;
 	font-size: large;
 }
 
-.headplaylist img {
+.headchannel img {
 	margin-left: 1em;
 	width: 24px;
 	height: auto;

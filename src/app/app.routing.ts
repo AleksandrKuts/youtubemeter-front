@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { VideoMetricsComponent } from './view/video/videometrics.component';
-import { VideoPlayListComponent } from './view/playlist/playlist.component';
+import { VideoChannelComponent } from './view/channel/channel.component';
 import { VideoAllComponent } from './view/videoall/videoall.component';
 import { AboutComponent } from './about/about.component';
 import { AuthGuard } from './admin/auth.guard';
@@ -26,8 +26,8 @@ const appRoutes: Routes = [
         component: AboutComponent
     },
     {
-        path: 'playlist',
-        component: VideoPlayListComponent
+        path: 'channel',
+        component: VideoChannelComponent
     },
     {
         path: '',

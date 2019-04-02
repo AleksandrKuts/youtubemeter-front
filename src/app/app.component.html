@@ -4,7 +4,7 @@
 		<div class="p-grid p-justify-between head">
 			<div class="p-col-3">		
 				<nav>
-					<a routerLink="playlist" routerLinkActive="active">{{ 'PLAYLIST.CHANNELS' | translate }}</a>
+					<a routerLink="channel" routerLinkActive="active">{{ 'CHANNEL.CHANNELS' | translate }}</a>
 					<a routerLink="videos" routerLinkActive="active">{{ 'COMMON.VIDEOS_U' | translate }}</a>
 					<a *ngIf="backEndService?.globalCounts.listenadmin" routerLink="admin" 
 						routerLinkActive="active">{{ 'COMMON.ADMIN' | translate }}</a>

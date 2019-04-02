@@ -1,43 +1,43 @@
-<p-sidebar *ngIf="selectedPlayList" [(visible)]="visibleSidebar1" [baseZIndex]="10000"
+<p-sidebar *ngIf="selectedChannel" [(visible)]="visibleSidebar1" [baseZIndex]="10000"
 	blockScroll="true" [style]="{'width':'340px', 'margin-bottom': '20px'}">
 
-	<h1>{{ 'PLAYLIST.SELECT' | translate }}</h1>
+	<h1>{{ 'CHANNEL.SELECT' | translate }}</h1>
 
-	<p-listbox [options]="playlistItems" [(ngModel)]="selectedPlayList"
+	<p-listbox [options]="channelItems" [(ngModel)]="selectedChannel"
 		filter="filter" [style]="{'width':'300px', 'border':'none'}"
 		(onChange)="getVideos()">
-		<ng-template let-playlistItem pTemplate="item">
-			<div class="ui-helper-clearfix">{{playlistItem.label}}</div>
+		<ng-template let-CHANNELItem pTemplate="item">
+			<div class="ui-helper-clearfix">{{CHANNELItem.label}}</div>
 		</ng-template>
 	</p-listbox>
 
 </p-sidebar>
 
-<div *ngIf="selectedPlayList" class="ui-g">
-	<div class="ui-g-12 headplaylist">
+<div *ngIf="selectedChannel" class="ui-g">
+	<div class="ui-g-12 headCHANNEL">
 		<button pButton type="button" (click)="visibleSidebar1 = true"
 			icon="pi pi-arrow-left" label="{{ 'COMMON.CHANGE' | translate }}">
 		</button>
 
 		<h1 title="{{ 'COMMON.DIRECTL_REF' | translate }}">
 			<span>{{ 'COMMON.CHANNEL_U' | translate }}: </span>
-			<a href="/playlist?id={{selectedPlayList.id}}" target="_blank" rel="noopener">
-				<label>{{selectedPlayList.title}}</label>
+			<a href="/CHANNEL?id={{selectedChannel.id}}" target="_blank" rel="noopener">
+				<label>{{selectedChannel.title}}</label>
 			</a>
 		</h1>
 
-		<a href="https://www.youtube.com/channel/{{selectedPlayList.idch}}" target="_blank" rel="noopener">
-			<img src="../../assets/images/link.png" title="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}" 
-				alt="{{ 'PLAYLIST.CHANNEL_REF_YOUTUBE' | translate }}"/>
+		<a href="https://www.youtube.com/channel/{{selectedChannel.idch}}" target="_blank" rel="noopener">
+			<img src="../../assets/images/link.png" title="{{ 'CHANNEL.CHANNEL_REF_YOUTUBE' | translate }}" 
+				alt="{{ 'CHANNEL.CHANNEL_REF_YOUTUBE' | translate }}"/>
 		</a>
 	</div>
 
 	<div class="ui-g-12">
-		{{ 'PLAYLIST.ID' | translate }}:
-		<a href="https://www.youtube.com/playlist?list={{selectedPlayList.id}}" target="_blank" rel="noopener">
-			{{selectedPlayList.id}}</a>,
-		{{ 'PLAYLIST.START' | translate }} {{selectedPlayList.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}},
-		{{ 'PLAYLIST.COUNT_VIDEO' | translate }}: {{selectedPlayList.countvideo}}
+		{{ 'CHANNEL.ID' | translate }}:
+		<a href="https://www.youtube.com/CHANNEL?list={{selectedChannel.id}}" target="_blank" rel="noopener">
+			{{selectedChannel.id}}</a>,
+		{{ 'CHANNEL.START' | translate }} {{selectedChannel.timeadd | date: 'dd-MM-yyyy HH:mm:ss'}},
+		{{ 'CHANNEL.COUNT_VIDEO' | translate }}: {{selectedChannel.countvideo}}
 	</div>
 
 	<div class="ui-g-12">
@@ -51,7 +51,7 @@
 							<a href="https://www.youtube.com/watch?v={{ytubevideo.id}}"
 								target="_blank" rel="noopener"><img
 								src="https://img.youtube.com/vi/{{ytubevideo.id}}/hqdefault.jpg"
-								alt="{{ 'PLAYLIST.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
+								alt="{{ 'CHANNEL.VIDEO_ID' | translate }}: {{ytubevideo.id}}"/>
 							</a>
 						</div>
 
@@ -62,7 +62,7 @@
 							'dd-MM-yyyy HH:mm:ss'}}
 							<a href="/video?idvideo={{ytubevideo.id}}"
 								target="_blank" rel="noopener"> <img src="../../assets/images/gr.png"
-								title="{{ 'PLAYLIST.VIEW_STATISTICS' | translate }}" />
+								title="{{ 'CHANNEL.VIEW_STATISTICS' | translate }}" />
 							</a>
 						</div>
 					</div>
@@ -73,8 +73,8 @@
 		</div>
 	</div>
 
-	<div class="ui-g-12" *ngIf="selectedPlayList && selectedPlayList.countvideo > maxCountVideoInPlayLists">
-		<p-paginator [rows]="maxCountVideoInPlayLists" totalRecords="{{selectedPlayList.countvideo}}"
+	<div class="ui-g-12" *ngIf="selectedChannel && selectedChannel.countvideo > maxCountVideoInChannels">
+		<p-paginator [rows]="maxCountVideoInChannels" totalRecords="{{selectedChannel.countvideo}}"
 		(onPageChange)="paginate($event)"></p-paginator>
 	</div>
 
