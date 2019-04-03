@@ -23,6 +23,22 @@
 	cursor: pointer;
 }
 
+
+.videotitle a {
+	text-decoration: none;
+	color: #191970;
+	font: inherit;
+}
+
+.videotitle a:visited {
+	text-decoration: none;
+}
+
+
+.videotitle a:hover {
+	text-decoration: underline;
+}
+
 .headchannel span {
 	margin-left: 1em;
 	color: black;

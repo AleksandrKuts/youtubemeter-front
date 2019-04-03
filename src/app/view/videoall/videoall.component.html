@@ -24,8 +24,13 @@
 							</a>
 						</div>
 
-						<div class="ui-g-12 videotitle">{{youtubevideo.ptitle}}: 
-							{{youtubevideo.title}}, {{ youtubevideo.duration | dateFormat: 'HH:mm:ss.SSS'}}</div>
+						<div class="ui-g-12 videotitle">
+							<a href="/channel?id={{youtubevideo.idch}}">
+								{{youtubevideo.ptitle}}:
+							</a>
+							{{youtubevideo.title}}, 
+							{{ youtubevideo.duration | dateFormat: 'HH:mm:ss.SSS'}}
+						</div>
 
 						<div class="ui-g-12 videopablished">
 							{{ 'COMMON.DATE' | translate }}: {{youtubevideo.publishedat | date:

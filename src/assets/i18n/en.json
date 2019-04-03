@@ -19,6 +19,7 @@
 		"ADMIN": "Administration",
 		"INFO": "Info",
 		"REFRESH": "Refresh",
+		"DURATION": "duration",
 		"CHANGE": "Change"
 	},
 	"HEADER": {
