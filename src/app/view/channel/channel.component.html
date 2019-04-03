@@ -6,8 +6,8 @@
 	<p-listbox [options]="channelItems" [(ngModel)]="selectedChannel"
 		filter="filter" [style]="{'width':'300px', 'border':'none'}"
 		(onChange)="getVideos()">
-		<ng-template let-ChannelItem pTemplate="item">
-			<div class="ui-helper-clearfix">{{ChannelItem.label}}</div>
+		<ng-template let-channelItem pTemplate="item">
+			<div class="ui-helper-clearfix">{{channelItem.label}}</div>
 		</ng-template>
 	</p-listbox>
 </p-sidebar>
