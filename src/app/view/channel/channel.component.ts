@@ -72,7 +72,7 @@ export class VideoChannelComponent implements OnInit {
                     this.channelItems = channelsItem;
 
                     if ( this.initChannelID !== undefined && this.selectedChannel === undefined ) {
-                        this.messageService.addError( 'Невідомий плейлист з id: ' + this.initChannelID);
+                        this.messageService.addError( 'Невідомий канал з id: ' + this.initChannelID);
                     }
 
                     if (this.selectedChannel === undefined ) {

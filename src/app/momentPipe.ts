@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as moment from 'moment';
 
 @Pipe({ name: 'dateFormat' })
 export class MomentPipe implements PipeTransform {
@@ -15,6 +14,5 @@ export class MomentPipe implements PipeTransform {
         const seconds = Math.floor(value / 1000);
 
         return (hours ? hours + 'h' : '') + (minutes ? minutes + 'm' : '') + (seconds ? seconds + 's' : '');
-
    }
 }

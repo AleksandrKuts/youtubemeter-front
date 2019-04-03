@@ -11,8 +11,6 @@ import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms'
 } )
 
 export class AdminComponent implements OnInit {
-    mode = 'Observable';
-
     errorMessage: string = null;
 
     channels: Channel[];
@@ -50,9 +48,7 @@ export class AdminComponent implements OnInit {
     }
 
     getChannels() {
-
         this.channels = null;
-
         this.backEndService.getChannels( false ).subscribe(
             responsePlaylists => {
                 this.channels = responsePlaylists.channels;

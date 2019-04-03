@@ -20,6 +20,7 @@ export interface YoutubeVideo {
     count: number;
     mintime: Date;
     maxtime: Date;
+    duration: number;
 }
 
 export interface YoutubeVideoShort {

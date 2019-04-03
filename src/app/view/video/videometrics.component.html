@@ -32,6 +32,9 @@
 					<div class="ui-g-2">{{ 'METRICS.PABLISHED' | translate }}:</div>
 					<div class="ui-g-10">{{youtubeVideo.publishedat | date: 'dd-MM-yyyy HH:mm:ss'}}</div>
 
+					<div class="ui-g-2">{{ 'COMMON.DURATION' | translate }}:</div>
+					<div class="ui-g-10">{{ youtubeVideo.duration | dateFormat: 'HH:mm:ss.SSS'}}</div>
+
 					<div class="ui-g-2">{{ 'METRICS.COLLECTION_PERIOD' | translate }}:</div>
 					<div class="ui-g-10">
 						{{ 'COMMON.FROM' | translate }} 

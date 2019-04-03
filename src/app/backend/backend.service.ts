@@ -14,12 +14,12 @@ import { MessageService } from '../message.service';
     providedIn: 'root',
 } )
 export class BackEndService {
-    private ChannelsUrl: string;
-    private adminChannelUrl: string;
-    private getUrlByVideoId: string;
-    private getUrlMetricsByVideoId: string;
-    private getUrlVideos: string;
-    private getUrlGlobalCounts: string;
+    private UrlChannels: string;
+    private UrlAdmin: string;
+    private UrlVideo: string;
+    private UrlMetrics: string;
+    private UrlVideos: string;
+    private UrlGlobalCounts: string;
 
     private handleError: HandleError;
 
@@ -29,44 +29,42 @@ export class BackEndService {
             private messageService: MessageService) {
 
         this.handleError = httpErrorHandler.createHandleError( 'ChannelsService' );
-        this.ChannelsUrl = environment.URL_BACKEND + '/channels';
-        this.adminChannelUrl = environment.URL_BACKEND + '/channels/admin';
-        this.getUrlByVideoId = environment.URL_BACKEND + '/view/video';
-        this.getUrlMetricsByVideoId = environment.URL_BACKEND + '/view/metrics';
-        this.getUrlVideos = environment.URL_BACKEND + '/view/videos';
-        this.getUrlGlobalCounts = environment.URL_BACKEND + '/view/counts';
-
+        this.UrlChannels = environment.URL_BACKEND + '/channels';
+        this.UrlAdmin = environment.URL_BACKEND + '/channels/admin';
+        this.UrlVideo = environment.URL_BACKEND + '/view/video';
+        this.UrlMetrics = environment.URL_BACKEND + '/view/metrics';
+        this.UrlVideos = environment.URL_BACKEND + '/view/videos';
+        this.UrlGlobalCounts = environment.URL_BACKEND + '/view/counts';
     }
 
     getChannels( onlyEnable: boolean ): Observable<Channels> {
         let params = new HttpParams();
         params = params.set( 'req', Date.now().toString() );
 
-        let url = this.adminChannelUrl;
+        let url = this.UrlAdmin;
         if ( onlyEnable ) {
-            url = this.ChannelsUrl;
+            url = this.UrlChannels;
         }
         const options = { params: params };
 
         return this.http.get<Channels>( url, options )
             .pipe(
-            catchError( this.handleError( 'getChannels', null ) )
+                catchError( this.handleError( 'getChannels', null ) )
             );
-
     }
 
 
     addChannel( playlist: Channel ): Observable<{}> {
         let params = new HttpParams();
-
         params = params.set( 'req', Date.now().toString() );
-
         const options = { params: params };
 
-        return this.http.post<Channel>( this.adminChannelUrl, playlist, options )
+        return this.http.post<Channel>( this.UrlAdmin, playlist, options )
             .pipe(
-            tap( _ => this.messageService.addSuccess( 'Доданий запис:<br />' + playlist.title + ' (' + playlist.id + ')' ) ),
-            catchError( this.handleError( 'addChannel', playlist ) )
+                tap( _ => this.messageService.addSuccess( 'Доданий запис:<br />' +
+                     playlist.title + ' (' + playlist.id + ')')
+                ),
+                catchError( this.handleError( 'addChannel', playlist ) )
             );
     }
 
@@ -80,12 +78,14 @@ export class BackEndService {
         params = params.set( 'req', Date.now().toString() );
 
         const options = { params: params };
-        const url = `${this.adminChannelUrl}/${id}`;
+        const url = `${this.UrlAdmin}/${id}`;
 
         return this.http.put<Channel>( url, playlist, options )
             .pipe(
-            tap( _ => this.messageService.addSuccess( 'Оновлений запис:<br />' + playlist.title + ' (' + playlist.id + ')' ) ),
-            catchError( this.handleError( 'updateChannel', playlist ) )
+                tap( _ => this.messageService.addSuccess( 'Оновлений запис:<br />' +
+                        playlist.title + ' (' + playlist.id + ')' )
+                ),
+                catchError( this.handleError( 'updateChannel', playlist ) )
             );
     }
 
@@ -95,12 +95,15 @@ export class BackEndService {
         params = params.set( 'req', Date.now().toString() );
 
         const options = { params: params };
-        const url = `${this.adminChannelUrl}/${playlist.id}`;
+        const url = `${this.UrlAdmin}/${playlist.id}`;
 
         return this.http.delete( url, options )
             .pipe(
-            tap( _ => this.messageService.addSuccess( 'Видалений запис:<br />' + playlist.title + ' (' + playlist.id + ')' ) ),
-            catchError( this.handleError( 'deleteChannel', playlist ) )
+                tap( _ =>
+                    this.messageService.addSuccess( 'Видалений запис:<br />' +
+                        playlist.title + ' (' + playlist.id + ')' )
+                ),
+                catchError( this.handleError( 'deleteChannel', playlist ))
             );
     }
 
@@ -114,13 +117,12 @@ export class BackEndService {
         params = params.set( 'req', Date.now().toString() );
 
         const options = { params: params };
-        const url = `${this.getUrlByVideoId}/${id}`;
+        const url = `${this.UrlVideo}/${id}`;
 
         return this.http.get<YoutubeVideo>( url, options )
             .pipe(
-            catchError( this.handleError( 'getVideoId', null ) )
-            );
-
+                catchError( this.handleError( 'getVideoId', null ) )
+        );
     }
 
     getMetricsByVideoId( id: string, dateFrom: Date, dateTo: Date ): Observable<Metric[]> {
@@ -139,11 +141,11 @@ export class BackEndService {
         }
 
         const options = { params: params };
-        const url = `${this.getUrlMetricsByVideoId}/${id}`;
+        const url = `${this.UrlMetrics}/${id}`;
 
         return this.http.get<Metric[]>( url, options )
             .pipe(
-            catchError( this.handleError( 'getMetricsByVideoId', null ) )
+                catchError( this.handleError( 'getMetricsByVideoId', null ) )
             );
     }
 
@@ -160,11 +162,11 @@ export class BackEndService {
         }
 
         const options = { params: params };
-        const url = `${this.getUrlVideos}/${id}`;
+        const url = `${this.UrlVideos}/${id}`;
 
         return this.http.get<YoutubeVideoShort[]>( url, options )
             .pipe(
-            catchError( this.handleError( 'getVideosByChannelId', null ) )
+                catchError( this.handleError( 'getVideosByChannelId', null ) )
             );
     }
 
@@ -176,32 +178,23 @@ export class BackEndService {
         }
 
         const options = { params: params };
-        const url = `${this.getUrlVideos}`;
+        const url = `${this.UrlVideos}`;
 
         return this.http.get<YoutubeVideoShort[]>( url, options )
             .pipe(
-            catchError( this.handleError( 'getVideos', null ) )
-            );
+                catchError( this.handleError( 'getVideos', null ) )
+        );
     }
 
     getGlobalCounts(): Observable<GlobalCounts> {
-//        console.log('BackEndService.globalCounts 1: ', this.globalCounts);
-
         if ( this.globalCounts !== undefined ) {
             const now = new Date();
             const update = new Date( this.globalCounts.timeupdate );
             const diff = now.valueOf() - update.valueOf();
-
-//            console.log( 'diff: ', diff );
-
             if ( diff < this.globalCounts.periodvideocache ) {
-//                console.log('BackEndService.globalCounts get from cache');
                 return of( this.globalCounts );
             }
         }
-
-//        console.log('BackEndService.globalCounts 2: ', this.globalCounts);
-
         return this.getGlobalCountsFromService();
     }
 
@@ -211,24 +204,20 @@ export class BackEndService {
 
         const options = { params: params };
 
-        return this.http.get<GlobalCounts>( this.getUrlGlobalCounts, options )
+        return this.http.get<GlobalCounts>( this.UrlGlobalCounts, options )
             .pipe(
                     tap( event => {
                         this.globalCounts = event;
-//                        console.log( 'tap', event ); // Update the cache.
                     }),
-                    catchError( this.handleError( 'getUrlGlobalCounts', null ) )
+                    catchError( this.handleError( 'UrlGlobalCounts', null ) )
             );
     }
 
     loadConfigurationData(): Promise<GlobalCounts> {
-//        console.log('BackEndService.loadConfigurationData');
         return new Promise( (resolve, reject) => {
-        this.http.get( this.getUrlGlobalCounts ).toPromise().then( result => {
-//                console.log('BackEndService.loadConfigurationData - 1');
+        this.http.get( this.UrlGlobalCounts ).toPromise().then( result => {
                 const data = result as any;
                 this.globalCounts = data;
-//                console.log('BackEndService.loadConfigurationData: APP_INITIALIZER', result);
                 resolve();
             }).catch(this.handleErrorPromise());
         });
@@ -239,6 +228,5 @@ export class BackEndService {
           console.log(error);
         };
     }
-
 }
 
