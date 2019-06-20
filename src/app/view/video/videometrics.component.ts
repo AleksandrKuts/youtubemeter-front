@@ -7,6 +7,7 @@ import { UIChart } from 'primeng/primeng';
 import { Title } from '@angular/platform-browser';
 import { MessageService } from '../../message.service';
 import { Meta } from '@angular/platform-browser';
+import { delay } from 'rxjs/operators';
 
 @Component( {
     selector: 'app-videometrics',
@@ -39,15 +40,15 @@ export class VideoMetricsComponent implements OnInit {
     chartDiffData: any;
     chartDiffOptions: any;
 
-    LANG_METRICS_METRICS: string;
-    LANG_METRICS_FROM: string;
-    LANG_METRICS_TO: string;
-    LANG_METRICS_CHANGE: string;
-    LANG_METRICS_LIKES: string;
-    LANG_METRICS_DISLIKES: string;
-    LANG_METRICS_COMMENTS: string;
-    LANG_METRICS_VIEWS: string;
-    LANG_DATE_ALREADY_SELECTED: string;
+    LANG_METRICS_METRICS: string = 'metrics';
+    LANG_METRICS_FROM: string = 'from';
+    LANG_METRICS_TO: string = 'to';
+    LANG_METRICS_CHANGE: string = 'change';
+    LANG_METRICS_LIKES: string = 'likes';
+    LANG_METRICS_DISLIKES: string = 'dislikes';
+    LANG_METRICS_COMMENTS: string = 'comments';
+    LANG_METRICS_VIEWS: string = 'views';
+    LANG_DATE_ALREADY_SELECTED: string = 'Date already selected';
 
     hidenLike: boolean;
     hidenDisLike: boolean;
@@ -99,6 +100,7 @@ export class VideoMetricsComponent implements OnInit {
         private meta: Meta, private messageService: MessageService) {
 
         this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+		this.setValueLang();
     }
 
     isValidDate( date ) {
@@ -186,6 +188,7 @@ export class VideoMetricsComponent implements OnInit {
         } );
 
         this.setValueLang();
+        delay(500);
         this.getMetrics();
     }
 
