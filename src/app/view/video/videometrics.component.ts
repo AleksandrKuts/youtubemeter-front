@@ -40,15 +40,15 @@ export class VideoMetricsComponent implements OnInit {
     chartDiffData: any;
     chartDiffOptions: any;
 
-    LANG_METRICS_METRICS: string = 'metrics';
-    LANG_METRICS_FROM: string = 'from';
-    LANG_METRICS_TO: string = 'to';
-    LANG_METRICS_CHANGE: string = 'change';
-    LANG_METRICS_LIKES: string = 'likes';
-    LANG_METRICS_DISLIKES: string = 'dislikes';
-    LANG_METRICS_COMMENTS: string = 'comments';
-    LANG_METRICS_VIEWS: string = 'views';
-    LANG_DATE_ALREADY_SELECTED: string = 'Date already selected';
+    LANG_METRICS_METRICS = 'metrics';
+    LANG_METRICS_FROM = 'from';
+    LANG_METRICS_TO = 'to';
+    LANG_METRICS_CHANGE = 'change';
+    LANG_METRICS_LIKES = 'likes';
+    LANG_METRICS_DISLIKES = 'dislikes';
+    LANG_METRICS_COMMENTS = 'comments';
+    LANG_METRICS_VIEWS = 'views';
+    LANG_DATE_ALREADY_SELECTED = 'Date already selected';
 
     hidenLike: boolean;
     hidenDisLike: boolean;
@@ -84,15 +84,15 @@ export class VideoMetricsComponent implements OnInit {
      * Встановлення написів на графіках згідно з обраною мовою. Потрібне оновлення сторінки
      */
     setValueLang() {
-        this.translate.get( 'METRICS.METRICS' ).subscribe( s => this.LANG_METRICS_METRICS = s );
-        this.translate.get( 'METRICS.FROM' ).subscribe( s => this.LANG_METRICS_FROM = s );
-        this.translate.get( 'METRICS.TO' ).subscribe( s => this.LANG_METRICS_TO = s );
-        this.translate.get( 'METRICS.CHANGE' ).subscribe( s => this.LANG_METRICS_CHANGE = s );
-        this.translate.get( 'METRICS.LIKES' ).subscribe( s => this.LANG_METRICS_LIKES = s );
-        this.translate.get( 'METRICS.DISLIKES' ).subscribe( s => this.LANG_METRICS_DISLIKES = s );
-        this.translate.get( 'METRICS.COMMENTS' ).subscribe( s => this.LANG_METRICS_COMMENTS = s );
-        this.translate.get( 'METRICS.VIEWS' ).subscribe( s => this.LANG_METRICS_VIEWS = s );
-        this.translate.get( 'METRICS.DATE_ALREADY_SELECTED' ).subscribe( s => this.LANG_DATE_ALREADY_SELECTED = s );
+        this.translate.get( 'METRICS.METRICS' ).toPromise().then( s => this.LANG_METRICS_METRICS = s );
+        this.translate.get( 'METRICS.FROM' ).toPromise().then( s => this.LANG_METRICS_FROM = s );
+        this.translate.get( 'METRICS.TO' ).toPromise().then( s => this.LANG_METRICS_TO = s );
+        this.translate.get( 'METRICS.CHANGE' ).toPromise().then( s => this.LANG_METRICS_CHANGE = s );
+        this.translate.get( 'METRICS.LIKES' ).toPromise().then( s => this.LANG_METRICS_LIKES = s );
+        this.translate.get( 'METRICS.DISLIKES' ).toPromise().then( s => this.LANG_METRICS_DISLIKES = s );
+        this.translate.get( 'METRICS.COMMENTS' ).toPromise().then( s => this.LANG_METRICS_COMMENTS = s );
+        this.translate.get( 'METRICS.VIEWS' ).toPromise().then( s => this.LANG_METRICS_VIEWS = s );
+        this.translate.get( 'METRICS.DATE_ALREADY_SELECTED' ).toPromise().then( s => this.LANG_DATE_ALREADY_SELECTED = s );
     }
 
     constructor( public translate: TranslateService, private route: ActivatedRoute,
@@ -100,7 +100,7 @@ export class VideoMetricsComponent implements OnInit {
         private meta: Meta, private messageService: MessageService) {
 
         this.curUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
-		this.setValueLang();
+        this.setValueLang();
     }
 
     isValidDate( date ) {
@@ -188,7 +188,6 @@ export class VideoMetricsComponent implements OnInit {
         } );
 
         this.setValueLang();
-        delay(500);
         this.getMetrics();
     }
 
